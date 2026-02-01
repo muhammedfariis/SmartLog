@@ -1,12 +1,29 @@
-
+import Buttons from "../common/button"
+import {ArrowBigRight} from "lucide-react"
+import LandingNav from "../common/landingNav"
 const LandingPage = () =>{
 
 
    return(
      <>
-       <div>
-        <h1>hello world it is a landing page </h1>
-       </div>
+        <LandingNav/>
+       <div className="flex  flex-col gap-2 text-white items-center justify-center">
+          <div>
+         <h1>SmartLog Fleet Platform</h1>
+            
+          </div>
+      
+        <div>
+            <h1>Control Your Fleet. Improve Efficiency. Scale Operations.</h1>
+        </div>
+
+         <div>
+            <p>Manage vehicles, driver teams, trip logs, maintenance records, and delivery workflows from a single dashboard. Get operational visibility, smarter coordination, and data-driven decisions — with upcoming GPS and live tracking capabilities.</p>
+         </div>
+         <div>
+          <Buttons name= "GetReady" Icon={ArrowBigRight} />
+         </div>
+          </div>
      </>
    )
 
