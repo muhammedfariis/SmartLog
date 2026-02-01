@@ -2,7 +2,7 @@ const Buttons = ({name , Icon}) => {
   return (
     <button
       className="group flex items-center rounded-full h-10 w-10 
-               bg-black text-white hover:w-35 transition-all duration-300 
+               bg-violet-300 text-violet-900 animate-pulse hover:w-35 transition-all duration-300 
              overflow-hidden px-3"
     >
       <Icon
