@@ -33,9 +33,9 @@ const LandingPage = () => {
 
       {/* section 2 data analytics */}
       <section className="min-h-screen gap-10">
-        <div className="relative w-full inline-flex">
+        <div className="relative w-full inline-flex ">
           <video
-            className="object-cover rounded-2xl w-full h-full  transition-all duration-300 ease-in-out"
+            className="object-cover rounded-t-4xl border-t-2 border-l-2 border-r-2 border-amber-500 w-full h-full  transition-all duration-300 ease-in-out"
             loop
             autoPlay
             muted
@@ -61,11 +61,55 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+      {/* coremodules */}
+       <section>
+
+           <div className="flex min-h-screen justify-center items-center border-l-2 border-r-2 border-amber-400 ">
+             <div className="flex  flex-col gap-20 justify-center items-center text-white">
+               <h1 className="text-center">Core Modules</h1>
+            {/* first */}
+              <div className="flex flex-col items-center justify-center  text-white border-2 border-violet-700 rounded-4xl p-2">
+                <div className="h-10 w-fit p-2 rounded-2xl bg-orange-400 animate-bounce">
+                  <h1>Driver Workspace Module</h1>
+                </div>
+                  <div className="flex flex-col justify-center items-center max-w-md text-center">
+                     <h1>Driver Portal</h1>
+                     <p>The Driver workspace is focused on trip execution and activity reporting. Drivers can view assigned trips, update trip status, log mileage, and submit vehicle condition reports. The interface is simplified for quick updates and mobile-friendly usage. Drivers can also view recent assignments, delivery instructions, and performance summaries, ensuring smooth day-to-day operations.</p>
+                  </div>
+                   <div className="flex flex-col text-black justify-center items-center h-fit w-fit bg-white p-5 rounded-2xl">
+                      <h1>Core Driver Features</h1>
+                       <p> View assigned trips</p>
+                         <p>  Update trip status</p>
+                         <p>  Submit mileage logs</p>
+                         <p>  Report vehicle issues</p>
+                         <p>  View recent activity history</p>
+                   </div>
+              </div>
+                  </div>
+             
+  
+
+          </div>
+
+
+
+
+       </section>
+     
+
+
+
+
+
+
+
+
       {/* security */}
+
       <section className="min-h-screen">
         <div className="relative w-full inline-flex">
           <video
-            className="object-cover rounded-2xl   w-full h-full transition-all duration-300 ease-in-out"
+            className="object-cover rounded-b-4xl border-r-2 border-l-2 border-b-2  border-amber-500 w-full h-full "
             loop
             autoPlay
             muted
@@ -89,6 +133,7 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+
     </>
   );
 };
