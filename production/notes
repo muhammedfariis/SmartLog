@@ -1,0 +1,9 @@
+production time must add authentication sessions in controllers add cookies parser 
+
+and add res.cookies(") on both signup and login 
+
+it wwill prevent xss csrf attaacks of hackers 
+
+and use helmet for best protections 
+
+and explore more security 
