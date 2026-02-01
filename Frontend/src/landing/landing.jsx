@@ -7,14 +7,14 @@ const LandingPage = () =>{
    return(
      <>
         <LandingNav/>
-       <div className="flex  flex-col gap-2 text-white items-center justify-center">
-          <div>
+       <div className="flex  flex-col gap-5 text-white items-center justify-center min-h-screen">
+          <div className="w-fit h-fit pr-2 pl-2 rounded-3xl text-md bg-violet-300 text-violet-800 ">
          <h1>SmartLog Fleet Platform</h1>
             
           </div>
       
         <div>
-            <h1>Control Your Fleet. Improve Efficiency. Scale Operations.</h1>
+            <h1 className="text-6xl ">Control Your Fleet. Improve Efficiency. Scale Operations.</h1>
         </div>
 
          <div>
@@ -29,5 +29,6 @@ const LandingPage = () =>{
 
 
 }
+
 
 export default LandingPage
