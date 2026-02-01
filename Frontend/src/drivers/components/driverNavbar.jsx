@@ -11,21 +11,21 @@ const AdminNavbar = () => {
           <div className="flex flex-col gap-10  p-5 text-white justify-center items-center">
             <Link
               className="hover:bg-gray-300 hover:text-black rounded-2xl h-10 w-30 flex items-center justify-center"
-              to="/vehicles"
+              to="/trips"
             >
-              Vehicles
+              My Trips
             </Link>
             <Link
               className="hover:bg-gray-300 hover:text-black rounded-2xl h-10 w-30 flex items-center justify-center"
-              to="/team"
+              to="/payment"
             >
-              Team
+              Payment
             </Link>
             <Link
               className="hover:bg-gray-300 hover:text-black rounded-2xl h-10 w-30 flex items-center justify-center"
-              to="/dashboard"
+              to="/kilometers"
             >
-              Dashboard
+              KM Update
             </Link>
           </div>
 
@@ -54,8 +54,8 @@ const AdminNavbar = () => {
                 <User2Icon size={40} />
               </div>
               <div className="flex flex-col  justify-center">
-                <h1>Administrator</h1>
-                <p>admin</p>
+                <h1>Worker</h1>
+                <p>driver</p>
               </div>
             </div>
 
