@@ -1,11 +1,10 @@
 import { BrowserRouter } from "react-router-dom";
-import AdminLandingPage from "../admin/routers/adminRouters";
-
+import LandingPage from "../landing/landing";
 const App = () => {
   return (
     <>
       <BrowserRouter>
-        <AdminLandingPage />
+       <LandingPage/>
       </BrowserRouter>
     </>
   );
