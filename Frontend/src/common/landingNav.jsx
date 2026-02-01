@@ -1,3 +1,6 @@
+
+import Buttons from "./button";
+import {LogIn} from "lucide-react"
 const LandingNav = () => {
   return (
     <>
@@ -6,9 +9,7 @@ const LandingNav = () => {
           <img src="/images/logosmartlog-removebg-preview.png" alt="Logo" />
         </div>
         <div>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-colors duration-200">
-            Sign Up
-          </button>
+          <Buttons name= "GetReady" Icon={LogIn}/>
         </div>
       </nav>
     </>
