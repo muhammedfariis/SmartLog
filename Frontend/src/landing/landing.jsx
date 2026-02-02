@@ -1,7 +1,7 @@
 import Buttons from "../common/button";
-import { ArrowBigRight } from "lucide-react";
 import LandingNav from "../common/landingNav";
 import FadeSection from "../common/framer";
+import {UserCircle2 , TruckIcon , PackageCheck , ArrowBigRight , SquareArrowOutUpRight} from "lucide-react"
 const LandingPage = () => {
   return (
     <>
@@ -75,7 +75,7 @@ const LandingPage = () => {
               {/* first */}
               <div className="flex flex-col items-center justify-center gap-5 text-white border-2 border-violet-700 rounded-4xl p-2">
                 <div className="h-12 pl-3 pr-3 w-fit text-3xl rounded-2xl bg-orange-400 animate-bounce">
-                  <h1>Driver Workspace Module</h1>
+                  <h1 className="flex justify-center items-center "> <TruckIcon className="pt-1" size={40} color="black"/> Driver Workspace Module</h1>
                 </div>
                 <div className="flex flex-col justify-center items-center max-w-md text-center">
                   <h1 className="text-2xl">Driver Portal</h1>
@@ -113,6 +113,8 @@ const LandingPage = () => {
                       View recent activity history
                     </li>
                   </ul>
+                  <Buttons name= "GetReady" Icon={SquareArrowOutUpRight}/>
+
                 </div>
               </div>
 
@@ -120,7 +122,7 @@ const LandingPage = () => {
 
               <div className="flex flex-col items-center justify-center gap-5 text-white border-2 border-violet-700 rounded-4xl p-2">
                 <div className="h-12 pl-3 pr-3 w-fit text-3xl rounded-2xl bg-orange-400 animate-bounce">
-                  <h1>Dispatcher Workspace Module</h1>
+                  <h1 className="flex justify-center items-center"> <PackageCheck className="pt-1" size={40} color="black"/> Dispatcher Workspace Module</h1>
                 </div>
                 <div className="flex flex-col justify-center items-center max-w-md text-center">
                   <h1 className="text-2xl">Dispatcher Control Panel</h1>
@@ -158,6 +160,7 @@ const LandingPage = () => {
                       View driver availability
                     </li>
                   </ul>
+                  <Buttons name= "GetReady" Icon={SquareArrowOutUpRight}/>
                 </div>
               </div>
 
@@ -165,7 +168,7 @@ const LandingPage = () => {
 
               <div className="flex flex-col items-center justify-center gap-5 text-white border-2 border-violet-700 rounded-4xl p-2">
                 <div className="h-12 pl-3 pr-3 w-fit text-3xl rounded-2xl bg-orange-400 animate-bounce">
-                  <h1>Admin Workspace Module</h1>
+                  <h1 className="flex justify-center items-center"><UserCircle2 className="pt-1" size={40} color="black"/> Admin Workspace Module</h1>
                 </div>
                 <div className="flex flex-col justify-center items-center max-w-md text-center">
                   <h1 className="text-2xl">Administrator Console</h1>
@@ -203,6 +206,8 @@ const LandingPage = () => {
                       Vehicle master data control
                     </li>
                   </ul>
+                  <Buttons name= "GetReady" Icon={SquareArrowOutUpRight}/>
+
                 </div>
               </div>
             </div>
