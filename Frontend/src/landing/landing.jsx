@@ -1,6 +1,7 @@
 import Buttons from "../common/button";
 import LandingNav from "../common/landingNav";
 import FadeSection from "../common/framer";
+import Footer from "../common/footer";
 import {UserCircle2 , TruckIcon , PackageCheck , ArrowBigRight , SquareArrowOutUpRight} from "lucide-react"
 const LandingPage = () => {
   return (
@@ -244,6 +245,7 @@ const LandingPage = () => {
         </div>
       </section>
       </FadeSection>
+      <Footer/>
     </>
   );
 };
