@@ -1,10 +1,12 @@
 import Buttons from "../common/button";
 import { ArrowBigRight } from "lucide-react";
 import LandingNav from "../common/landingNav";
+import FadeSection from "../common/framer";
 const LandingPage = () => {
   return (
     <>
       <LandingNav />
+   <FadeSection>
       <section>
         <div className="flex  flex-col gap-5 text-white items-center justify-center min-h-screen">
           <div className="w-fit h-fit pr-2 animate-bounce pl-2 rounded-3xl text-md bg-violet-300 text-violet-900">
@@ -30,8 +32,9 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
-
+       </FadeSection>
       {/* section 2 data analytics */}
+      <FadeSection>
       <section className="min-h-screen gap-10">
         <div className="relative w-full inline-flex ">
           <video
@@ -61,7 +64,9 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+      </FadeSection>
       {/* coremodules */}
+       <FadeSection>
       <section>
         <div className="flex min-h-screen justify-center items-center border-l-2 border-r-2 border-amber-400 ">
           <div className="flex  flex-col gap-20 justify-center items-center text-white">
@@ -204,9 +209,9 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
-
+  </FadeSection>
       {/* security */}
-
+    <FadeSection>
       <section className="min-h-screen">
         <div className="relative w-full inline-flex">
           <video
@@ -233,6 +238,7 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+      </FadeSection>
     </>
   );
 };
