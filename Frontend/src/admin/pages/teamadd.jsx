@@ -4,7 +4,7 @@ const TeamAdd = () =>{
   return(
     <>
     
-      <h1 className="text-2xl">Driver add</h1>
+      <h1 className="text-2xl text-white">Driver add</h1>
     </>
   )
 

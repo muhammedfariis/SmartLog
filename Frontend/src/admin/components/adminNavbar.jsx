@@ -4,26 +4,26 @@ const AdminNavbar = () => {
   return (
     <>
       <div className="min-h-screen  w-56  ">
-        <div className="flex min-h-screen flex-col justify-between items-center">
+        <div className="flex min-h-screen flex-col justify-between items-center border-r-2 border-gray-900">
           <div className="flex items-center w-40 h-20">
             <img src="/images/logosmartlog-removebg-preview.png" alt="" />
           </div>
           <div className="flex flex-col gap-10  p-5 text-white justify-center items-center">
             <Link
               className="hover:bg-gray-300 hover:text-black rounded-2xl h-10 w-30 flex items-center justify-center"
-              to="/vehicles"
+              to="/admin/vehicles"
             >
               Vehicles
             </Link>
             <Link
               className="hover:bg-gray-300 hover:text-black rounded-2xl h-10 w-30 flex items-center justify-center"
-              to="/team"
+              to="/admin/team"
             >
               Team
             </Link>
             <Link
               className="hover:bg-gray-300 hover:text-black rounded-2xl h-10 w-30 flex items-center justify-center"
-              to="/dashboard"
+              to="/admin/dashboard"
             >
               Dashboard
             </Link>
