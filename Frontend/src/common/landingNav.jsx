@@ -1,6 +1,7 @@
 
 import Buttons from "./button";
 import {LogIn} from "lucide-react"
+import Switch from "./toggle";
 const LandingNav = () => {
   return (
     <>
@@ -8,7 +9,9 @@ const LandingNav = () => {
         <div className="flex items-center h-12 w-30">
           <img src="/images/logosmartlog-removebg-preview.png" alt="Logo" />
         </div>
-        <div>
+         
+        <div className="flex gap-5 items-center justify-center">
+            <Switch/>
           <Buttons name= "GetReady" Icon={LogIn}/>
         </div>
       </nav>
