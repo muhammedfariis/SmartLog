@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Plus } from "lucide-react";
 
 const TeamAdd = () => {
-  const [popup, setPopup] = useState(false);
   const [driver, setdriver] = useState(true);
   const [Dispatcher, setDispatcher] = useState(false);
   const [dispAcc, setDispAcc] = useState(false);
@@ -120,7 +119,7 @@ const TeamAdd = () => {
                     className="h-10 w-40 p-2 rounded-4xl text-white bg-violet-600 active:bg-red-400"
                     onClick={() => {
                       setDispAcc(false);
-                     setDriverAcc(true);
+                      setDriverAcc(true);
                     }}
                   >
                     Create Driver

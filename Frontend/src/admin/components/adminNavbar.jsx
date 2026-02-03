@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import { User2Icon, LogOut, SunMoonIcon } from "lucide-react";
 import Switch from "../../common/toggle";
 const AdminNavbar = () => {
+  const go = useNavigate()
   return (
     <>
       <div className="min-h-screen  w-56  ">
@@ -57,6 +58,7 @@ const AdminNavbar = () => {
                 className="group flex items-center rounded-full h-10 w-10 
                bg-black text-white hover:w-30 transition-all duration-300 
              overflow-hidden px-3"
+             onClick={()=> go("/login")}
               >
                 <LogOut
                   size={20}
