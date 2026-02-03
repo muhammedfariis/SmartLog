@@ -8,6 +8,10 @@ import DashboardAdmin from "../admin/pages/dashboard";
 import TeamAdd from "../admin/pages/teamadd";
 import AdminLayout from "../layouts/adminlayout";
 import {VehicleCreate} from "../admin/pages/vehicles"
+import DisptLayout from "../layouts/dispatcherlayout";
+import Assignment from "../dispatcher/pages/assignment";
+import Status from "../dispatcher/pages/status";
+import DISPATCHERPATH from "../common/dispatcherPath";
 const Router = () => {
   return (
     <>
@@ -22,6 +26,11 @@ const Router = () => {
         <Route path={ROUTEADMIN.DASHBOARD} element={<DashboardAdmin />} />
         <Route path={ROUTEADMIN.VEHICLES} element={<VehicleCreate/>} />
         <Route path={ROUTEADMIN.TEAM} element={<TeamAdd />} />
+        </Route>
+        {/* dispatcher */}
+        <Route path="/dispatcher" element = {<DisptLayout/>}>
+        <Route path={DISPATCHERPATH.ASSIGNMENT} element = {<Assignment/>}/>
+        <Route path={DISPATCHERPATH.STATUS} element = {<Status/>}/>
         </Route>
       </Routes>
     </>
