@@ -5,7 +5,7 @@ const DashboardAdmin = () =>{
 
    return (
    <>
-     <h1 className="text-2xl">Dashboard page</h1>
+     <h1 className="text-2xl text-white">Dashboard page</h1>
    
    </>
 

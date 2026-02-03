@@ -1,9 +1,9 @@
 
-const ROUTE = {
-  VEHICLES : "/vehicles",
-  TEAM : "/team",
-  DASHBOARD : "/dashboard"
+const ROUTEADMIN = {
+  VEHICLES : "vehicles",
+  TEAM : "team",
+  DASHBOARD : "dashboard"
 
 }
 
-export default ROUTE
+export default ROUTEADMIN
