@@ -24,7 +24,6 @@ const go = useNavigate()
             >
               Status
             </Link>
-        
           </div>
 
           <div className="flex items-center justify-center w-20 h-8">
