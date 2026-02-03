@@ -12,6 +12,11 @@ import DisptLayout from "../layouts/dispatcherlayout";
 import Assignment from "../dispatcher/pages/assignment";
 import Status from "../dispatcher/pages/status";
 import DISPATCHERPATH from "../common/dispatcherPath";
+import Mytrips from "../drivers/pages/mytrips";
+import DRIVERSPATH from "../common/driverspath";
+import Payments from "../drivers/pages/payments";
+import Kmupdate from "../drivers/pages/kmupdate";
+import DriverLayout from "../layouts/driverlayout";
 const Router = () => {
   return (
     <>
@@ -32,6 +37,13 @@ const Router = () => {
         <Route path={DISPATCHERPATH.ASSIGNMENT} element = {<Assignment/>}/>
         <Route path={DISPATCHERPATH.STATUS} element = {<Status/>}/>
         </Route>
+        {/* drivers */}
+        <Route path="/drivers" element = {<DriverLayout/>}>
+         <Route path={DRIVERSPATH.KMUPDATE} element = {<Kmupdate/>}/>
+         <Route path={DRIVERSPATH.PAYMENTS} element = {<Payments/>}/>
+         <Route path={DRIVERSPATH.TRIPS} element = {<Mytrips/>}/>
+        </Route>
+
       </Routes>
     </>
   );

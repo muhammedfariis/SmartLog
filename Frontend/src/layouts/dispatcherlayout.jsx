@@ -5,7 +5,7 @@ const DisptLayout = () => {
   return (
     <div className="min-h-screen flex">
       <DispatcherNavbar />
-      <div className="flex-1 gap-1">
+      <div className="flex-1 p-4">
         <Outlet />
       </div>
     </div>

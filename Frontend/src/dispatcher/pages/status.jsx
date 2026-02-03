@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { Plus } from "lucide-react";
-
 const Status = () => {
   const [driver, setdriver] = useState(true);
   const [Dispatcher, setDispatcher] = useState(false);
   return (
-    <div className="space-y-5 p-5">
+    <div className="space-y-5 p-10">
       <div className="flex justify-start items-center">
         <div>
           <h1 className="text-3xl font-bold text-violet-500">
