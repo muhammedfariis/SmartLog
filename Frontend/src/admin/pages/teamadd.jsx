@@ -55,8 +55,8 @@ const TeamAdd = () => {
                   <button
                     className="h-10 w-40 p-2 rounded-4xl text-white bg-violet-600 active:bg-red-400"
                     onClick={() => {
-                      setDispAcc(false);
-                      setDriverAcc(true);
+                      setDispAcc(true);
+                      setDriverAcc(false);
                     }}
                   >
                     Create Dispatcher
@@ -119,8 +119,8 @@ const TeamAdd = () => {
                   <button
                     className="h-10 w-40 p-2 rounded-4xl text-white bg-violet-600 active:bg-red-400"
                     onClick={() => {
-                      setDriverAcc(false);
-                      setDispAcc(true);
+                      setDispAcc(false);
+                     setDriverAcc(true);
                     }}
                   >
                     Create Driver
