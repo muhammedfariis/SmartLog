@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { User2Icon, LogOut, SunMoonIcon } from "lucide-react";
+import Switch from "../../common/toggle";
 const AdminNavbar = () => {
   return (
     <>
@@ -10,45 +11,37 @@ const AdminNavbar = () => {
           </div>
           <div className="flex flex-col gap-10  p-5 text-white justify-center items-center">
             <Link
-              className="hover:bg-gray-300 hover:text-black rounded-2xl h-10 w-30 flex items-center justify-center"
+              className="hover:bg-linear-to-br from-30% from-violet-500 to-70% to-violet-400  hover:text-black rounded-2xl transition-all duration-500 ease-in-out h-10 w-30 flex items-center justify-center"
               to="/admin/vehicles"
             >
               Vehicles
             </Link>
             <Link
-              className="hover:bg-gray-300 hover:text-black rounded-2xl h-10 w-30 flex items-center justify-center"
+              className="hover:bg-linear-to-br from-30% from-violet-500 to-70% to-violet-400  hover:text-black rounded-2xl transition-all duration-500 ease-in-out h-10 w-30 flex items-center justify-center"
               to="/admin/team"
             >
               Team
             </Link>
             <Link
-              className="hover:bg-gray-300 hover:text-black rounded-2xl h-10 w-30 flex items-center justify-center"
+              className="hover:bg-linear-to-br from-30% from-violet-500 to-70% to-violet-400  hover:text-black rounded-2xl transition-all duration-500 ease-in-out h-10 w-30 flex items-center justify-center"
               to="/admin/dashboard"
             >
               Dashboard
             </Link>
           </div>
 
-          <div className="flex items-center justify-center w-40 h-20">
+          <div className="flex items-center justify-center w-20 h-8">
             <button
-              className="group flex items-center rounded-full h-10 w-10 
-               bg-gray-300 text-black hover:w-25 transition-all duration-300 
-             overflow-hidden px-3"
+              className="group flex items-center rounded-full h-8 w-14 
+                text-black hover:w-15 transition-all duration-300 
+             overflow-hidden "
             >
-              <SunMoonIcon
-                size={20}
-                className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
-              />
-
-              <span
-                className="ml-3 opacity-0  
-                  transition-opacity duration-200 group-hover:opacity-100"
-              >
-                Light
-              </span>
+           
+              <Switch/>
+           
             </button>
           </div>
-          <div className="flex flex-col items-center justify-center h-fit w-40 p-5 bg-gray-300 rounded-2xl ">
+          <div className="flex flex-col items-center justify-center h-fit w-40 p-5 bg-linear-to-br from-30% from-violet-500 to-70% to-violet-400 rounded-2xl ">
             <div className="flex items-center justify-center gap-2 h-15">
               <div>
                 <User2Icon size={40} />
