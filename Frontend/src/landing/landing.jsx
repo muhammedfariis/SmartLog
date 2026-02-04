@@ -36,7 +36,7 @@ const LandingPage = () => {
        </FadeSection>
       {/* section 2 data analytics */}
       <FadeSection>
-      <section className="min-h-screen gap-10">
+      <section className="min-h-screen p-5 gap-10">
         <div className="relative w-full inline-flex ">
           <video
             className="object-cover rounded-t-4xl border-t-2 border-l-2 border-r-2 border-amber-500 w-full h-full  transition-all duration-300 ease-in-out"
@@ -68,9 +68,9 @@ const LandingPage = () => {
       </FadeSection>
       {/* coremodules */}
        <FadeSection>
-      <section>
-        <div className="flex min-h-screen justify-center items-center border-l-2 border-r-2 border-amber-400 ">
-          <div className="flex  flex-col gap-20 justify-center items-center text-white">
+      <section className="p-5">
+        <div className="flex min-h-screen justify-center items-center border-l-2 border-r-2  border-amber-400 ">
+          <div className="flex  flex-col  gap-20 justify-center items-center text-white">
             <h1 className="text-center font-bold text-6xl">Core Modules</h1>
             <div className="flex gap-2">
               {/* first */}
@@ -218,7 +218,7 @@ const LandingPage = () => {
   </FadeSection>
       {/* security */}
     <FadeSection>
-      <section className="min-h-screen">
+      <section className="min-h-screen p-5">
         <div className="relative w-full inline-flex">
           <video
             className="object-cover rounded-b-4xl border-r-2 border-l-2 border-b-2  border-amber-500 w-full h-full "

@@ -54,6 +54,19 @@ const Assignment = ()=>{
               <DateTimePicker/>
             </div>
           </div>
+              <div className="space-y-2">
+            <label className="text-sm text-gray-400">
+              Location Assign
+            </label>
+
+            <div className="flex items-center gap-3 bg-black border border-violet-500 rounded-xl p-3">
+              <div className="flex justify-between items-center gap-35">
+                <input className="h-8 w-fit rounded-2xl outline-none text-white p-2 bg-violet-800" type="text"  placeholder="From" />
+                <input className="h-8 w-fit rounded-2xl outline-none text-white p-2  bg-violet-800" type="text"  placeholder="To"/>
+
+              </div>
+            </div>
+          </div>
 
           <button className="w-full bg-violet-600 hover:bg-violet-700 py-3 rounded-xl font-medium">
             Assign Driver
