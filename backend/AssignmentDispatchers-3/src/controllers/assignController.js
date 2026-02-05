@@ -31,3 +31,6 @@ class AssignmentControllers {
     }
   };
 }
+
+
+export default AssignmentControllers
