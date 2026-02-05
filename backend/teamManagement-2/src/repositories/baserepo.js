@@ -2,7 +2,7 @@ export class BaseRepository {
   findOne(find) {
     throw new Error("notimplimented" || "not working");
   }
-  findByIdAndUpdate(data) {
+  findByIdAndDelete(data) {
     throw new Error("not implimented" || "not working");
   }
   find(find) {
