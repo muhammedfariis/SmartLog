@@ -14,14 +14,21 @@ const UserSchema = new mongoose.Schema({
         type : String , 
         required : true
     },
+
+    role : {
+        type : String,
+        required : true ,
+        enum : ["admin" , "dispatcher" , "driver"]
+    },
+
     LicenceInfo : {
         type : String,
-        required : true
+        unique : true
     }
 
 
 } , {timestamps : true})
 
-const Users = mongoose.model("dispatchers" , UserSchema)
+const Users = mongoose.model("Users" , UserSchema)
 
 export default Users

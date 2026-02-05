@@ -8,10 +8,16 @@ export const Messege = {
   TOKEN_MISSING: "Authorization token missing",
   TOKEN_INVALID: "Invalid or expired token",
 
-  // User
+  // User / team management
   USER_NOT_FOUND: "User not found",
   DRIVER_LIST_FETCHED: "Drivers fetched successfully",
   USER_EXIST : "user already exist",
+  USER_NOT_CREATED : "user not created",
+  USER_CREATED : "user created",
+  USER_FOUND : "user founded",
+  USER_DELETED: "user deleted",
+  USER_NOT_DELETED: "user not deleted",
+
   
   // Vehicles
   VEHICLE_CREATED: "Vehicle added to fleet",
@@ -28,11 +34,14 @@ export const Messege = {
 
 
 
-  // Deliveries
-  DELIVERY_CREATED: "Delivery task created",
+  // assigning dispatcher 
+  DELIVERY: "All delivery details",
   DELIVERY_ASSIGNED: "Delivery assigned successfully",
   DELIVERY_STATUS_UPDATED: "Delivery status updated",
   DELIVERY_NOT_FOUND: "Delivery not found",
+  DRIVER_ALREADY_EXIST : "driver already assigned",
+
+
 
   // Fuel & Maintenance
   FUEL_LOGGED: "Fuel log saved successfully",

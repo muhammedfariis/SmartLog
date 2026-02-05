@@ -1,6 +1,6 @@
 
 const DISPATCHERPATH = {
    ASSIGNMENT : "assignment",
-   STATUS : "status"
+   DETAILS : "details"
 }
 export default DISPATCHERPATH

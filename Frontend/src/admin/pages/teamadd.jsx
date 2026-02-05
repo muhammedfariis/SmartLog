@@ -81,6 +81,10 @@ const TeamAdd = () => {
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Licence Info"
               />
+                <input
+                className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
+                placeholder="Role"
+              />
             </div>
 
             <div className="flex justify-end gap-3 mt-5">
@@ -151,6 +155,10 @@ const TeamAdd = () => {
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Password"
+              />
+               <input
+                className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
+                placeholder="Role"
               />
             </div>
 

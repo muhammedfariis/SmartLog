@@ -36,7 +36,7 @@ const Router = () => {
         <Route path="/dispatcher" element = {<DisptLayout/>}>
         <Route index element = {<Assignment/>}/>
         <Route path={DISPATCHERPATH.ASSIGNMENT} element = {<Assignment/>}/>
-        <Route path={DISPATCHERPATH.STATUS} element = {<Status/>}/>
+        <Route path={DISPATCHERPATH.DETAILS} element = {<Status/>}/>
         </Route>
         {/* drivers */}
         <Route path="/drivers" element = {<DriverLayout/>}>

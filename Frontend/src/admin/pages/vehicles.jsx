@@ -1,6 +1,6 @@
-import { Plus } from "lucide-react";
+import { Plus, CalendarDays } from "lucide-react";
 import { useState } from "react";
-
+import DateTimePicker from "../../common/datepicker";
 export const VehicleCreate = () => {
   const [popup, setPopup] = useState(false);
   return (
@@ -24,14 +24,14 @@ export const VehicleCreate = () => {
       </div>
 
       {popup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 flex items-center justify-center">
           <div className="absolute inset-0 bg-gray-800/40 backdrop-blur-md min-h-screen" />
-          <div className="relative bg-zinc-900 text-white p-6 rounded-2xl shadow-xl border border-violet-500">
+          <div className="relative flex flex-col items-center justify-center bg-zinc-900 text-white p-6 rounded-2xl shadow-xl border border-violet-500">
             <h2 className="text-xl font-bold mb-4 text-violet-400">
-              Add Vehicle
+              Add Vehicles
             </h2>
 
-            <div className="space-y-3 flex flex-col">
+            <div className="space-y-3 flex flex-col items-center">
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Vehicle"
@@ -46,7 +46,7 @@ export const VehicleCreate = () => {
               />
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
-                placeholder="status"
+                placeholder="Status"
               />
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
@@ -56,14 +56,26 @@ export const VehicleCreate = () => {
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Service"
               />
-              <input
-                className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
-                placeholder="Polution"
-              />
-              <input
-                className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
-                placeholder="Insurance"
-              />
+              <div className="flex gap-2">
+                   <div className="flex items-center flex-col">
+                <label className="text-sm text-gray-400">Insurence</label>
+
+                <div className="flex items-center gap-3 bg-black border border-violet-500 rounded-lg p-2">
+                  <CalendarDays size={18} />
+                  <DateTimePicker />
+                </div>
+              </div>
+              <div className=" flex items-center flex-col">
+                <label className="text-sm  text-gray-400">Polution</label>
+
+                <div className="flex items-center gap-3 bg-black border border-violet-500 rounded-lg p-2">
+                  <CalendarDays size={18} />
+                  <DateTimePicker />
+                </div>
+              </div>
+                
+              </div>
+           
             </div>
 
             <div className="flex justify-end gap-3 mt-5">
@@ -95,7 +107,7 @@ export const VehicleCreate = () => {
       </div>
 
       <div className="bg-black text-white rounded-2xl shadow border border-violet-500">
-        <div className="grid grid-cols-9 py-2 px-3 text-center gap-5 border-b text-gray-500 font-medium">
+        <div className="grid grid-cols-10 py-2 px-3 text-center gap-5 border-b text-gray-500 font-medium">
           <div>Vehicle</div>
           <div>Brand</div>
           <div>NumberPlate</div>
@@ -104,10 +116,11 @@ export const VehicleCreate = () => {
           <div>Service-Km</div>
           <div>Polution-Expiry</div>
           <div>Insurance-Expiry</div>
-          <div>Actions</div>
+          <div>Delete</div>
+          <div>Update</div>
         </div>
 
-        <div className="grid grid-cols-9 py-2 px-3 text-center gap-5  border-b border-violet-500 items-center">
+        <div className="grid grid-cols-10 py-2 px-3 text-center gap-5  border-b border-violet-500 items-center">
           <div>Truck</div>
           <div>BharatBenz</div>
           <div>KL-07-AB-1234</div>
@@ -117,9 +130,10 @@ export const VehicleCreate = () => {
           <div>{new Date().getDate()}</div>
           <div>{new Date().getDate()}</div>
           <div>Delete</div>
+          <div>Update</div>
         </div>
 
-        <div className="grid grid-cols-9 py-2 px-3 text-center gap-5 border-violet-500 border-b items-center">
+        <div className="grid grid-cols-10 py-2 px-3 text-center gap-5 border-violet-500 border-b items-center">
           <div>Truck</div>
           <div>BharatBenz</div>
           <div>KL-07-AB-1234</div>
@@ -129,9 +143,10 @@ export const VehicleCreate = () => {
           <div>{new Date().getDate()}</div>
           <div>{new Date().getDate()}</div>
           <div>Delete</div>
+          <div>Update</div>
         </div>
 
-        <div className="grid grid-cols-9 py-2 px-3 text-center gap-5 border-violet-500  border-b items-center">
+        <div className="grid grid-cols-10 py-2 px-3 text-center gap-5 border-violet-500  border-b items-center">
           <div>Truck</div>
           <div>BharatBenz</div>
           <div>KL-07-AB-1234</div>
@@ -141,9 +156,10 @@ export const VehicleCreate = () => {
           <div>{new Date().getDate()}</div>
           <div>{new Date().getDate()}</div>
           <div>Delete</div>
+          <div>Update</div>
         </div>
 
-        <div className="grid grid-cols-9 py-2 px-3 text-center gap-5 border-violet-500  items-center">
+        <div className="grid grid-cols-10 py-2 px-3 text-center gap-5 border-violet-500  items-center">
           <div>Truck</div>
           <div>BharatBenz</div>
           <div>KL-07-AB-1234</div>
@@ -153,6 +169,7 @@ export const VehicleCreate = () => {
           <div>{new Date().getDate()}</div>
           <div>{new Date().getDate()}</div>
           <div>Delete</div>
+          <div>Update</div>
         </div>
       </div>
     </div>
