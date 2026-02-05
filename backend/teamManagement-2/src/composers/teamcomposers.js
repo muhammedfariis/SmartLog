@@ -1,7 +1,7 @@
 
-import { UserRepository } from "../repositories/userrepo";
-import TeamServices from "../services/userServices";
-import Teamcontrollers from "../controllers/usersControllers";
+import { UserRepository } from "../repositories/userrepo.js";
+import TeamServices from "../services/userServices.js";
+import Teamcontrollers from "../controllers/usersControllers.js";
 
 const teamComposers = ()=>{
    
