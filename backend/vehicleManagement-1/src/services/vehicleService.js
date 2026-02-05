@@ -18,7 +18,9 @@ class VehicleServices {
     insuranceExpiry,
     polutionExpiry,
     addedBy,
-  }) {
+  }) 
+  
+  {
     if (
       !vehiclesNo ||
       !vehiclesType ||
