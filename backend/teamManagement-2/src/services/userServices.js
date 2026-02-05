@@ -13,7 +13,7 @@ class TeamServices {
       throw new ApiError(Status.CONFLICT, Messege.VALIDATION_ERROR);
     }
 
-    const existing = await this.UserRepository.findOne(UserName);
+    const existing = await this.UserRepository.findOne({UserName});
     if (existing) {
       throw new ApiError(Status.BAD_REQUEST, Messege.USER_EXIST);
     }
@@ -45,7 +45,7 @@ class TeamServices {
     if (!Name || !UserName || !Password || !role) {
       throw new ApiError(Status.CONFLICT, Messege.VALIDATION_ERROR);
     }
-    const existing = await this.UserRepository.findOne(UserName);
+    const existing = await this.UserRepository.findOne({UserName});
     if (existing) {
       throw new ApiError(Status.BAD_REQUEST, Messege.USER_EXIST);
     }
