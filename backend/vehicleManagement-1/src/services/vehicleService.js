@@ -8,48 +8,44 @@ class VehicleServices {
   }
 
   async createVehicles({
-    vehiclesNo,
-    vehiclesType,
+    vehicle,
+    NumberPlate,
     brand,
-    year,
     status,
-    currentMilage,
-    nextServiceMilage,
-    insuranceExpiry,
-    polutionExpiry,
-    addedBy,
+    Milage,
+    Service,
+    insurance,
+    polution,
   }) 
   
   {
     if (
-      !vehiclesNo ||
-      !vehiclesType ||
+      !vehicle ||
+      !NumberPlate ||
       !brand ||
-      year == null ||
-      nextServiceMilage == null ||
-      !insuranceExpiry ||
-      !polutionExpiry ||
-      !addedBy
+      !status||
+      Service == null ||
+      !insurance||
+      !polution ||
+      !Milage
     ) {
       throw new ApiError(Status.BAD_REQUEST, Messege.VALIDATION_ERROR);
     }
 
-    const existing = await this.VehicleRepository.findOne({ vehiclesNo });
+    const existing = await this.VehicleRepository.findOne({ NumberPlate });
     if (existing) {
       throw new ApiError(Status.BAD_REQUEST, Messege.VEHICLE_ALREADY_FOUND);
     }
 
     const insertvehicle = await this.VehicleRepository.create({
-      vehiclesNo,
-      vehiclesType,
-      brand,
-      year,
-      status,
-      currentMilage,
-      nextServiceMilage,
-      insuranceExpiry,
-      polutionExpiry,
-      addedBy,
+    vehicle,
+    NumberPlate,
+    brand,
+    status,
+    Milage,
+    Service,
+    insurance,
+    polution,
     });
 
     logger.debug("Vehicle insertion completed");
@@ -69,27 +65,26 @@ class VehicleServices {
 
   async updateVehicles({
     id,
-    vehiclesType,
+    vehicle,
+    NumberPlate,
     brand,
-    year,
     status,
-    currentMilage,
-    nextServiceMilage,
-    insuranceExpiry,
-    polutionExpiry,
-    isActive,
+    Milage,
+    Service,
+    insurance,
+    polution,
+  
   }) {
     const data = {
       id,
-      vehiclesType,
-      brand,
-      year,
-      status,
-      currentMilage,
-      nextServiceMilage,
-      insuranceExpiry,
-      polutionExpiry,
-      isActive,
+    vehicle,
+    NumberPlate,
+    brand,
+    status,
+    Milage,
+    Service,
+    insurance,
+    polution,
     };
 
     const updatevehicle = await this.VehicleRepository.findByIdAndUpdate(

@@ -2,14 +2,14 @@ import mongoose from "mongoose";
 
 const schema = new mongoose.Schema(
   {
-    vehiclesNo: {
+    NumberPlate: {
       type: String,
       required: true,
       unique: true,
       trim: true,
     },
 
-    vehiclesType: {
+    vehicle: {
       type: String,
       enum: ["truck", "minitruck", "van", "container"],
       required: true,     
@@ -21,44 +21,29 @@ const schema = new mongoose.Schema(
       trim: true,
     },
 
-    year: {
-      type: Number,
-      required: true,
-    },
-
+ 
     status: {
       type: String,
       enum: ["Active", "Maintainance", "In-Transist", "Retired"],
       default: "Active",
     },
 
-    currentMilage: {
+    Milage: {
       type: Number,
       default: 0,
     },
 
-    nextServiceMilage: {
+    Service: {
       type: Number,
       required: true,
     },
 
-    addedBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Auth",
-      required: true,
-    },
-
-    isActive: {
-      type: Boolean,
-      default: true,
-    },
-
-    insuranceExpiry: {
+    insurance: {
       type: Date,
       required: true,
     },
 
-    polutionExpiry: {
+    polution: {
       type: Date,
       required: true,
     },
