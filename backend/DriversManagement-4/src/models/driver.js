@@ -1,23 +1,29 @@
-
 import mongoose from "mongoose";
 
-const driverSchema = new mongoose.Schema({
-   
-    assignmentId : {
-        type : mongoose.Schema.Types.ObjectId,
-        required : true ,
+const driverSchema = new mongoose.Schema(
+  {
+    vehicleId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "vehicle_management",
+      required: true,
     },
-    startKm : {
-        type : Number,
-        required : true 
+    assignmentId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Assignments",
+      required: true,
     },
-    endKm : {
-        type : Number,
-        required : true 
-    }
+    startKm: {
+      type: Number,
+      required: true,
+    },
+    endKm: {
+      type: Number,
+      required: true,
+    },
+  },
+  { timestamps: true },
+);
 
-},{timestamps:true})
+const driver = mongoose.model("Drivers", driverSchema);
 
-const driver = mongoose.model("Drivers" , driverSchema)
-
-export default driver 
+export default driver;
