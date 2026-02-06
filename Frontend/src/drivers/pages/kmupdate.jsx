@@ -14,10 +14,10 @@ const Kmupdate = ()=>{
       <div className="bg-black border border-violet-500 rounded-2xl shadow p-6 space-y-6">
 
         <div className="space-y-2">
-          <label className="text-gray-400 text-sm">Vehicle Number</label>
+          <label className="text-gray-400 text-sm">Assignment ID</label>
           <input
             type="text"
-            placeholder="KL-07-AB-1234"
+            placeholder="852852854254"
             className="w-full p-3 rounded-xl bg-zinc-900 border border-violet-500 text-white outline-none focus:ring-2 focus:ring-violet-600"
           />
         </div>

@@ -32,7 +32,6 @@ const Mytrips = ()=>{
             <p><span className="text-gray-500">Route:</span> Kochi → Trivandrum</p>
             <p><span className="text-gray-500">Vehicle:</span> KL-07-AB-1234</p>
             <p><span className="text-gray-500">Load:</span> Electronics</p>
-            <p><span className="text-gray-500">Dispatcher:</span> Arun</p>
           </div>
 
           <button className="w-full md:w-48 py-2 rounded-xl font-medium bg-violet-600 hover:bg-violet-700"
