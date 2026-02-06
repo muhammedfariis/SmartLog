@@ -9,6 +9,7 @@ import {errorHandler} from "./middlewares/errorHandler.js"
 import path from "path"
 import helmet from "helmet"
 import TeamRouters from "./teamManagement-2/src/routers/teamroutes.js"
+import AssignmentRouter from "./AssignmentDispatchers-3/src/routers/assignmentRoutes.js"
 dotenv.config({path: path.resolve(".env")})
 // assigning server 
 
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/authentication" , authRouter)
 app.use("/api/vehicleassignations" , vehicleRouter)
 app.use("/api/addteamMembers" , TeamRouters)
+app.use("/api/assigndrivers" , AssignmentRouter)
 app.use(errorHandler)
 
 database()
