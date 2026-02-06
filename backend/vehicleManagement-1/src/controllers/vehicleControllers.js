@@ -48,6 +48,8 @@ class VehicleControllers {
       next(err);
     }
   };
+
+  
 }
 
 export default VehicleControllers;

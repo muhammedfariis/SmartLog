@@ -27,7 +27,7 @@ class VehicleServices {
       Service == null ||
       !insurance||
       !polution ||
-      !CurrentKm
+      CurrentKm == null
     ) {
       throw new ApiError(Status.BAD_REQUEST, Messege.VALIDATION_ERROR);
     }
@@ -132,6 +132,15 @@ class VehicleServices {
       message: Messege.VEHICLE_FOUND,
       vehicles,
     };
+  }
+
+
+  async addRunningKm(vehicleId , totalKm){
+    return this.VehicleRepository.findByIdAndUpdate(
+      vehicleId,
+      {$inc : {CurrentKm : totalKm}},
+      {new : true}
+    )
   }
 }
 

@@ -8,11 +8,11 @@ const driverSchema = new mongoose.Schema({
         required : true ,
     },
     startKm : {
-        type : String ,
+        type : Number,
         required : true 
     },
     endKm : {
-        type : String,
+        type : Number,
         required : true 
     }
 

@@ -6,11 +6,15 @@ export class UserRepository extends BaseRepository {
         return driver.find(user)
     }
 
-    findOne(one){
-        return driver.findOne(one)
+    findById(one){
+        return driver.findById(one)
     }
 
-    create(creat){
-        return driver.create(creat)
+    findByIdAndUpdate(id ,data){
+        return driver.findByIdAndUpdate(id , data , {new : true})
+    }
+
+    create(data){
+        return driver.create(data)
     }
 }
