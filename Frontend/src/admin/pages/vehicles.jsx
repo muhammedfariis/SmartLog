@@ -50,7 +50,7 @@ export const VehicleCreate = () => {
               />
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
-                placeholder="Milage"
+                placeholder="Current Km"
               />
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
@@ -112,7 +112,7 @@ export const VehicleCreate = () => {
           <div>Brand</div>
           <div>NumberPlate</div>
           <div>Status</div>
-          <div>Milage-Km</div>
+          <div>Current-Km</div>
           <div>Service-Km</div>
           <div>Polution-Expiry</div>
           <div>Insurance-Expiry</div>

@@ -28,7 +28,7 @@ const schema = new mongoose.Schema(
       default: "Active",
     },
 
-    Milage: {
+    CurrentKm: {
       type: Number,
       default: 0,
     },

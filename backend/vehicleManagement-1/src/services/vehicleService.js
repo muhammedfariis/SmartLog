@@ -12,7 +12,7 @@ class VehicleServices {
     NumberPlate,
     brand,
     status,
-    Milage,
+    CurrentKm,
     Service,
     insurance,
     polution,
@@ -27,7 +27,7 @@ class VehicleServices {
       Service == null ||
       !insurance||
       !polution ||
-      !Milage
+      !CurrentKm
     ) {
       throw new ApiError(Status.BAD_REQUEST, Messege.VALIDATION_ERROR);
     }
@@ -42,7 +42,7 @@ class VehicleServices {
     NumberPlate,
     brand,
     status,
-    Milage,
+    CurrentKm,
     Service,
     insurance,
     polution,
@@ -69,7 +69,7 @@ class VehicleServices {
     NumberPlate,
     brand,
     status,
-    Milage,
+    CurrentKm,
     Service,
     insurance,
     polution,
@@ -81,7 +81,7 @@ class VehicleServices {
     NumberPlate,
     brand,
     status,
-    Milage,
+    CurrentKm,
     Service,
     insurance,
     polution,
