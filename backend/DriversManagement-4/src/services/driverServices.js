@@ -48,3 +48,5 @@ class DriverServices {
 
 }
 
+export default DriverServices
+
