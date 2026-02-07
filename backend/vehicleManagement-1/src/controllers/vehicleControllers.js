@@ -33,7 +33,9 @@ class VehicleControllers {
 
   deleteVehicles = async (req, res, next) => {
     try {
-      const deleted = await this.VehicleServices.deleteVehicles(req.body);
+      const deleted = await this.VehicleServices.deleteVehicles({
+        id : req.params.id
+      });
       res.json(deleted);
     } catch (err) {
       next(err);

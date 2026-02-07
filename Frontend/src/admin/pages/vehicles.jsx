@@ -1,9 +1,11 @@
 import { Plus, CalendarDays } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DateTimePicker from "../../common/datepicker";
 import API from "../../Api/api";
 export const VehicleCreate = () => {
   const [popup, setPopup] = useState(false);
+  const [vehicle, setVehicle] = useState([]);
+  const [editId, setEdit] = useState(null);
   const [form, setForm] = useState({
     NumberPlate: "",
     vehicle: "",
@@ -21,6 +23,63 @@ export const VehicleCreate = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const fetchVehicle = async () => {
+    try {
+      const api = await API.get("/vehicleassignations/allvehicles");
+      console.log("data from backend : ", api.data);
+
+      setVehicle(api.data.vehicles);
+    } catch (err) {
+      console.log("fetching error :", err);
+    }
+  };
+
+  const deleteVehicle = async (id) => {
+    try {
+      const api = await API.delete(`/vehicleassignations/deletevehicles/${id}`);
+      console.log(api);
+
+      fetchVehicle();
+    } catch (err) {
+      console.error(err.message, "delete vehicles not working");
+    }
+  };
+
+  const emptyForm = {
+    NumberPlate: "",
+    vehicle: "",
+    brand: "",
+    status: "",
+    CurrentKm: "",
+    Service: "",
+    insurance: null,
+    polution: null,
+  };
+
+  const resetvalues = () => {
+    setForm(emptyForm);
+    setEdit(null);
+  };
+
+  const updateVehicle = (v) => {
+    setForm({
+      vehicle: v.vehicle,
+      brand: v.brand,
+      NumberPlate: v.NumberPlate,
+      status: v.status,
+      CurrentKm: v.CurrentKm,
+      Service: v.Service,
+      insurance: new Date(v.insurance),
+      polution: new Date(v.polution),
+    });
+    setEdit(v._id);
+    setPopup(true);
+  };
+
+  useEffect(() => {
+    fetchVehicle();
+  }, []);
 
   const handleSubmit = async (e) => {
     console.log(form);
@@ -41,19 +100,30 @@ export const VehicleCreate = () => {
 
     const convertForm = {
       ...form,
-      CurrentKm : Number(form.CurrentKm),
-      Service : Number(form.Service),
-      polution : new Date(form.polution),
-      insurance : new Date(form.insurance),
-       NumberPlate : form.NumberPlate.trim()
-    }
+      CurrentKm: Number(form.CurrentKm),
+      Service: Number(form.Service),
+      polution: new Date(form.polution),
+      insurance: new Date(form.insurance),
+      NumberPlate: form.NumberPlate.trim(),
+    };
 
     try {
-      const api = await API.post("/vehicleassignations/insertvehicle", convertForm);
+      let api = undefined;
 
-      alert("form submit completed");
+      if (editId) {
+        api = await API.put(
+          `/vehicleassignations/updatevehicles/${editId}`,
+          convertForm,
+        );
+        alert("vehicle updated");
+      } else {
+        api = await API.post("/vehicleassignations/insertvehicle", convertForm);
+        alert("vehicle created");
+      }
+      setEdit(null);
       console.log("form submit completed", api.data);
-
+      await fetchVehicle();
+      setPopup(false);
       setForm({
         vehicle: "",
         NumberPlate: "",
@@ -85,7 +155,10 @@ export const VehicleCreate = () => {
 
         <button
           className="bg-violet-500 flex items-center justify-center gap-1 hover:bg-violet-700 text-white px-5 py-2 rounded-xl shadow"
-          onClick={() => setPopup(true)}
+          onClick={() => {
+            setPopup(true);
+            resetvalues();
+          }}
         >
           <Plus size={25} /> <span> Add Vehicle</span>
         </button>
@@ -96,7 +169,7 @@ export const VehicleCreate = () => {
           <div className="absolute inset-0 bg-gray-800/40 backdrop-blur-md min-h-screen" />
           <div className="relative flex flex-col items-center justify-center bg-zinc-900 text-white p-6 rounded-2xl shadow-xl border border-violet-500">
             <h2 className="text-xl font-bold mb-4 text-violet-400">
-              Add Vehicles
+              {editId ? "Update Vehicle" : "Add Vehicle"}
             </h2>
 
             <form
@@ -107,36 +180,42 @@ export const VehicleCreate = () => {
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Vehicle"
                 name="vehicle"
+                value={form.vehicle}
                 onChange={handleChange}
               />
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Brand"
                 name="brand"
+                value={form.brand}
                 onChange={handleChange}
               />
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Number Plate"
                 name="NumberPlate"
+                value={form.NumberPlate}
                 onChange={handleChange}
               />
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Status"
                 name="status"
+                value={form.status}
                 onChange={handleChange}
               />
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Current Km"
                 name="CurrentKm"
+                value={form.CurrentKm}
                 onChange={handleChange}
               />
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Service"
                 name="Service"
+                value={form.Service}
                 onChange={handleChange}
               />
               <div className="flex gap-2">
@@ -185,10 +264,8 @@ export const VehicleCreate = () => {
                 <button
                   className="px-4 py-2 rounded-lg bg-violet-600 hover:bg-violet-700"
                   type="submit"
-                  onClick={() => setPopup(false)}
-
                 >
-                  Save
+                  {editId ? "Update" : "Save"}
                 </button>
               </div>
             </form>
@@ -218,58 +295,37 @@ export const VehicleCreate = () => {
           <div>Delete</div>
           <div>Update</div>
         </div>
-
-        <div className="grid grid-cols-10 py-2 px-3 text-center gap-5  border-b border-violet-500 items-center">
-          <div>Truck</div>
-          <div>BharatBenz</div>
-          <div>KL-07-AB-1234</div>
-          <div className="text-green-600 font-medium">Active</div>
-          <div>3000km</div>
-          <div>5000km</div>
-          <div>{new Date().getDate()}</div>
-          <div>{new Date().getDate()}</div>
-          <div>Delete</div>
-          <div>Update</div>
-        </div>
-
-        <div className="grid grid-cols-10 py-2 px-3 text-center gap-5 border-violet-500 border-b items-center">
-          <div>Truck</div>
-          <div>BharatBenz</div>
-          <div>KL-07-AB-1234</div>
-          <div className="text-green-600 font-medium">Active</div>
-          <div>3000km</div>
-          <div>5000km</div>
-          <div>{new Date().getDate()}</div>
-          <div>{new Date().getDate()}</div>
-          <div>Delete</div>
-          <div>Update</div>
-        </div>
-
-        <div className="grid grid-cols-10 py-2 px-3 text-center gap-5 border-violet-500  border-b items-center">
-          <div>Truck</div>
-          <div>BharatBenz</div>
-          <div>KL-07-AB-1234</div>
-          <div className="text-green-600 font-medium">Active</div>
-          <div>3000km</div>
-          <div>5000km</div>
-          <div>{new Date().getDate()}</div>
-          <div>{new Date().getDate()}</div>
-          <div>Delete</div>
-          <div>Update</div>
-        </div>
-
-        <div className="grid grid-cols-10 py-2 px-3 text-center gap-5 border-violet-500  items-center">
-          <div>Truck</div>
-          <div>BharatBenz</div>
-          <div>KL-07-AB-1234</div>
-          <div className="text-green-600 font-medium">Active</div>
-          <div>3000km</div>
-          <div>5000km</div>
-          <div>{new Date().getDate()}</div>
-          <div>{new Date().getDate()}</div>
-          <div>Delete</div>
-          <div>Update</div>
-        </div>
+        {vehicle.map((v) => (
+          <div
+            key={v._id}
+            className="grid grid-cols-10 py-2 px-3 text-center gap-5  border-b border-violet-500 items-center"
+          >
+            <div>{v.vehicle}</div>
+            <div>{v.brand}</div>
+            <div>{v.NumberPlate}</div>
+            <div className="text-green-600 font-medium">{v.status}</div>
+            <div>{v.CurrentKm}</div>
+            <div>{v.Service}</div>
+            <div>{new Date(v.polution).toLocaleDateString()}</div>
+            <div>{new Date(v.insurance).toLocaleDateString()}</div>
+            <div>
+              <button
+                className="h-10 w-20 rounded-3xl bg-red-500 "
+                onClick={() => deleteVehicle(v._id)}
+              >
+                Delete
+              </button>
+            </div>
+            <div>
+              <button
+                className="h-10 w-20 rounded-3xl bg-blue-500 "
+                onClick={() => updateVehicle(v)}
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
