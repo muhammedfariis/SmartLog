@@ -7,6 +7,7 @@ export const Messege = {
   INVALID_CREDENTIALS: "Invalid email or password",
   TOKEN_MISSING: "Authorization token missing",
   TOKEN_INVALID: "Invalid or expired token",
+  ADMIN_EXIST : "admin already in db",
 
   // User / team management
   USER_NOT_FOUND: "User not found",

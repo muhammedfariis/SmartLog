@@ -1,7 +1,51 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ROUTEAUTH from "../../common/authPath";
+import API from "../../Api/api";
+import { useState } from "react";
 
 const Register = () => {
+  const go = useNavigate()
+ const [form , setForm] = useState({
+  userName : "",
+  password : ""
+ })
+
+ const handleChange = (e)=>{
+  setForm({
+    ...form,
+    [e.target.name]:e.target.value
+  })
+ }
+
+const handleSubmit = async (e)=>{
+
+  console.log(form);
+   e.preventDefault()
+  
+  try{
+    const api = await API.post(
+    "/authentication/register",
+
+      {
+        ...form,
+        role : "admin"
+      }
+    )
+    
+    
+    console.log("register completed" , api.data);
+    alert("registration completed")
+
+
+    setForm({userName : "" , password : ""})
+
+    go("/admin/vehicles")
+    
+  }catch(err){
+    alert("registeration failed" || err.response?.data?.message)
+  }
+}
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-black text-white px-4">
       <div className="flex flex-col gap-8 border-amber-300 border-2 rounded-4xl p-8 max-w-md w-full">
@@ -16,24 +60,23 @@ const Register = () => {
 
         <h1 className="text-3xl font-bold text-center">Register</h1>
 
-        <form className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <input
             className="h-12 w-full p-2 border-2 border-violet-400 rounded-3xl bg-black text-white"
             type="text"
             placeholder="Username"
             required
+            name="userName"
+            onChange={handleChange}
           />
-          <input
-            className="h-12 w-full p-2 border-2 border-violet-400 rounded-3xl bg-black text-white"
-            type="email"
-            placeholder="Gmail"
-            required
-          />
+          
           <input
             className="h-12 w-full p-2 border-2 border-violet-400 rounded-3xl bg-black text-white"
             type="password"
             placeholder="Password"
             required
+            name="password"
+            onChange={handleChange}
           />
 
           <label className="flex items-center gap-2 text-sm text-gray-300">

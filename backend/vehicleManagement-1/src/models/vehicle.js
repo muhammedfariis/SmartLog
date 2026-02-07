@@ -28,7 +28,7 @@ const schema = new mongoose.Schema(
       default: "Active",
     },
 
-    Milage: {
+    CurrentKm: {
       type: Number,
       default: 0,
     },
@@ -51,6 +51,6 @@ const schema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const vehicles = mongoose.model("vehicle_management", schema);
+const vehicles = mongoose.model("vehicles", schema);
 
 export default vehicles;

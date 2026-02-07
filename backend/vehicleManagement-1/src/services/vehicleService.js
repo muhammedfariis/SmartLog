@@ -12,7 +12,7 @@ class VehicleServices {
     NumberPlate,
     brand,
     status,
-    Milage,
+    CurrentKm,
     Service,
     insurance,
     polution,
@@ -21,13 +21,13 @@ class VehicleServices {
   {
     if (
       !vehicle ||
-      !NumberPlate ||
+      !NumberPlate||
       !brand ||
       !status||
       Service == null ||
       !insurance||
       !polution ||
-      !Milage
+      CurrentKm == null
     ) {
       throw new ApiError(Status.BAD_REQUEST, Messege.VALIDATION_ERROR);
     }
@@ -36,17 +36,19 @@ class VehicleServices {
     if (existing) {
       throw new ApiError(Status.BAD_REQUEST, Messege.VEHICLE_ALREADY_FOUND);
     }
-
+    
     const insertvehicle = await this.VehicleRepository.create({
     vehicle,
     NumberPlate,
     brand,
     status,
-    Milage,
+    CurrentKm,
     Service,
     insurance,
     polution,
     });
+    
+   
 
     logger.debug("Vehicle insertion completed");
 
@@ -69,7 +71,7 @@ class VehicleServices {
     NumberPlate,
     brand,
     status,
-    Milage,
+    CurrentKm,
     Service,
     insurance,
     polution,
@@ -81,7 +83,7 @@ class VehicleServices {
     NumberPlate,
     brand,
     status,
-    Milage,
+    CurrentKm,
     Service,
     insurance,
     polution,
@@ -132,6 +134,15 @@ class VehicleServices {
       message: Messege.VEHICLE_FOUND,
       vehicles,
     };
+  }
+
+
+  async addRunningKm(vehicleId , totalKm){
+    return this.VehicleRepository.findByIdAndUpdate(
+      vehicleId,
+      {$inc : {CurrentKm : totalKm}},
+      {new : true}
+    )
   }
 }
 

@@ -22,6 +22,9 @@ export class UserRepository extends BaseRepository {
   findOne(query) {
     return vehicles.findOne(query);
   }
+
+
+
 }
 
 

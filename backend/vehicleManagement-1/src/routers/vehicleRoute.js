@@ -6,8 +6,8 @@ const vehicles = vehicleComposer()
 const router = express.Router()
 router.get("/allvehicles",Validation,roleMiddleware("admin") , vehicles.readVehicles);
 router.post("/insertvehicle",Validation, roleMiddleware("admin"), vehicles.createVehicles);
-router.put("/updatevehicles", Validation, roleMiddleware("admin"), vehicles.updateVehicles);
-router.delete("/deletevehicles",Validation, roleMiddleware("admin"), vehicles.deleteVehicles);
+router.put("/updatevehicles/:id", Validation, roleMiddleware("admin"), vehicles.updateVehicles);
+router.delete("/deletevehicles/:id",Validation, roleMiddleware("admin"), vehicles.deleteVehicles);
 
 
 export default router
