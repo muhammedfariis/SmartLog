@@ -1,8 +1,54 @@
 import { Plus, CalendarDays } from "lucide-react";
 import { useState } from "react";
 import DateTimePicker from "../../common/datepicker";
+import API from "../../Api/api";
 export const VehicleCreate = () => {
   const [popup, setPopup] = useState(false);
+  const [form, setForm] = useState({
+    NumberPlate: "",
+    vehicle: "",
+    brand: "",
+    status: "",
+    CurrentKm: "",
+    Service: "",
+    insurance: "",
+    polution: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    console.log(form);
+    e.preventDefault();
+
+    try {
+      const api = await API.post("/vehicleassignations/insertvehicle", form);
+
+      alert("form submit completed");
+      console.log("form submit completed", api.data);
+
+      setForm({
+        vehicle: "",
+        NumberPlate: "",
+        brand: "",
+        status: "",
+        CurrentKm: "",
+        Service: "",
+        insurance: null,
+        polution: null,
+      });
+    } catch (err) {
+      alert("vehicles not created");
+      console.error(err.response?.data || err.message);
+  alert("Failed to create vehicle. Check console for details.");
+    }
+  };
+
   return (
     <div className="space-y-5">
       <div className="flex justify-between items-start">
@@ -31,52 +77,79 @@ export const VehicleCreate = () => {
               Add Vehicles
             </h2>
 
-            <div className="space-y-3 flex flex-col items-center">
+            <form onSubmit={handleSubmit} className="space-y-3 flex flex-col items-center">
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Vehicle"
+                name="vehicle"
+                onChange={handleChange}
               />
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Brand"
+                name="brand"
+                onChange={handleChange}
+
               />
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Number Plate"
+                name="NumberPlate"
+                onChange={handleChange}
+
               />
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Status"
+                name="status"
+                onChange={handleChange}
+
               />
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Current Km"
+                name="CurrentKm"
+                onChange={handleChange}
+
               />
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Service"
+                name="Service"
+                onChange={handleChange}
+
               />
               <div className="flex gap-2">
-                   <div className="flex items-center flex-col">
-                <label className="text-sm text-gray-400">Insurence</label>
+                <div className="flex items-center flex-col">
+                  <label className="text-sm text-gray-400">Insurence</label>
 
-                <div className="flex items-center gap-3 bg-black border border-violet-500 rounded-lg p-2">
-                  <CalendarDays size={18} />
-                  <DateTimePicker />
+                  <div className="flex items-center gap-3 bg-black border border-violet-500 rounded-lg p-2">
+                    <CalendarDays size={18} />
+                    <DateTimePicker 
+                    value = {form.insurance}
+                    onChange = {(date)=>setForm({
+                      ...form ,
+                      insurance : date
+                    })}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className=" flex items-center flex-col">
-                <label className="text-sm  text-gray-400">Polution</label>
+                <div className=" flex items-center flex-col">
+                  <label className="text-sm  text-gray-400">Polution</label>
 
-                <div className="flex items-center gap-3 bg-black border border-violet-500 rounded-lg p-2">
-                  <CalendarDays size={18} />
-                  <DateTimePicker />
+                  <div className="flex items-center gap-3 bg-black border border-violet-500 rounded-lg p-2">
+                    <CalendarDays size={18} />
+                    <DateTimePicker
+                     value = {form.polution}
+                     onChange = {(date)=>setForm({
+                      ...form ,
+                      polution : date
+                     })}
+                    />
+                  </div>
                 </div>
-              </div>
-                
               </div>
            
-            </div>
 
             <div className="flex justify-end gap-3 mt-5">
               <button
@@ -88,11 +161,12 @@ export const VehicleCreate = () => {
 
               <button
                 className="px-4 py-2 rounded-lg bg-violet-600 hover:bg-violet-700"
-                onClick={() => setPopup(false)}
+                type="submit"
               >
                 Save
               </button>
             </div>
+             </form>
           </div>
         </div>
       )}

@@ -1,47 +1,51 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ROUTEAUTH from "../../common/authPath";
 import API from "../../Api/api";
 import { useState } from "react";
 
-const Login = () =>{
+const Login = () => {
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    userName: "",
+    password: "",
+  });
 
-const [form , setForm] = useState({
- userName : "",
- password : ""
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-})
+  const handleSubmit = async (e) => {
+    console.log(form);
+    e.preventDefault();
+    try {
+      const api = await API.post("/authentication/login", {
+        ...form,
+      });
 
-const handleChange = (e)=>{
-  setForm({
-    ...form,
-    [e.target.name]:e.target.value
-  })
-}
+      console.log("login completed", api.data);
 
-const handleSubmit = async (e)=>{
-  console.log(form);
-  e.preventDefault()
-try{
+      const role = api.data.user.role;
 
+      if (role === "admin") navigate("/admin/vehicles");
+      else if (role === "dispatcher") navigate("/dispatcher/assignment");
+      else if (role === "driver") navigate("/drivers/trips");
+      else {
+        alert("Unknown role");
+      }
 
-  const api = await API.post(
-    "/authentication/login",
-     {
-      ...form
+      alert("login completed");
+      
+      setForm({userName : "" , password : ""})
 
-     }
-  )
-
-  console.log("login completed" , api.data);
-
-  alert("login completed")
-    }catch(err){
-      alert("login failed" || err.response?.data?.message)
+    } catch (err) {
+      alert("login failed" || err.response?.data?.message);
     }
-  
-}
+  };
 
- return (
+  return (
     <div className="flex justify-center items-center min-h-screen bg-black text-white px-4">
       <div className="flex flex-col gap-8 border-amber-300 border-2 rounded-4xl p-8 max-w-md w-full">
         <div className="flex flex-col items-center">
@@ -58,7 +62,6 @@ try{
         <h1 className="text-3xl font-bold text-center">Login</h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          
           <input
             className="h-12 w-full p-2 border-2 border-violet-400 rounded-3xl bg-black text-white"
             type="text"
@@ -71,7 +74,7 @@ try{
             className="h-12 w-full p-2 border-2 border-violet-400 rounded-3xl bg-black text-white"
             type="password"
             placeholder="Password"
-            name= "password"
+            name="password"
             required
             onChange={handleChange}
           />
@@ -104,7 +107,6 @@ try{
       </div>
     </div>
   );
+};
 
-}
-
-export default Login
+export default Login;

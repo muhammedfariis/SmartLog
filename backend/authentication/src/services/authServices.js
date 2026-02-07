@@ -21,7 +21,7 @@ class AuthService {
     }
 
     const passwordhashed = await passwordHash(password);
-    if (!password) {
+    if (!passwordhashed) {
       throw new ApiError(400, "Password required");
     }
 

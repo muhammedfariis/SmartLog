@@ -1,6 +1,9 @@
+import { useState , useEffect } from "react";
+import { Route, Routes, Navigate } from "react-router-dom";
+
+
 import Register from "../Authentication/pages/register";
 import Login from "../Authentication/pages/login";
-import { Route, Routes, Navigate } from "react-router-dom";
 import ROUTEAUTH from "../common/authPath";
 import LandingPage from "../landing/landing";
 import ROUTEADMIN from "../common/adminPath";
@@ -16,14 +19,29 @@ import Mytrips from "../drivers/pages/mytrips";
 import DRIVERSPATH from "../common/driverspath";
 import Kmupdate from "../drivers/pages/kmupdate";
 import DriverLayout from "../layouts/driverlayout";
+import API from "../Api/api";
 const Router = () => {
+ const [adminExist , setAdmin] = useState(false)
+  
+    useEffect(()=>{
+     const chekAdmin = async ()=> {
+         const res = await API.get("/authentication/admin")
+         setAdmin(res.data.admin)
+      
+     }
+       chekAdmin()
+
+    },[])
+
+ if(adminExist===null) return null
+ 
   return (
     <>
       <Routes>
         {/* landing */}
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={adminExist ? <Navigate to={ROUTEAUTH.LOGIN}/> :<LandingPage />} />
         {/* authentication */}
-        <Route path={ROUTEAUTH.REGISTER} element={<Register />} />
+        <Route path={ROUTEAUTH.REGISTER} element={adminExist ? <Navigate to={ROUTEAUTH.LOGIN}/> : <Register/>} />
         <Route path={ROUTEAUTH.LOGIN} element={<Login />} />
         {/* admin */}
         <Route path="/admin" element = {<AdminLayout/>}>

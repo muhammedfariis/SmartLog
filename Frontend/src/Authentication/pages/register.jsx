@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ROUTEAUTH from "../../common/authPath";
 import API from "../../Api/api";
 import { useState } from "react";
+import ROUTEADMIN from "../../common/adminPath";
 
 const Register = () => {
-
+  const go = useNavigate()
  const [form , setForm] = useState({
   userName : "",
   password : ""
@@ -18,9 +19,9 @@ const Register = () => {
  }
 
 const handleSubmit = async (e)=>{
-  e.preventDefault()
 
   console.log(form);
+   e.preventDefault()
   
   try{
     const api = await API.post(
@@ -36,6 +37,10 @@ const handleSubmit = async (e)=>{
     console.log("register completed" , api.data);
     alert("registration completed")
 
+
+    setForm({userName : "" , password : ""})
+
+    go("/admin/vehicles")
     
   }catch(err){
     alert("registeration failed" || err.response?.data?.message)
