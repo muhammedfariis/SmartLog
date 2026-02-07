@@ -18,4 +18,6 @@ export class BaseRepository {
   findOne(email) {
     throw new Error("not implimented || not added")
   }
+
+ 
 }

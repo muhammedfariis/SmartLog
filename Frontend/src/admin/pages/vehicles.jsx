@@ -28,8 +28,8 @@ export const VehicleCreate = () => {
 
     if (
       !form.vehicle ||
-      !form.NumberPlate ||
-      !form.brand ||
+      !form.NumberPlate.trim() ||
+      !form.brand.trim() ||
       !form.status ||
       !form.CurrentKm ||
       !form.Service ||
@@ -44,8 +44,8 @@ export const VehicleCreate = () => {
       CurrentKm : Number(form.CurrentKm),
       Service : Number(form.Service),
       polution : new Date(form.polution),
-      insurance : new Date(form.insurance)
-
+      insurance : new Date(form.insurance),
+       NumberPlate : form.NumberPlate.trim()
     }
 
     try {
@@ -185,6 +185,8 @@ export const VehicleCreate = () => {
                 <button
                   className="px-4 py-2 rounded-lg bg-violet-600 hover:bg-violet-700"
                   type="submit"
+                  onClick={() => setPopup(false)}
+
                 >
                   Save
                 </button>

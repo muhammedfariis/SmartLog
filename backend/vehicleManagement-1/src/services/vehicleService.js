@@ -21,7 +21,7 @@ class VehicleServices {
   {
     if (
       !vehicle ||
-      !NumberPlate ||
+      !NumberPlate||
       !brand ||
       !status||
       Service == null ||
@@ -36,7 +36,7 @@ class VehicleServices {
     if (existing) {
       throw new ApiError(Status.BAD_REQUEST, Messege.VEHICLE_ALREADY_FOUND);
     }
-
+    
     const insertvehicle = await this.VehicleRepository.create({
     vehicle,
     NumberPlate,
@@ -47,6 +47,8 @@ class VehicleServices {
     insurance,
     polution,
     });
+    
+   
 
     logger.debug("Vehicle insertion completed");
 
