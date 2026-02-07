@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import ROUTEAUTH from "../../common/authPath";
 import API from "../../Api/api";
 import { useState } from "react";
-import ROUTEADMIN from "../../common/adminPath";
 
 const Register = () => {
   const go = useNavigate()

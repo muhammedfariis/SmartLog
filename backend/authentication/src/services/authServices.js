@@ -48,7 +48,7 @@ class AuthService {
     if (!user) {
       throw new ApiError(Status.NOT_FOUND, Messege.USER_NOT_FOUND);
     }
-    const compare = comparePassword(password, user.password);
+    const compare = await comparePassword(password, user.password);
 
     if (!compare) {
       throw new ApiError(Status.UNAUTHORIZED, Messege.INVALID_CREDENTIALS);
@@ -61,7 +61,9 @@ class AuthService {
     return {
       user: user._id,
       user,
-      tokens,
+      tokens : {
+        accessToken : tokens
+      }
     };
   }
 

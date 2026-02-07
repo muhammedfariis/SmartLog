@@ -9,7 +9,8 @@ const API = axios.create({
 
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
-  if (config) {
+  console.log("token in localStorage:", localStorage.getItem("token"));
+  if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
@@ -19,7 +20,6 @@ API.interceptors.response.use(
   (response) => {
     if (response.data?.tokens?.accessToken) {
       localStorage.setItem("token", response.data.tokens.accessToken);
-
       console.log("token stored automatically successfull");
     }
     return response;
