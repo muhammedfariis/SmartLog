@@ -19,6 +19,12 @@ class AuthController {
         const finding  = await this.AuthService.getAllUsers()
         res.json(finding)
     }
+     
+    adminExists = async (req , res , next)=>{
+        const admin = await this.AuthService.adminExists()
+        res.json({admin})
+    }
+
 
 }
 

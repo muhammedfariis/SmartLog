@@ -9,5 +9,8 @@ export class BaseRepository {
     find(users){
         throw new Error("not implimented || not used")
     }
+    findByAdmin(admin){
+        throw new Error("not implimented || not working")
+    }
 }
 

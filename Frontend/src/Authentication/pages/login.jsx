@@ -6,11 +6,40 @@ import { useState } from "react";
 const Login = () =>{
 
 const [form , setForm] = useState({
+ userName : "",
+ password : ""
 
 })
 
+const handleChange = (e)=>{
+  setForm({
+    ...form,
+    [e.target.name]:e.target.value
+  })
+}
+
+const handleSubmit = async (e)=>{
+  console.log(form);
+  e.preventDefault()
+try{
 
 
+  const api = await API.post(
+    "/authentication/login",
+     {
+      ...form
+
+     }
+  )
+
+  console.log("login completed" , api.data);
+
+  alert("login completed")
+    }catch(err){
+      alert("login failed" || err.response?.data?.message)
+    }
+  
+}
 
  return (
     <div className="flex justify-center items-center min-h-screen bg-black text-white px-4">
@@ -28,19 +57,23 @@ const [form , setForm] = useState({
 
         <h1 className="text-3xl font-bold text-center">Login</h1>
 
-        <form className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           
           <input
             className="h-12 w-full p-2 border-2 border-violet-400 rounded-3xl bg-black text-white"
             type="text"
             placeholder="userName"
+            name="userName"
             required
+            onChange={handleChange}
           />
           <input
             className="h-12 w-full p-2 border-2 border-violet-400 rounded-3xl bg-black text-white"
             type="password"
             placeholder="Password"
+            name= "password"
             required
+            onChange={handleChange}
           />
 
           <label className="flex items-center gap-2 text-sm text-gray-300">

@@ -9,6 +9,12 @@ class AuthService {
     this.UserRepository = UserRepository;
   }
   async register({ userName, password, role }) {
+    const adminexist = await this.UserRepository.findByAdmin()
+
+    if(adminexist && role === "admin"){
+      throw new ApiError(Status.BAD_REQUEST , Messege.ADMIN_EXIST)
+    }
+
     const existing = await this.UserRepository.findOne(userName);
     if (existing) {
       throw new ApiError(Status.CONFLICT, Messege.USER_EXIST);
@@ -68,6 +74,11 @@ class AuthService {
       user: getting._id,
       getting,
     };
+  }
+
+  async adminExists(){
+    const admin = await this.UserRepository.findByAdmin()
+    return !!admin
   }
 }
 
