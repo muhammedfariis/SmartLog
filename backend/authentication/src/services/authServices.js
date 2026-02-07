@@ -8,17 +8,19 @@ class AuthService {
   constructor(UserRepository) {
     this.UserRepository = UserRepository;
   }
-  async register({ userName, email, password, role }) {
-    const existing = await this.UserRepository.findOne(email);
+  async register({ userName, password, role }) {
+    const existing = await this.UserRepository.findOne(userName);
     if (existing) {
       throw new ApiError(Status.CONFLICT, Messege.USER_EXIST);
     }
 
     const passwordhashed = await passwordHash(password);
+    if (!password) {
+      throw new ApiError(400, "Password required");
+    }
 
     const user = await this.UserRepository.create({
       userName,
-      email,
       password: passwordhashed,
       role,
     });
@@ -34,14 +36,17 @@ class AuthService {
     };
   }
 
-  async login({ email, password }) {
-    const user = await this.UserRepository.findOne(email);
+  async login({ userName, password }) {
+    const user = await this.UserRepository.findOne(userName);
     logger.debug("email found");
     if (!user) {
       throw new ApiError(Status.NOT_FOUND, Messege.USER_NOT_FOUND);
     }
     const compare = comparePassword(password, user.password);
-    logger.debug("password compared");
+
+    if (!compare) {
+      throw new ApiError(Status.UNAUTHORIZED, Messege.INVALID_CREDENTIALS);
+    }
 
     const tokens = generateToken({ _id: user._id, role: user.role });
     if (!tokens) {

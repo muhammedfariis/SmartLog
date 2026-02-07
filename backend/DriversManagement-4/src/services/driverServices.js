@@ -3,7 +3,7 @@ import {ApiError} from "../../../Errors/Error.js"
 import {Messege , Status} from "../../../constants/httpResponse.js"
 
 class DriverServices {
-    constructor(vehicleRepo , DriverRepo){
+    constructor( DriverRepo ,vehicleRepo){
         this.vehicleRepo = vehicleRepo
         this.DriverRepo = DriverRepo
     }

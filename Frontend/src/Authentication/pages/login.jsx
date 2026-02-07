@@ -1,8 +1,16 @@
 import { Link } from "react-router-dom";
 import ROUTEAUTH from "../../common/authPath";
-
+import API from "../../Api/api";
+import { useState } from "react";
 
 const Login = () =>{
+
+const [form , setForm] = useState({
+
+})
+
+
+
 
  return (
     <div className="flex justify-center items-center min-h-screen bg-black text-white px-4">
@@ -24,8 +32,8 @@ const Login = () =>{
           
           <input
             className="h-12 w-full p-2 border-2 border-violet-400 rounded-3xl bg-black text-white"
-            type="email"
-            placeholder="Gmail"
+            type="text"
+            placeholder="userName"
             required
           />
           <input
