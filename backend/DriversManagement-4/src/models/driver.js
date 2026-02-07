@@ -4,7 +4,7 @@ const driverSchema = new mongoose.Schema(
   {
     vehicleId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "vehicle_management",
+      ref: "vehicles",
       required: true,
     },
     assignmentId: {
