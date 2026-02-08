@@ -1,6 +1,7 @@
 import { ApiError } from "../../../Errors/Error.js";
 import { Messege, Status } from "../../../constants/httpResponse.js";
 import logger from "../../../log/logger.js";
+import vehicles from "../models/vehicle.js";
 
 class VehicleServices {
   constructor(VehicleRepository) {
@@ -144,6 +145,27 @@ class VehicleServices {
       {new : true}
     )
   }
+
+   async searchByRegex(plate){
+
+     if(!plate || plate.trim()===""){
+      return{
+        message : "empty search",
+        vehicles : []
+      }
+     }
+
+     const search = await this.VehicleRepository.findBySearch(plate)
+
+     return{
+      Messege : "search completed and getted",
+      count : search.lenght ,
+      search,
+     }
+
+
+   }
+
 }
 
 export default VehicleServices;
