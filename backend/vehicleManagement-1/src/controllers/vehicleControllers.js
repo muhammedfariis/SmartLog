@@ -51,7 +51,19 @@ class VehicleControllers {
     }
   };
 
-  searchByRegex
+  searchByRegex = async (req , res , next)=>{
+    try{
+
+      const {plate} = req.query
+      
+     const searchPlate = await this.VehicleServices.searchByRegex(plate)
+
+     res.json(searchPlate)
+
+    }catch(err){
+      next(err)
+    }
+  }
 
   
 }
