@@ -279,7 +279,7 @@ export const VehicleCreate = () => {
           type="search"
           placeholder="Search No:Plate"
         />
-        <button className="h-10 w-20 rounded-2xl bg-violet-500">Search</button>
+        <button type="search" className="h-10 w-20 rounded-2xl bg-violet-500">Search</button>
       </div>
 
       <div className="bg-black text-white rounded-2xl shadow border border-violet-500">
