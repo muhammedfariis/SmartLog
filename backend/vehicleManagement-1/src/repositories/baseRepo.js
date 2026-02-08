@@ -18,6 +18,9 @@ export class BaseRepository {
   findOne(email) {
     throw new Error("not implimented || not added")
   }
+  findBySearch(plate){
+    throw new Error("not implimented || not added")
+  }
 
  
 }
