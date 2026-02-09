@@ -1,10 +1,10 @@
-import { Plus, CalendarDays } from "lucide-react";
+import { Plus, CalendarDays, Trash, SquarePen } from "lucide-react";
 import { useState, useEffect } from "react";
 import DateTimePicker from "../../common/datepicker";
 import API from "../../Api/api";
 export const VehicleCreate = () => {
-  const [loading , setLoading] =  useState(false)
-  const [search , setSearch] = useState("")
+  const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState("");
   const [popup, setPopup] = useState(false);
   const [vehicle, setVehicle] = useState([]);
   const [editId, setEdit] = useState(null);
@@ -26,29 +26,26 @@ export const VehicleCreate = () => {
     });
   };
 
+  const vehicleSearch = async (plate) => {
+    console.log("search : ", plate);
 
-   const vehicleSearch = async(plate) =>{
-    try{
-        if(!plate.trim()){
-          fetchVehicle()
-        return
-
-        }
-
-        setLoading(true)
-
-        const api = await API.get(`vehicleassignations/search?plate=${plate}`)
-
-        setVehicle(api.data.search)
-      }catch(err){
-        console.error(err);
-      }finally{
-        setLoading(false)
+    try {
+      if (!plate.trim()) {
+        fetchVehicle();
+        return;
       }
-      
-   }
 
+      setLoading(true);
 
+      const api = await API.get(`vehicleassignations/search?plate=${plate}`);
+
+      setVehicle(api.data.search);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const fetchVehicle = async () => {
     try {
@@ -105,12 +102,15 @@ export const VehicleCreate = () => {
 
   useEffect(() => {
     fetchVehicle();
+  }, []);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
-       vehicleSearch(search)
+      vehicleSearch(search);
     }, 500);
 
-    return () => clearTimeout(timer)
-  }, []);
+    return () => clearTimeout(timer);
+  }, [search]);
 
   const handleSubmit = async (e) => {
     console.log(form);
@@ -172,6 +172,25 @@ export const VehicleCreate = () => {
     }
   };
 
+  const getStatus = (status) => {
+    switch (status.toLowerCase()) {
+      case "active":
+        return "bg-green-900 text-green-400";
+
+      case "retired":
+        return "bg-red-900 text-red-400";
+
+      case "maintainance":
+        return "bg-yellow-900 text-yellow-400";
+
+      case "in-transist":
+        return "bg-violet-900 text-violet-400";
+
+      default:
+        return "bg-black text-white";
+    }
+  };
+
   return (
     <div className="space-y-5">
       <div className="flex justify-between items-start">
@@ -207,38 +226,54 @@ export const VehicleCreate = () => {
               onSubmit={handleSubmit}
               className="space-y-3 flex flex-col items-center"
             >
-              <input
-                className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
-                placeholder="Vehicle"
+               <select
                 name="vehicle"
+                required
                 value={form.vehicle}
                 onChange={handleChange}
-              />
+                className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none appearance-none text-white"
+              >
+                <option value="">Select vehicle</option>
+                <option value="truck">truck</option>
+                <option value="minitruck">minitruck</option>
+                <option value="van">van</option>
+                <option value="container">container</option>
+              </select>
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Brand"
                 name="brand"
                 value={form.brand}
+                required
                 onChange={handleChange}
               />
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Number Plate"
                 name="NumberPlate"
+                required
                 value={form.NumberPlate}
                 onChange={handleChange}
               />
-              <input
-                className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
-                placeholder="Status"
+              <select
                 name="status"
+                required
                 value={form.status}
                 onChange={handleChange}
-              />
+                className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none appearance-none text-white"
+              >
+                <option value="">Select Status</option>
+                <option value="Active">Active</option>
+                <option value="Maintainance">Maintainance</option>
+                <option value="In-Transist">In-Transist</option>
+                <option value="Retired">Retired</option>
+              </select>
+
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Current Km"
                 name="CurrentKm"
+                required
                 value={form.CurrentKm}
                 onChange={handleChange}
               />
@@ -246,6 +281,7 @@ export const VehicleCreate = () => {
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Service"
                 name="Service"
+                required
                 value={form.Service}
                 onChange={handleChange}
               />
@@ -306,24 +342,24 @@ export const VehicleCreate = () => {
 
       <div className="flex gap-4">
         <input
-          className="text-white rounded-3xl h-10 w-60 border-2 outline-0 border-violet-500 p-2"
-          type="search"
+          className="text-white rounded-3xl h-10 w-96 border-2 outline-0  border-violet-500 p-5 text-lg"
+          type="text"
           value={search}
-          placeholder="Search No:Plate"
-          onChange={(e)=>setSearch(e.target.value)}
+          placeholder="Search Number Plate"
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-        
 
+      {loading && (
+        <div className="bg-transparent">
+          <p className="text-violet-700 animate-bounce inset-0 -z-50 backdrop-blur-3xl shadow-2xl">
+            Loading...
+          </p>
+        </div>
+      )}
 
-        {loading&&(
-           <div className="bg-transparent">
-             <p className="text-violet-700 animate-bounce inset-0 -z-50 backdrop-blur-3xl shadow-2xl">Loading...</p>
-          </div>
-        )}
-
-      <div className="bg-black text-white rounded-2xl shadow border border-violet-500">
-        <div className="grid grid-cols-10 py-2 px-3 text-center gap-5 border-b text-gray-500 font-medium">
+      <div className="bg-black text-white rounded-3xl shadow border border-violet-500">
+        <div className="grid grid-cols-9 py-2 px-3 text-center gap-5 border-b border-violet-500 text-gray-500 font-medium">
           <div>Vehicle</div>
           <div>Brand</div>
           <div>NumberPlate</div>
@@ -332,37 +368,69 @@ export const VehicleCreate = () => {
           <div>Service-Km</div>
           <div>Polution-Expiry</div>
           <div>Insurance-Expiry</div>
-          <div>Delete</div>
-          <div>Update</div>
+          <div>Actions</div>
         </div>
         {vehicle.map((v) => (
           <div
             key={v._id}
-            className="grid grid-cols-10 py-2 px-3 text-center gap-5  border-b border-violet-500 items-center"
+            className="grid grid-cols-9 py-2 px-3 text-center gap-5 justify-center border-violet-500 items-center"
           >
             <div>{v.vehicle}</div>
             <div>{v.brand}</div>
             <div>{v.NumberPlate}</div>
-            <div className="text-green-600 font-medium">{v.status}</div>
+            <div className="flex justify-center items-center">
+              <div className={` w-fit px-2 rounded-3xl ${getStatus(v.status)}`}>
+                {v.status}
+              </div>
+            </div>
             <div>{v.CurrentKm}</div>
             <div>{v.Service}</div>
             <div>{new Date(v.polution).toLocaleDateString()}</div>
             <div>{new Date(v.insurance).toLocaleDateString()}</div>
-            <div>
-              <button
-                className="h-10 w-20 rounded-3xl bg-red-500 "
-                onClick={() => deleteVehicle(v._id)}
-              >
-                Delete
-              </button>
-            </div>
-            <div>
-              <button
-                className="h-10 w-20 rounded-3xl bg-blue-500 "
-                onClick={() => updateVehicle(v)}
-              >
-                Update
-              </button>
+            <div className="flex items-center justify-center gap-1">
+              <div>
+                <button
+                  className="group flex items-center  rounded-full h-10 w-10 
+               bg-red-900 text-red-600 hover:w-25 transition-all duration-300 
+             overflow-hidden px-2"
+                  onClick={() => deleteVehicle(v._id)}
+                >
+                  <Trash
+                    size={22}
+                    color="red"
+                    className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+                  />
+
+                  <span
+                    className="ml-2 opacity-0  
+                  transition-opacity duration-200 group-hover:opacity-100"
+                  >
+                    Delete
+                  </span>
+                </button>
+              </div>
+
+              <div>
+                <button
+                  className="group flex items-center  rounded-full h-10 w-10 
+               bg-blue-950 text-blue-600 hover:w-25 transition-all duration-300 
+             overflow-hidden px-2"
+                  onClick={() => updateVehicle(v)}
+                >
+                  <SquarePen
+                    size={22}
+                    color="blue"
+                    className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+                  />
+
+                  <span
+                    className="ml-2 opacity-0  
+                  transition-opacity duration-200 group-hover:opacity-100"
+                  >
+                    Update
+                  </span>
+                </button>
+              </div>
             </div>
           </div>
         ))}
