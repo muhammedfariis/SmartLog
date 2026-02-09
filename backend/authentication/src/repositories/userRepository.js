@@ -15,5 +15,8 @@ export class UserRepository extends BaseRepository{
     async findByAdmin(admin){
       return await UserModel.findOne({role : "admin"})
     }
+    async findByIdAndDelete(id){
+    return Auth.findByIdAndDelete(id)
+   }
 
 }

@@ -5,6 +5,8 @@ class Teamcontrollers {
 
   createDispatcher = async (req, res, next) => {
     try {
+      console.log("req body : " , req.body);
+      
       const createdDisp = await this.TeamServices.createDispatcher({
         ...req.body,
       });

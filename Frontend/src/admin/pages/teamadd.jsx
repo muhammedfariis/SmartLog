@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Plus , SquarePen , Trash } from "lucide-react";
+import { Plus  , Trash } from "lucide-react";
 import API from "../../Api/api";
 
 const TeamAdd = () => {
@@ -11,18 +11,16 @@ const TeamAdd = () => {
   const [displist , setDisplist] = useState([])
   const [formDriver, setFormDriver] = useState({
     Name: "",
-    UserName: "",
-    Password: "",
+    userName: "",
+    password: "",
     LicenceInfo: "",
-        role : ""
 
   });
 
   const [formDisp, setFormDisp] = useState({
     Name: "",
-    UserName: "",
-    Password: "",
-        role : ""
+    userName: "",
+    password: "",
 
   });
 
@@ -46,10 +44,9 @@ const TeamAdd = () => {
 
       setFormDriver({
         Name: "",
-        UserName: "",
-        Password: "",
+        userName: "",
+        password: "",
         LicenceInfo: "",
-        role : ""
       });
 
       setDriverAcc(false);
@@ -85,9 +82,8 @@ const TeamAdd = () => {
 
       setFormDisp({
         Name: "",
-        UserName: "",
-        Password: "",
-        role : ""
+        userName: "",
+        password: "",
 
       });
 
@@ -238,14 +234,14 @@ const TeamAdd = () => {
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="UserName"
-                name="UserName"
+                name="userName"
                 required
                 onChange={handleChangeDriver}
               />
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Password"
-                name="Password"
+                name="password"
                 type="password"
                 onChange={handleChangeDriver}
                 required
@@ -332,18 +328,18 @@ const TeamAdd = () => {
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="UserName"
-                name="UserName"
+                name="userName"
                 required
-                value={formDisp.UserName}
+                value={formDisp.userName}
                 onChange={handleChangeDisp}
               />
               <input
                 className="w-80 p-2 rounded-lg bg-black border border-violet-500 outline-none"
                 placeholder="Password"
-                name="Password"
+                name="password"
                 type="password"
                 required
-                value={formDisp.Password}
+                value={formDisp.password}
                 onChange={handleChangeDisp}
               />
 

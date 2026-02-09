@@ -5,7 +5,7 @@ const AuthSchema = new mongoose.Schema(
 
     Name : {
       type : String,
-      required : true
+      
     },
     userName: {
       type: String,
@@ -21,7 +21,8 @@ const AuthSchema = new mongoose.Schema(
     },
      LicenceInfo : {
         type : String,
-        unique : true
+        unique : true,
+        sparse : true
     }
   },
   { timestamps: true }

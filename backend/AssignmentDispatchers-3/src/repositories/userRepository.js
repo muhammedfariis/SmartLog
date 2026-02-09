@@ -3,7 +3,7 @@ import { BaseRepository } from "./baseRepository.js";
 
 export class UserRepository extends BaseRepository{
 
-  find(data){
+  find(query = {}){
     return Assignment.find(data)
   }
 
@@ -13,6 +13,12 @@ export class UserRepository extends BaseRepository{
 
   create(user){
     return Assignment.create(user)
+  }
+
+  findByPopulate(){
+    return Assignment.find()
+    .populate("vehicle")
+    .populate("driver")
   }
 
 }

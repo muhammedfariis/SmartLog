@@ -1,5 +1,5 @@
 
-import { UserRepository } from "../repositories/userrepo.js";
+import { UserRepository } from "../../../authentication/src/repositories/userRepository.js";
 import TeamServices from "../services/userServices.js";
 import Teamcontrollers from "../controllers/usersControllers.js";
 

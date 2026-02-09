@@ -8,8 +8,8 @@ class TeamServices {
 
   // create drivers
 
-  async createDriver({ Name, userName, password,role, LicenceInfo }) {
-    if (!Name || !userName || !password ||!role|| !LicenceInfo) {
+  async createDriver({ Name, userName, password, LicenceInfo }) {
+    if (!Name || !userName || !password || !LicenceInfo) {
       throw new ApiError(Status.CONFLICT, Messege.VALIDATION_ERROR);
     }
 
@@ -24,7 +24,7 @@ class TeamServices {
       Name,
       userName,
       password: hasingpass,
-      role ,
+      role : "driver" ,
       LicenceInfo,
     });
 
@@ -41,8 +41,11 @@ class TeamServices {
 
   // create dispatchers
 
-  async createDispatcher({ Name, userName, password , role }) {
-    if (!Name || !userName || !password || !role) {
+  async createDispatcher({ Name, userName, password  }) {
+
+    
+  console.log("DISPATCHER INPUT:", { Name, userName, password});
+    if (!Name || !userName || !password ) {
       throw new ApiError(Status.CONFLICT, Messege.VALIDATION_ERROR);
     }
     const existing = await this.UserRepository.findOne({userName});
@@ -55,7 +58,7 @@ class TeamServices {
     const createDisp = await this.UserRepository.create({
       Name,
       userName,
-      role,
+      role : "dispatcher",
       password: hashingpass,
     });
 
