@@ -21,9 +21,7 @@ const UserSchema = new mongoose.Schema({
         enum : ["admin" , "dispatcher" , "driver"]
     },
 
-    LicenceInfo : {
-        type : String,
-    }
+   
 
 
 } , {timestamps : true})

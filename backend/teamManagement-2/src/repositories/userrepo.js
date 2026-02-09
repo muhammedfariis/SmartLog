@@ -1,22 +1,22 @@
-import Users from "../models/users.js";
+import Auth from "../../../authentication/src/models/userModel.js";
 import { BaseRepository } from "./baserepo.js";
 
 export class UserRepository extends BaseRepository {
 
    findOne(email){
-    return Users.findOne(email)
+    return Auth.findOne(email)
    }
 
    find(query){
-    return Users.find(query)
+    return Auth.find(query)
    }
 
    findByIdAndDelete(id){
-    return Users.findByIdAndDelete(id)
+    return Auth.findByIdAndDelete(id)
    }
    
    create(data) {
-    return Users.create(data)
+    return Auth.create(data)
    }
 
 

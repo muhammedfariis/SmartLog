@@ -8,22 +8,22 @@ class TeamServices {
 
   // create drivers
 
-  async createDriver({ Name, UserName, Password,role, LicenceInfo }) {
-    if (!Name || !UserName || !Password ||!role|| !LicenceInfo) {
+  async createDriver({ Name, userName, password,role, LicenceInfo }) {
+    if (!Name || !userName || !password ||!role|| !LicenceInfo) {
       throw new ApiError(Status.CONFLICT, Messege.VALIDATION_ERROR);
     }
 
-    const existing = await this.UserRepository.findOne({UserName});
+    const existing = await this.UserRepository.findOne({userName});
     if (existing) {
       throw new ApiError(Status.BAD_REQUEST, Messege.USER_EXIST);
     }
 
-    const hasingpass = await passwordHash(Password);
+    const hasingpass = await passwordHash(password);
 
     const createdrivers = await this.UserRepository.create({
       Name,
-      UserName,
-      Password: hasingpass,
+      userName,
+      password: hasingpass,
       role ,
       LicenceInfo,
     });
@@ -41,22 +41,22 @@ class TeamServices {
 
   // create dispatchers
 
-  async createDispatcher({ Name, UserName, Password , role }) {
-    if (!Name || !UserName || !Password || !role) {
+  async createDispatcher({ Name, userName, password , role }) {
+    if (!Name || !userName || !password || !role) {
       throw new ApiError(Status.CONFLICT, Messege.VALIDATION_ERROR);
     }
-    const existing = await this.UserRepository.findOne({UserName});
+    const existing = await this.UserRepository.findOne({userName});
     if (existing) {
       throw new ApiError(Status.BAD_REQUEST, Messege.USER_EXIST);
     }
 
-    const hashingpass = await passwordHash(Password);
+    const hashingpass = await passwordHash(password);
 
     const createDisp = await this.UserRepository.create({
       Name,
-      UserName,
+      userName,
       role,
-      Password: hashingpass,
+      password: hashingpass,
     });
 
     if (!createDisp) {

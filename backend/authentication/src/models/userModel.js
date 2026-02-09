@@ -1,7 +1,12 @@
 import mongoose from "mongoose";
 
 const AuthSchema = new mongoose.Schema(
-  {
+  { 
+
+    Name : {
+      type : String,
+      required : true
+    },
     userName: {
       type: String,
       required: true,
@@ -12,8 +17,12 @@ const AuthSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["admin", "dispatcher", "driver" , "user"],
+      enum: ["admin", "dispatcher", "driver"],
     },
+     LicenceInfo : {
+        type : String,
+        unique : true
+    }
   },
   { timestamps: true }
 );
