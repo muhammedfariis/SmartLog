@@ -12,8 +12,8 @@ Router.get("/alldispatchers" , authValidation , roleMiddleware("admin"), Team.re
 Router.get("/alldrivers" , authValidation , roleMiddleware("admin") , Team.readDriver)
 Router.post("/createDrivers" , authValidation , roleMiddleware("admin"), Team.createDriver)
 Router.post("/createDispatchers" , authValidation , roleMiddleware("admin") , Team.createDispatcher)
-Router.delete("/deleteDrivers" , authValidation , roleMiddleware("admin") , Team.deleteDriver)
-Router.delete("/deleteDispatchers" , authValidation , roleMiddleware("admin") , Team.deleteDispatcher)
+Router.delete("/deleteDrivers/:id" , authValidation , roleMiddleware("admin") , Team.deleteDriver)
+Router.delete("/deleteDispatchers/:id" , authValidation , roleMiddleware("admin") , Team.deleteDispatcher)
 
 
 export default Router

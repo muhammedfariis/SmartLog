@@ -27,7 +27,11 @@ class AssignmentServices {
       throw new ApiError(Status.CONFLICT, Messege.VALIDATION_ERROR);
     }
 
-    const existing = await this.UserRepository.findOne({ driver });
+    const existing = await this.UserRepository.findOne({ 
+      driver , 
+      status : {$in : ["assigned" , "in-progress"]}
+     });
+
     if (existing) {
       throw new ApiError(Status.BAD_REQUEST, Messege.DRIVER_ALREADY_EXIST);
     }
@@ -54,7 +58,7 @@ class AssignmentServices {
   }
 
   async readAssignedDetails() {
-    const getassign = await this.UserRepository.find();
+    const getassign = await this.UserRepository.findByPopulate();
     if (!getassign) {
       throw new ApiError(Status.NOT_FOUND, Messege.DELIVERY_NOT_FOUND);
     }

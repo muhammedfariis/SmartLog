@@ -8,23 +8,23 @@ class TeamServices {
 
   // create drivers
 
-  async createDriver({ Name, UserName, Password,role, LicenceInfo }) {
-    if (!Name || !UserName || !Password ||!role|| !LicenceInfo) {
+  async createDriver({ Name, userName, password, LicenceInfo }) {
+    if (!Name || !userName || !password || !LicenceInfo) {
       throw new ApiError(Status.CONFLICT, Messege.VALIDATION_ERROR);
     }
 
-    const existing = await this.UserRepository.findOne({UserName});
+    const existing = await this.UserRepository.findOne({userName});
     if (existing) {
       throw new ApiError(Status.BAD_REQUEST, Messege.USER_EXIST);
     }
 
-    const hasingpass = await passwordHash(Password);
+    const hasingpass = await passwordHash(password);
 
     const createdrivers = await this.UserRepository.create({
       Name,
-      UserName,
-      Password: hasingpass,
-      role ,
+      userName,
+      password: hasingpass,
+      role : "driver" ,
       LicenceInfo,
     });
 
@@ -41,22 +41,25 @@ class TeamServices {
 
   // create dispatchers
 
-  async createDispatcher({ Name, UserName, Password , role }) {
-    if (!Name || !UserName || !Password || !role) {
+  async createDispatcher({ Name, userName, password  }) {
+
+    
+  console.log("DISPATCHER INPUT:", { Name, userName, password});
+    if (!Name || !userName || !password ) {
       throw new ApiError(Status.CONFLICT, Messege.VALIDATION_ERROR);
     }
-    const existing = await this.UserRepository.findOne({UserName});
+    const existing = await this.UserRepository.findOne({userName});
     if (existing) {
       throw new ApiError(Status.BAD_REQUEST, Messege.USER_EXIST);
     }
 
-    const hashingpass = await passwordHash(Password);
+    const hashingpass = await passwordHash(password);
 
     const createDisp = await this.UserRepository.create({
       Name,
-      UserName,
-      role,
-      Password: hashingpass,
+      userName,
+      role : "dispatcher",
+      password: hashingpass,
     });
 
     if (!createDisp) {
@@ -71,7 +74,7 @@ class TeamServices {
   }
 
   async readDispatcher() {
-    const readdisp = await this.UserRepository.find();
+    const readdisp = await this.UserRepository.find({role : "dispatcher"});
     if (!readdisp) {
       throw new ApiError(Status.NOT_FOUND, Messege.USER_NOT_FOUND);
     }
@@ -82,7 +85,7 @@ class TeamServices {
   }
 
   async readDriver() {
-    const readDriver = await this.UserRepository.find();
+    const readDriver = await this.UserRepository.find({role : "driver"});
     if (!readDriver) {
       throw new ApiError(Status.NOT_FOUND, Messege.USER_NOT_FOUND);
     }

@@ -8,7 +8,7 @@ router.get("/allvehicles",Validation,roleMiddleware("admin") , vehicles.readVehi
 router.post("/insertvehicle",Validation, roleMiddleware("admin"), vehicles.createVehicles);
 router.put("/updatevehicles/:id", Validation, roleMiddleware("admin"), vehicles.updateVehicles);
 router.delete("/deletevehicles/:id",Validation, roleMiddleware("admin"), vehicles.deleteVehicles);
-
+router.get("/search" ,Validation , roleMiddleware("admin") , vehicles.searchByRegex)
 
 export default router
 

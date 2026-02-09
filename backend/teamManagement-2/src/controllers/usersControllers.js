@@ -5,6 +5,8 @@ class Teamcontrollers {
 
   createDispatcher = async (req, res, next) => {
     try {
+      console.log("req body : " , req.body);
+      
       const createdDisp = await this.TeamServices.createDispatcher({
         ...req.body,
       });
@@ -34,7 +36,11 @@ class Teamcontrollers {
 
   deleteDriver = async (req, res, next) => {
     try {
-      const deletedDriver = await this.TeamServices.deleteDriver(req.body);
+      const deletedDriver = await this.TeamServices.deleteDriver(
+        {id : req.params.id}
+        
+
+      );
       res.json({
         success: true,
         ...deletedDriver,
@@ -47,7 +53,7 @@ class Teamcontrollers {
   deleteDispatcher = async (req, res, next) => {
     try {
       const deletedDispatcher = await this.TeamServices.deleteDispatcher(
-        req.body,
+        {id : req.params.id}
       );
       res.json({
         success: true,

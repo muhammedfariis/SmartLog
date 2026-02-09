@@ -22,6 +22,11 @@ export class UserRepository extends BaseRepository {
   findOne(query) {
     return vehicles.findOne(query);
   }
+  findBySearch(plate){
+    return vehicles.find({
+      NumberPlate : {$regex : plate , $options : "i"}
+    }).limit(50)
+  }
 
 
 
