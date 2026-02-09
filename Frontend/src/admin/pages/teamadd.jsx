@@ -392,12 +392,12 @@ const TeamAdd = () => {
       </div>
 
       {driver && (
-        <div className="bg-black text-white rounded-2xl shadow border border-violet-500">
+        <div className="bg-black text-white w-fit rounded-2xl shadow border border-violet-500">
           <div className="grid grid-cols-4 py-2 px-3 text-center gap-5 border-b border-violet-500 text-gray-500 font-medium">
             <div>Driver</div>
             <div>UserName</div>
             <div>Licence Info</div>
-            <div>Actions</div>
+            <div>Action</div>
           </div>
 
          {driverlist.map((d)=>(
@@ -428,26 +428,7 @@ const TeamAdd = () => {
                 </button>
               </div>
 
-              <div>
-                <button
-                  className="group flex items-center  rounded-full h-10 w-10 
-               bg-blue-950 text-blue-600 hover:w-25 transition-all duration-300 
-             overflow-hidden px-2"
-                >
-                  <SquarePen
-                    size={22}
-                    color="blue"
-                    className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
-                  />
-
-                  <span
-                    className="ml-2 opacity-0  
-                  transition-opacity duration-200 group-hover:opacity-100"
-                  >
-                    Update
-                  </span>
-                </button>
-              </div>
+            
             </div>
           </div>
          ))}
@@ -456,15 +437,15 @@ const TeamAdd = () => {
       )}
 
       {Dispatcher && (
-        <div  className="bg-black text-white rounded-2xl shadow border border-violet-500">
-          <div className="grid grid-cols-3 py-2 px-3 text-center gap-5 border-b text-gray-500 font-medium">
+        <div  className="bg-black text-white rounded-2xl w-fit shadow border border-violet-500">
+          <div className="grid grid-cols-3 py-2 px-3 text-center gap-5 border-b border-violet-500 text-gray-500 font-medium">
             <div>Dispatcher</div>
             <div>UserName</div>
-            <div>Actions</div>
+            <div>Action</div>
           </div>
          {displist.map((dis)=>(
 
-          <div key={dis._id} className="grid grid-cols-3 py-2 px-3 text-center gap-5  border-b border-violet-500 items-center">
+          <div key={dis._id} className="grid grid-cols-3 py-2 px-3 text-center gap-5  border-violet-500 items-center">
             <div>{dis.Name}</div>
             <div>{dis.UserName}</div>
                               <div className="flex items-center justify-center gap-1">
@@ -490,26 +471,7 @@ const TeamAdd = () => {
                 </button>
               </div>
 
-              <div>
-                <button
-                  className="group flex items-center  rounded-full h-10 w-10 
-               bg-blue-950 text-blue-600 hover:w-25 transition-all duration-300 
-             overflow-hidden px-2"
-                >
-                  <SquarePen
-                    size={22}
-                    color="blue"
-                    className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
-                  />
-
-                  <span
-                    className="ml-2 opacity-0  
-                  transition-opacity duration-200 group-hover:opacity-100"
-                  >
-                    Update
-                  </span>
-                </button>
-              </div>
+           
             </div>
           </div>
 
