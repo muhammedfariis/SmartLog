@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import DateTimePicker from "../../common/datepicker";
 import API from "../../Api/api";
 export const VehicleCreate = () => {
+  const [loading , setLoading] =  useState(false)
+  const [search , setSearch] = useState("")
   const [popup, setPopup] = useState(false);
   const [vehicle, setVehicle] = useState([]);
   const [editId, setEdit] = useState(null);
@@ -23,6 +25,30 @@ export const VehicleCreate = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+
+   const vehicleSearch = async(plate) =>{
+    try{
+        if(!plate.trim()){
+          fetchVehicle()
+        return
+
+        }
+
+        setLoading(true)
+
+        const api = await API.get(`vehicleassignations/search?plate=${plate}`)
+
+        setVehicle(api.data.search)
+      }catch(err){
+        console.error(err);
+      }finally{
+        setLoading(false)
+      }
+      
+   }
+
+
 
   const fetchVehicle = async () => {
     try {
@@ -79,6 +105,11 @@ export const VehicleCreate = () => {
 
   useEffect(() => {
     fetchVehicle();
+    const timer = setTimeout(() => {
+       vehicleSearch(search)
+    }, 500);
+
+    return () => clearTimeout(timer)
   }, []);
 
   const handleSubmit = async (e) => {
@@ -277,10 +308,19 @@ export const VehicleCreate = () => {
         <input
           className="text-white rounded-3xl h-10 w-60 border-2 outline-0 border-violet-500 p-2"
           type="search"
+          value={search}
           placeholder="Search No:Plate"
+          onChange={(e)=>setSearch(e.target.value)}
         />
-        <button type="search" className="h-10 w-20 rounded-2xl bg-violet-500">Search</button>
       </div>
+        
+
+
+        {loading&&(
+           <div className="bg-transparent">
+             <p className="text-violet-700 animate-bounce inset-0 -z-50 backdrop-blur-3xl shadow-2xl">Loading...</p>
+          </div>
+        )}
 
       <div className="bg-black text-white rounded-2xl shadow border border-violet-500">
         <div className="grid grid-cols-10 py-2 px-3 text-center gap-5 border-b text-gray-500 font-medium">

@@ -17,16 +17,14 @@ class VehicleServices {
     Service,
     insurance,
     polution,
-  }) 
-  
-  {
+  }) {
     if (
       !vehicle ||
-      !NumberPlate||
+      !NumberPlate ||
       !brand ||
-      !status||
+      !status ||
       Service == null ||
-      !insurance||
+      !insurance ||
       !polution ||
       CurrentKm == null
     ) {
@@ -37,19 +35,17 @@ class VehicleServices {
     if (existing) {
       throw new ApiError(Status.BAD_REQUEST, Messege.VEHICLE_ALREADY_FOUND);
     }
-    
+
     const insertvehicle = await this.VehicleRepository.create({
-    vehicle,
-    NumberPlate,
-    brand,
-    status,
-    CurrentKm,
-    Service,
-    insurance,
-    polution,
+      vehicle,
+      NumberPlate,
+      brand,
+      status,
+      CurrentKm,
+      Service,
+      insurance,
+      polution,
     });
-    
-   
 
     logger.debug("Vehicle insertion completed");
 
@@ -76,18 +72,17 @@ class VehicleServices {
     Service,
     insurance,
     polution,
-  
   }) {
     const data = {
       id,
-    vehicle,
-    NumberPlate,
-    brand,
-    status,
-    CurrentKm,
-    Service,
-    insurance,
-    polution,
+      vehicle,
+      NumberPlate,
+      brand,
+      status,
+      CurrentKm,
+      Service,
+      insurance,
+      polution,
     };
 
     const updatevehicle = await this.VehicleRepository.findByIdAndUpdate(
@@ -137,35 +132,30 @@ class VehicleServices {
     };
   }
 
-
-  async addRunningKm(vehicleId , totalKm){
+  async addRunningKm(vehicleId, totalKm) {
     return this.VehicleRepository.findByIdAndUpdate(
       vehicleId,
-      {$inc : {CurrentKm : totalKm}},
-      {new : true}
-    )
+      { $inc: { CurrentKm: totalKm } },
+      { new: true },
+    );
   }
 
-   async searchByRegex(plate){
+  async searchByRegex(plate) {
+    if (!plate || plate.trim() === "") {
+      return {
+        message: "empty search",
+        vehicles: [],
+      };
+    }
 
-     if(!plate || plate.trim()===""){
-      return{
-        message : "empty search",
-        vehicles : []
-      }
-     }
+    const search = await this.VehicleRepository.findBySearch(plate);
 
-     const search = await this.VehicleRepository.findBySearch(plate)
-
-     return{
-      Messege : "search completed and getted",
-      count : search.lenght ,
+    return {
+      Messege: "search completed and getted",
       search,
-     }
-
-
-   }
-
+      count: search.lenght,
+    };
+  }
 }
 
 export default VehicleServices;
