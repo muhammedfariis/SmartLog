@@ -71,7 +71,7 @@ class TeamServices {
   }
 
   async readDispatcher() {
-    const readdisp = await this.UserRepository.find();
+    const readdisp = await this.UserRepository.find({role : "dispatcher"});
     if (!readdisp) {
       throw new ApiError(Status.NOT_FOUND, Messege.USER_NOT_FOUND);
     }
@@ -82,7 +82,7 @@ class TeamServices {
   }
 
   async readDriver() {
-    const readDriver = await this.UserRepository.find();
+    const readDriver = await this.UserRepository.find({role : "driver"});
     if (!readDriver) {
       throw new ApiError(Status.NOT_FOUND, Messege.USER_NOT_FOUND);
     }

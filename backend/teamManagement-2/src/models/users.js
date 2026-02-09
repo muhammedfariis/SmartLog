@@ -23,7 +23,6 @@ const UserSchema = new mongoose.Schema({
 
     LicenceInfo : {
         type : String,
-        unique : true
     }
 
 

@@ -226,7 +226,7 @@ export const VehicleCreate = () => {
               onSubmit={handleSubmit}
               className="space-y-3 flex flex-col items-center"
             >
-               <select
+              <select
                 name="vehicle"
                 required
                 value={form.vehicle}
@@ -322,6 +322,7 @@ export const VehicleCreate = () => {
 
               <div className="flex justify-end gap-3 mt-5">
                 <button
+                   type="button"
                   onClick={() => setPopup(false)}
                   className="px-4 py-2 rounded-lg border border-gray-500"
                 >
