@@ -156,6 +156,14 @@ class VehicleServices {
       count: search.lenght,
     };
   }
+
+  async filterByStatus(){
+    const vehicleActive = await this.VehicleRepository.findActive()
+    return{
+      Messege : "vehicle by status Active",
+      vehicleActive
+    }
+  }
 }
 
 export default VehicleServices;

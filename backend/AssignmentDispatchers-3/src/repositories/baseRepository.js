@@ -8,5 +8,8 @@ export class BaseRepository {
   create(creat){
     throw new Error("not implimented " || "not working")
   }
+  findById(id){
+    throw new Error("not implimented || not working ")
+  }
 
 }

@@ -15,6 +15,10 @@ export class UserRepository extends BaseRepository{
     return Assignment.create(user)
   }
 
+  findById(id){
+    return Assignment.findById(id)
+  }
+
   findByPopulate(){
     return Assignment.find()
     .populate("vehicle")

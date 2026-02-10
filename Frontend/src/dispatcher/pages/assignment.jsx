@@ -18,10 +18,10 @@ const Assignment = () => {
     status: "",
   });
   useEffect(() => {
-    API.get("/vehicleassignations/allvehicles")
+    API.get("/vehicleassignations/bystatus")
       .then((response) => {
         console.log("Vehicle API Response:", response.data);
-        setVehicle(response.data.vehicles || []);
+        setVehicle(response.data.vehicleActive || []);
       })
       .catch((err) => console.log("Vehicle API error:", err));
 
@@ -191,27 +191,34 @@ const Assignment = () => {
           </button>
         </div>
 
-        <div className="bg-zinc-900 border border-violet-500/40 rounded-2xl p-6 shadow-lg">
-          <h2 className="text-xl font-semibold mb-4">Recent Assignments</h2>
+      <div className="bg-zinc-900 border border-violet-500/40 rounded-2xl p-6 shadow-lg">
+  <h2 className="text-xl font-semibold mb-4">Recent Assignments</h2>
 
-          <div className="h-64 flex items-center justify-center text-gray-500">
-            {assignment.map((d) => (
-              <div
-                className="flex justify-center items-center  h-15 w-full border border-violet-600 bg-black rounded-3xl"
-                key={d._id}
-              >
-                <div>{d.driver?.Name}</div>
-                <div>
-                  <ArrowBigRight size={22} />
-                </div>
-                <div>{d.vehicle?.NumberPlate}</div>
-              </div>
-            ))}
-          </div>
+  <div className="h-fit p-2 space-y-3">
+    {assignment.map((d) => (
+      <div
+        key={d._id}
+        className="flex justify-between items-center px-5 py-3 w-full border border-violet-600 bg-black rounded-3xl"
+      >
+        <div className="rounded-2xl px-3 py-2 bg-green-950 text-lime-400">
+          NAME : {d.driver?.Name?.toUpperCase()}
         </div>
+
+        <ArrowBigRight size={22} className="text-violet-400" />
+
+        <div className="rounded-2xl px-3 py-2 bg-yellow-900 text-yellow-200">
+          VEHICLE : {d.vehicle?.NumberPlate?.toUpperCase()}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
       </div>
     </div>
   );
 };
 
 export default Assignment;
+
+

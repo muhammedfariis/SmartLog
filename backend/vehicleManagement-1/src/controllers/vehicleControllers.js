@@ -65,6 +65,15 @@ class VehicleControllers {
     }
   }
 
+  filterByStatus = async (req , res , next)=>{
+    try{
+      const filterStatus = await this.VehicleServices.filterByStatus()
+       res.json(filterStatus)
+    }catch(err){
+      next(err)
+    }
+  }
+
   
 }
 

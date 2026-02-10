@@ -9,6 +9,6 @@ router.post("/insertvehicle",Validation, roleMiddleware("admin"), vehicles.creat
 router.put("/updatevehicles/:id", Validation, roleMiddleware("admin"), vehicles.updateVehicles);
 router.delete("/deletevehicles/:id",Validation, roleMiddleware("admin"), vehicles.deleteVehicles);
 router.get("/search" ,Validation , roleMiddleware("admin") , vehicles.searchByRegex)
-
+router.get("/bystatus" , Validation , roleMiddleware("admin","dispatcher"), vehicles.filterByStatus)
 export default router
 

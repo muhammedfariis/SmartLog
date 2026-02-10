@@ -15,11 +15,18 @@ export class BaseRepository {
     throw new Error("not implimented || not added");
   }
 
+  findById(id){
+    throw new Error("not implimented || not added")
+  }
+
   findOne(email) {
     throw new Error("not implimented || not added")
   }
   findBySearch(plate){
     throw new Error("not implimented || not added")
+  }
+   findActive(active){
+    return new Error("not implimented || not added");
   }
 
  
