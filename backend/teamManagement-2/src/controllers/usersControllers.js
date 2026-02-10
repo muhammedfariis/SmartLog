@@ -87,6 +87,23 @@ class Teamcontrollers {
       next(err);
     }
   };
+
+  blockDispatcher = async (req , res , next)=>{
+    try{
+      const blockUser = await this.TeamServices.blockDispatcher({
+        id : req.params.id,
+        status : req.body.status
+      }
+        
+      )
+      res.json({
+        success : true,
+        ...blockUser
+      })
+    }catch(err){
+      next(err)
+    }
+  }
 }
 
 export default Teamcontrollers;

@@ -10,6 +10,7 @@ const AuthSchema = new mongoose.Schema(
     userName: {
       type: String,
       required: true,
+    
     },
     password: {
       type: String,
@@ -23,7 +24,13 @@ const AuthSchema = new mongoose.Schema(
         type : String,
         unique : true,
         sparse : true
+    },
+    status : {
+      type : String,
+      enum : ["blocked" , "un-blocked"],
+      default : "un-blocked"
     }
+  
   },
   { timestamps: true }
 );

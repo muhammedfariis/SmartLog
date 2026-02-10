@@ -127,6 +127,25 @@ class TeamServices {
       deleteDisp,
     };
   }
+
+  async blockDispatcher({id , status}){
+     if (!id || !status ) {
+      throw new ApiError(Status.CONFLICT, Messege.VALIDATION_ERROR);
+    }
+     if (!["blocked", "un-blocked"].includes(status)) {
+    throw new ApiError(Status.BAD_REQUEST, "Invalid status");
+  }
+
+    const blockUser = await this.UserRepository.findAndBlock(id , status)
+    console.log("Blocked User",blockUser); 
+       
+
+    return{
+      Message : Messege.ACCESS_DENIED,
+      blockUser
+    }
+  }
+
 }
 
 export default TeamServices;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Plus  , Trash } from "lucide-react";
+import { Plus, Trash, Ban, CircleSlash2 } from "lucide-react";
 import API from "../../Api/api";
 
 const TeamAdd = () => {
@@ -8,21 +8,35 @@ const TeamAdd = () => {
   const [dispAcc, setDispAcc] = useState(false);
   const [driverAcc, setDriverAcc] = useState(false);
   const [driverlist, setDriverlist] = useState([]);
-  const [displist , setDisplist] = useState([])
+  const [displist, setDisplist] = useState([]);
   const [formDriver, setFormDriver] = useState({
     Name: "",
     userName: "",
     password: "",
     LicenceInfo: "",
-
   });
 
   const [formDisp, setFormDisp] = useState({
     Name: "",
     userName: "",
     password: "",
-
   });
+
+  const statusUI = (status) => {
+    if (status === "blocked") {
+      return {
+        bg: "bg-green-900 text-green-500",
+        text: "Unblock",
+        icon: <CircleSlash2 size={22} className="shrink-0" />,
+      };
+    } else {
+      return {
+        bg: "bg-yellow-900 text-yellow-500",
+        text: "BlockUser",
+        icon: <Ban size={22} className="shrink-0" />,
+      };
+    }
+  };
 
   const handleChangeDriver = (e) => {
     setFormDriver({
@@ -37,7 +51,7 @@ const TeamAdd = () => {
     try {
       const api = await API.post("/addteamMembers/createDrivers", {
         ...formDriver,
-        role : "driver"
+        role: "driver",
       });
 
       alert("driver created");
@@ -50,7 +64,7 @@ const TeamAdd = () => {
       });
 
       setDriverAcc(false);
-      fetchDrivers()
+      fetchDrivers();
 
       console.log("form driver : ", api.data.driver);
     } catch (err) {
@@ -70,12 +84,13 @@ const TeamAdd = () => {
     console.log(formDisp);
     e.preventDefault();
     try {
-      const api = await API.post("/addteamMembers/createDispatchers", 
+      const api = await API.post(
+        "/addteamMembers/createDispatchers",
 
         {
           ...formDisp,
-          role : "dispatcher"
-        }
+          role: "dispatcher",
+        },
       );
 
       alert("dispatcher created");
@@ -84,12 +99,11 @@ const TeamAdd = () => {
         Name: "",
         userName: "",
         password: "",
-
       });
 
       setDispAcc(false);
 
-     fetchDisp()
+      fetchDisp();
       console.log("form driver : ", api.data.dispatcher);
     } catch (err) {
       console.error(err);
@@ -107,60 +121,62 @@ const TeamAdd = () => {
     } catch (err) {
       console.error(err);
     }
-  }
+  };
 
-  const deleteDriver = async (id) =>{
-    try{
-
-      const api = await API.delete(`/addteamMembers/deleteDrivers/${id}`)
+  const deleteDriver = async (id) => {
+    try {
+      const api = await API.delete(`/addteamMembers/deleteDrivers/${id}`);
 
       console.log(api);
+      fetchDrivers();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const deleteDispatcher = async (id) => {
+    try {
+      const api = await API.delete(`/addteamMembers/deleteDispatchers/${id}`);
+
+      console.log(api);
+      fetchDisp();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const blockDispatcher = async (id, currentStatus) => {
+    try {
+      const newStatus = currentStatus === "blocked" ? "un-blocked" : "blocked";
+      const api = await API.patch(`/addteamMembers/blockDispatcher/${id}`, {
+        status: newStatus,
+      });
+      console.log(api);
+      fetchDisp();
       fetchDrivers()
-      
-    }catch(err){
+    } catch (err) {
       console.log(err);
-      
     }
+  };
 
-  }
-
-
-   const deleteDispatcher = async (id) =>{
-    try{
-
-      const api = await API.delete(`/addteamMembers/deleteDispatchers/${id}`)
-
-      console.log(api);
-      fetchDisp()
-      
-    }catch(err){
-      console.log(err);
-      
-    }
-
-  }
-
-  const fetchDisp = async () =>{
-    try{
-
-      const api = await API.get("/addteamMembers/alldispatchers")
+  const fetchDisp = async () => {
+    try {
+      const api = await API.get("/addteamMembers/alldispatchers");
       console.log(api);
 
-      setDisplist(api.data.readdisp)
-      
-    }catch(err){
+      setDisplist(api.data.readdisp);
+    } catch (err) {
       console.log(err);
-      
     }
-  }
+  };
 
-  useEffect(()=>{
-    fetchDrivers()
-  } , [])
-  
-  useEffect(()=>{
-    fetchDisp()
-  },[])
+  useEffect(() => {
+    fetchDrivers();
+  }, []);
+
+  useEffect(() => {
+    fetchDisp();
+  }, []);
 
   return (
     <div className="space-y-5">
@@ -253,7 +269,6 @@ const TeamAdd = () => {
                 onChange={handleChangeDriver}
                 required
               />
-              
 
               <div className="flex justify-end gap-3 mt-5">
                 <button
@@ -398,84 +413,126 @@ const TeamAdd = () => {
             <div>Action</div>
           </div>
 
-         {driverlist.map((d)=>(
-            <div key={d._id} className="grid grid-cols-4 py-2 px-3 text-center gap-5   border-violet-500 items-center">
-            <div>{d.Name}</div>
-            <div>{d.userName}</div>
-            <div>{d.LicenceInfo}</div>
-                  <div className="flex items-center justify-center gap-1">
-              <div>
-                <button
-                  className="group flex items-center  rounded-full h-10 w-10 
+          {driverlist.map((d) => (
+            <div
+              key={d._id}
+              className="grid grid-cols-4 py-2 px-3 text-center gap-5   border-violet-500 items-center"
+            >
+              <div>{d.Name}</div>
+              <div>{d.userName}</div>
+              <div>{d.LicenceInfo}</div>
+              <div className="flex items-center justify-center gap-1">
+                <div>
+                  <button
+                    className="group flex items-center  rounded-full h-10 w-10 
                bg-red-900 text-red-600 hover:w-25 transition-all duration-300 
              overflow-hidden px-2"
-               onClick={()=>deleteDriver(d._id)}
-                >
-                  <Trash
-                    size={22}
-                    color="red"
-                    className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
-                  />
-
-                  <span
-                    className="ml-2 opacity-0  
-                  transition-opacity duration-200 group-hover:opacity-100"
+                    onClick={() => deleteDriver(d._id)}
                   >
-                    Delete
-                  </span>
-                </button>
-              </div>
+                    <Trash
+                      size={22}
+                      color="red"
+                      className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+                    />
 
-            
+                    <span
+                      className="ml-2 opacity-0  
+                  transition-opacity duration-200 group-hover:opacity-100"
+                    >
+                      Delete
+                    </span>
+                  </button>
+                </div>
+                  <div className="flex items-center justify-center">
+                  {(() => {
+                    const ui = statusUI(d.status);
+
+                    return (
+                      <button
+                        onClick={() => blockDispatcher(d._id, d.status)}
+                        className={`group flex items-center rounded-full h-10 w-10
+        hover:w-28 transition-all duration-300
+        overflow-hidden px-2 ${ui.bg}`}
+                      >
+                        <span className="transition-transform  duration-300 group-hover:translate-x-1">
+                          {ui.icon}
+                        </span>
+
+                        <span className="ml-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                          {ui.text}
+                        </span>
+                      </button>
+                    );
+                  })()}
+                </div>
+              </div>
             </div>
-          </div>
-         ))}
-       
+          ))}
         </div>
       )}
 
       {Dispatcher && (
-        <div  className="bg-black text-white rounded-2xl w-full shadow border border-violet-500">
+        <div className="bg-black text-white rounded-2xl w-full shadow border border-violet-500">
           <div className="grid grid-cols-3 py-2 px-3 text-center gap-5 border-b border-violet-500 text-gray-500 font-medium">
             <div>Dispatcher</div>
             <div>UserName</div>
             <div>Action</div>
           </div>
-         {displist.map((dis)=>(
-
-          <div key={dis._id} className="grid grid-cols-3 py-2 px-3 text-center gap-5  border-violet-500 items-center">
-            <div>{dis.Name}</div>
-            <div>{dis.userName}</div>
-                              <div className="flex items-center justify-center gap-1">
-              <div>
-                <button
-                  className="group flex items-center  rounded-full h-10 w-10 
+          {displist.map((dis) => (
+            <div
+              key={dis._id}
+              className="grid grid-cols-3 py-2 px-3 text-center gap-5  border-violet-500 items-center"
+            >
+              <div>{dis.Name}</div>
+              <div>{dis.userName}</div>
+              <div className="flex items-center justify-center gap-1">
+                <div>
+                  <button
+                    className="group flex items-center  rounded-full h-10 w-10 
                bg-red-900 text-red-600 hover:w-25 transition-all duration-300 
              overflow-hidden px-2"
-                  onClick={()=>deleteDispatcher(dis._id)}
-                >
-                  <Trash
-                    size={22}
-                    color="red"
-                    className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
-                  />
-
-                  <span
-                    className="ml-2 opacity-0  
-                  transition-opacity duration-200 group-hover:opacity-100"
+                    onClick={() => deleteDispatcher(dis._id)}
                   >
-                    Delete
-                  </span>
-                </button>
+                    <Trash
+                      size={22}
+                      color="red"
+                      className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+                    />
+
+                    <span
+                      className="ml-2 opacity-0  
+                  transition-opacity duration-200 group-hover:opacity-100"
+                    >
+                      Delete
+                    </span>
+                  </button>
+                </div>
+
+                <div className="flex items-center justify-center">
+                  {(() => {
+                    const ui = statusUI(dis.status);
+
+                    return (
+                      <button
+                        onClick={() => blockDispatcher(dis._id, dis.status)}
+                        className={`group flex items-center rounded-full h-10 w-10
+        hover:w-28 transition-all duration-300
+        overflow-hidden px-2 ${ui.bg}`}
+                      >
+                        <span className="transition-transform  duration-300 group-hover:translate-x-1">
+                          {ui.icon}
+                        </span>
+
+                        <span className="ml-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                          {ui.text}
+                        </span>
+                      </button>
+                    );
+                  })()}
+                </div>
               </div>
-
-           
             </div>
-          </div>
-
-         ))}
-          
-
+          ))}
         </div>
       )}
     </div>
