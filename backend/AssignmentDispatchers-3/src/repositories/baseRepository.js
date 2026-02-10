@@ -11,5 +11,8 @@ export class BaseRepository {
   findById(id){
     throw new Error("not implimented || not working ")
   }
+  findByIdAndUpdate(id){
+    throw new Error("not implimented || not working")
+  } 
 
 }

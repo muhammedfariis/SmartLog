@@ -79,6 +79,40 @@ class AssignmentServices {
       Assignments: getassign,
     };
   }
+
+
+   async driverStatusUpdate({assignmentId , status , driverId}){
+
+  if(!assignmentId || !status){
+  throw new ApiError(Status.CONFLICT , Messege.VALIDATION_ERROR)
+
+ }
+    const allowed = [ "in_progress",
+   "completed",
+   "cancelled"]
+
+   if(!allowed.includes(status)){
+    throw new ApiError(Status.BAD_REQUEST , "invalid request")
+   }
+
+   const trip = await this.UserRepository.findOne({
+    _id: assignmentId ,
+     driver : driverId
+   })
+  
+   if(!trip){
+    throw new ApiError(Status.BAD_REQUEST , "trip not found for the driver")
+   }
+
+   const update = await this.UserRepository.findByIdAndUpdate(
+    assignmentId,
+    {status}
+   )
+
+ 
+
+   }
+
 }
 
 export default AssignmentServices;

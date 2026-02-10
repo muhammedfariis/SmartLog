@@ -390,7 +390,7 @@ const TeamAdd = () => {
       </div>
 
       {driver && (
-        <div className="bg-black text-white w-fit rounded-2xl shadow border border-violet-500">
+        <div className="bg-black text-white w-full rounded-2xl shadow border border-violet-500">
           <div className="grid grid-cols-4 py-2 px-3 text-center gap-5 border-b border-violet-500 text-gray-500 font-medium">
             <div>Driver</div>
             <div>UserName</div>
@@ -401,7 +401,7 @@ const TeamAdd = () => {
          {driverlist.map((d)=>(
             <div key={d._id} className="grid grid-cols-4 py-2 px-3 text-center gap-5   border-violet-500 items-center">
             <div>{d.Name}</div>
-            <div>{d.UserName}</div>
+            <div>{d.userName}</div>
             <div>{d.LicenceInfo}</div>
                   <div className="flex items-center justify-center gap-1">
               <div>
@@ -435,7 +435,7 @@ const TeamAdd = () => {
       )}
 
       {Dispatcher && (
-        <div  className="bg-black text-white rounded-2xl w-fit shadow border border-violet-500">
+        <div  className="bg-black text-white rounded-2xl w-full shadow border border-violet-500">
           <div className="grid grid-cols-3 py-2 px-3 text-center gap-5 border-b border-violet-500 text-gray-500 font-medium">
             <div>Dispatcher</div>
             <div>UserName</div>
@@ -445,7 +445,7 @@ const TeamAdd = () => {
 
           <div key={dis._id} className="grid grid-cols-3 py-2 px-3 text-center gap-5  border-violet-500 items-center">
             <div>{dis.Name}</div>
-            <div>{dis.UserName}</div>
+            <div>{dis.userName}</div>
                               <div className="flex items-center justify-center gap-1">
               <div>
                 <button
