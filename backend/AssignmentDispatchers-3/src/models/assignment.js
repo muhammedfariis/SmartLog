@@ -4,12 +4,12 @@ const AssignmentSchema = new mongoose.Schema(
   {
     vehicle: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "vehicle_management",
+      ref: "vehicles",
       required: true,
     },
     driver: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Users",
+      ref: "authentications",
       required: true,
     },
     scheduledDate: {

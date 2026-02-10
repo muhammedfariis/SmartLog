@@ -1,4 +1,4 @@
-import { CalendarDays , ArrowBigRight } from "lucide-react";
+import { CalendarDays, ArrowBigRight } from "lucide-react";
 
 import DateTimePicker from "../../common/datepicker";
 import { useEffect, useState } from "react";
@@ -6,9 +6,7 @@ import API from "../../Api/api";
 const Assignment = () => {
   const [driver, setDriver] = useState([]);
   const [vehicle, setVehicle] = useState([]);
-  const [assignment , setAssignment] = useState([])
-
-  
+  const [assignment, setAssignment] = useState([]);
 
   const [form, setForm] = useState({
     driver: "",
@@ -17,25 +15,33 @@ const Assignment = () => {
     fromLocation: "",
     toLocation: "",
     load: "",
+    status: "",
   });
+useEffect(() => {
+  API.get("/vehicleassignations/allvehicles")
+    .then((response) => {
+      console.log("Vehicle API Response:", response.data);
+      setVehicle(response.data.vehicles || []);
+    })
+    .catch((err) => console.log("Vehicle API error:", err));
+
+  API.get("/addteamMembers/alldrivers")
+    .then((res) => {
+      console.log("Driver API Response:", res.data);
+      setDriver(res.data.readDriver || []);
+    })
+    .catch((err) => console.log("Driver API error:", err));
+}, []);
+
 
   useEffect(() => {
-    API.get("/vehicleassignations/allvehicles").then((response) =>
-      setVehicle(response.data.vehicle),
-    );
-
-    API.get("/addteamMembers/alldrivers").then((res) =>
-      setDriver(res.data.driver),
-    );
+    API.get("/assigndrivers/assignmentShedule").then((response) => {
+      setAssignment(response.data.Assignments || []).catch((err) => {
+        console.log("errorr from useeffect assignment : ", err);
+        setAssignment([]);
+      });
+    });
   }, []);
-
-
-  useEffect(()=>{
-   API.get("/assigndrivers/assignmentShedule")
-   .then((response)=>{
-    setAssignment(response.data.Assignments)
-   })
-  },[])
 
   const assignDrivers = async (e) => {
     console.log(form);
@@ -43,7 +49,7 @@ const Assignment = () => {
     e.preventDefault();
 
     try {
-      const api = await API.post("/assigndrivers/assignment", ...form);
+      const api = await API.post("/assigndrivers/assignment", form);
 
       console.log(api);
       alert("assignation completed");
@@ -53,12 +59,12 @@ const Assignment = () => {
     }
   };
 
-  const onchanging = (e)=>{
+  const onchanging = (e) => {
     setForm({
-      ...form ,
-      [e.target.name] : e.target.value
-    })
-  }
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <div className="min-h-screen bg-black text-white p-10">
@@ -75,31 +81,35 @@ const Assignment = () => {
 
           <div className="space-y-2">
             <label className="text-sm text-gray-400">Select Vehicle</label>
-            <select className="w-full bg-black border border-violet-500 rounded-xl p-3 outline-none"
-             value={form.vehicle}
-             onChange={(e)=>setForm({...form , vehicle : e.target.value})}
+            <select
+              className="w-full bg-black border border-violet-500 rounded-xl appearance-none p-3 outline-none"
+              value={form.vehicle}
+              name="vehicle"
+              onChange={onchanging}
             >
-              <option>Select Vehicle</option>
-             {vehicle.map((veh)=>(
-              <option key={veh._id} value={veh._id}>
-                {veh.NumberPlate}
-              </option>
-             ))}
+              <option value="">Select Vehicle</option>
+              {vehicle.map((veh) => (
+                <option key={veh._id} value={veh._id}>
+                  {veh.NumberPlate}
+                </option>
+              ))}
             </select>
           </div>
 
           <div className="space-y-2">
             <label className="text-sm text-gray-400">Select Driver</label>
-            <select className="w-full bg-black border  border-violet-500 rounded-xl p-3 outline-none"
-            value={form.driver}
-            onChange={(e)=>setForm({...form , driver : e.target.value})}
+            <select
+              className="w-full bg-black border  border-violet-500 rounded-xl appearance-none p-3 outline-none"
+              value={form.driver}
+              name="driver"
+              onChange={onchanging}
             >
-              <option>Select Driver</option>
-               {driver.map((data)=>(
+              <option value="">Select Driver</option>
+              {driver.map((data) => (
                 <option key={data._id} value={data._id}>
                   {data.Name}
                 </option>
-               ))}
+              ))}
             </select>
           </div>
 
@@ -108,11 +118,47 @@ const Assignment = () => {
 
             <div className="flex items-center gap-3 bg-black border border-violet-500 rounded-xl p-3">
               <CalendarDays size={18} />
-              <DateTimePicker 
-               onChange={(date)=>setForm({...form , scheduledDate : date})}
+              <DateTimePicker
+                value={form.scheduledDate || null}
+                onChange={(date) =>
+                  setForm({ ...form, scheduledDate: date || "" })
+                }
               />
             </div>
           </div>
+          <div className="space-y-2">
+            <label className="text-sm text-gray-400">Load</label>
+
+            <div className="flex items-center gap-3 bg-black border border-violet-500 rounded-xl p-3">
+              <input
+                className="outline-none text-white p-2 h-7"
+                type="text"
+                placeholder="Load"
+                name="load"
+                value={form.load}
+                onChange={onchanging}
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm text-gray-400">Status</label>
+
+            <select
+              name="status"
+              value={form.status}
+              onChange={onchanging}
+              className="w-full bg-black border border-violet-500 rounded-xl p-3 appearance-none outline-none"
+            >
+              <option value="">Select Status</option>
+              <option value="scheduled">Scheduled</option>
+              <option value="assigned">Assigned</option>
+              <option value="in_progress">In Progress</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+
           <div className="space-y-2">
             <label className="text-sm text-gray-400">Location Assign</label>
 
@@ -122,6 +168,7 @@ const Assignment = () => {
                   className="h-8 w-fit rounded-2xl outline-none text-white p-2 bg-violet-800"
                   type="text"
                   placeholder="From"
+                  name="fromLocation"
                   value={form.fromLocation}
                   onChange={onchanging}
                 />
@@ -129,6 +176,7 @@ const Assignment = () => {
                   className="h-8 w-fit rounded-2xl outline-none text-white p-2  bg-violet-800"
                   type="text"
                   placeholder="To"
+                  name="toLocation"
                   value={form.toLocation}
                   onChange={onchanging}
                 />
@@ -136,7 +184,8 @@ const Assignment = () => {
             </div>
           </div>
 
-          <button className="w-full bg-violet-600 hover:bg-violet-700 py-3 rounded-xl font-medium"
+          <button
+            className="w-full bg-violet-600 hover:bg-violet-700 py-3 rounded-xl font-medium"
             onClick={assignDrivers}
           >
             Assign Driver
@@ -147,11 +196,18 @@ const Assignment = () => {
           <h2 className="text-xl font-semibold mb-4">Recent Assignments</h2>
 
           <div className="h-64 flex items-center justify-center text-gray-500">
-             {assignment.map((d)=>(
-              <div>
-                {d.driver.Name} <ArrowBigRight/> {d.vehicle.NumberPlate}
+            {assignment.map((d) => (
+              <div
+                className="flex justify-center items-center  h-15 w-full border border-violet-600 bg-black rounded-3xl"
+                key={d._id}
+              >
+                <div>{d.driver?.Name}</div>
+                <div>
+                  <ArrowBigRight size={22} />
+                </div>
+                <div>{d.vehicle?.NumberPlate}</div>
               </div>
-             ))}
+            ))}
           </div>
         </div>
       </div>
