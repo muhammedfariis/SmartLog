@@ -17,22 +17,21 @@ const Assignment = () => {
     load: "",
     status: "",
   });
-useEffect(() => {
-  API.get("/vehicleassignations/allvehicles")
-    .then((response) => {
-      console.log("Vehicle API Response:", response.data);
-      setVehicle(response.data.vehicles || []);
-    })
-    .catch((err) => console.log("Vehicle API error:", err));
+  useEffect(() => {
+    API.get("/vehicleassignations/allvehicles")
+      .then((response) => {
+        console.log("Vehicle API Response:", response.data);
+        setVehicle(response.data.vehicles || []);
+      })
+      .catch((err) => console.log("Vehicle API error:", err));
 
-  API.get("/addteamMembers/alldrivers")
-    .then((res) => {
-      console.log("Driver API Response:", res.data);
-      setDriver(res.data.readDriver || []);
-    })
-    .catch((err) => console.log("Driver API error:", err));
-}, []);
-
+    API.get("/addteamMembers/alldrivers")
+      .then((res) => {
+        console.log("Driver API Response:", res.data);
+        setDriver(res.data.readDriver || []);
+      })
+      .catch((err) => console.log("Driver API error:", err));
+  }, []);
 
   useEffect(() => {
     API.get("/assigndrivers/assignmentShedule").then((response) => {

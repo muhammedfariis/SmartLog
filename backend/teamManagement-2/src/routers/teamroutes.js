@@ -8,8 +8,8 @@ const Router = express.Router()
 
 const Team = teamComposers()
 
-Router.get("/alldispatchers" , authValidation , roleMiddleware("admin"), Team.readDispatcher)
-Router.get("/alldrivers" , authValidation , roleMiddleware("admin") , Team.readDriver)
+Router.get("/alldispatchers" , authValidation , roleMiddleware("admin" , "dispatcher"), Team.readDispatcher)
+Router.get("/alldrivers" , authValidation , roleMiddleware("admin" ,"dispatcher") , Team.readDriver)
 Router.post("/createDrivers" , authValidation , roleMiddleware("admin"), Team.createDriver)
 Router.post("/createDispatchers" , authValidation , roleMiddleware("admin") , Team.createDispatcher)
 Router.delete("/deleteDrivers/:id" , authValidation , roleMiddleware("admin") , Team.deleteDriver)
