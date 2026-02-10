@@ -20,12 +20,19 @@ API.interceptors.response.use(
   (response) => {
     if (response.data?.tokens?.accessToken) {
       localStorage.setItem("token", response.data.tokens.accessToken);
-      console.log("token stored automatically successfull");
     }
     return response;
   },
 
-  (error) => Promise.reject(error),
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("token");
+      window.location.replace("/login");
+    }
+
+    return Promise.reject(error);
+  }
 );
+
 
 export default API;

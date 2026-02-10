@@ -35,9 +35,9 @@ const Login = () => {
       const role = api.data.user.role;
 
       setTimeout(() => {
-        if (role === "admin") navigate("/admin/vehicles");
-        else if (role === "dispatcher") navigate("/dispatcher/assignment");
-        else if (role === "driver") navigate("/drivers/trips");
+        if (role === "admin") navigate("/admin/vehicles" ,{replace : true});
+        else if (role === "dispatcher") navigate("/dispatcher/assignment",{replace :true});
+        else if (role === "driver") navigate("/drivers/trips" ,{replace : true});
       }, 1200);
 
       setForm({ userName: "", password: "" });
@@ -107,7 +107,7 @@ const Login = () => {
           <input
             className="h-12 w-full p-2 border-2 border-violet-400 rounded-3xl bg-black text-white focus:ring-2 focus:ring-violet-500 outline-none"
             type="text"
-            placeholder="userName"
+            placeholder="USERNAME"
             name="userName"
             required
             value={form.userName}
@@ -117,7 +117,7 @@ const Login = () => {
           <input
             className="h-12 w-full p-2 border-2 border-violet-400 rounded-3xl bg-black text-white focus:ring-2 focus:ring-violet-500 outline-none"
             type="password"
-            placeholder="Password"
+            placeholder="PASSWORD"
             name="password"
             required
             value={form.password}
