@@ -132,7 +132,6 @@ const Assignment = () => {
               <input
                 className="outline-none text-white p-2 h-7"
                 type="text"
-                placeholder="Load"
                 name="load"
                 value={form.load}
                 onChange={onchanging}
@@ -191,34 +190,31 @@ const Assignment = () => {
           </button>
         </div>
 
-      <div className="bg-zinc-900 border border-violet-500/40 rounded-2xl p-6 shadow-lg">
-  <h2 className="text-xl font-semibold mb-4">Recent Assignments</h2>
+        <div className="bg-zinc-900 border border-violet-500/40 rounded-2xl p-6 shadow-lg">
+          <h2 className="text-xl font-semibold mb-4">Recent Assignments</h2>
 
-  <div className="h-fit p-2 space-y-3">
-    {assignment.map((d) => (
-      <div
-        key={d._id}
-        className="flex justify-between items-center px-5 py-3 w-full border border-violet-600 bg-black rounded-3xl"
-      >
-        <div className="rounded-2xl px-3 py-2 bg-green-950 text-lime-400">
-          NAME : {d.driver?.Name?.toUpperCase()}
+          <div className="h-fit p-2 space-y-3">
+            {assignment.map((d) => (
+              <div
+                key={d._id}
+                className="flex justify-between items-center px-5 py-3 w-full border border-violet-600 bg-black rounded-3xl"
+              >
+                <div className="rounded-2xl px-3 py-2 bg-green-950 text-lime-400">
+                  NAME : {d.driver?.Name?.toUpperCase()}
+                </div>
+
+                <ArrowBigRight size={22} className="text-violet-400" />
+
+                <div className="rounded-2xl px-3 py-2 bg-yellow-900 text-yellow-200">
+                  VEHICLE : {d.vehicle?.NumberPlate?.toUpperCase()}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-
-        <ArrowBigRight size={22} className="text-violet-400" />
-
-        <div className="rounded-2xl px-3 py-2 bg-yellow-900 text-yellow-200">
-          VEHICLE : {d.vehicle?.NumberPlate?.toUpperCase()}
-        </div>
-      </div>
-    ))}
-  </div>
-</div>
-
       </div>
     </div>
   );
 };
 
 export default Assignment;
-
-
