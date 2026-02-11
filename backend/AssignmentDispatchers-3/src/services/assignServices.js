@@ -40,7 +40,7 @@ class AssignmentServices {
 
     const existing = await this.UserRepository.findOne({
       driver,
-      status: { $in: ["assigned", "in_progress"] },
+      status: "in_progress",
     });
 
     if (existing) {
