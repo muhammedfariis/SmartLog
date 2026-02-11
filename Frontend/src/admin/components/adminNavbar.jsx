@@ -5,7 +5,7 @@ const AdminNavbar = () => {
   const go = useNavigate()
   return (
     <>
-      <div className="min-h-screen  w-56  ">
+      <div className="min-h-screen   w-56  ">
         <div className="flex min-h-screen pb-5 flex-col justify-between items-center border-r-2 border-gray-900">
           <div className="flex items-center w-40 h-20">
             <img src="/images/logosmartlog-removebg-preview.png" alt="" />
