@@ -4,3 +4,71 @@ body{
   background-color: black;
   font-family: 'Josefin Sans', sans-serif;
 }
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-animated-gradient {
+  background: linear-gradient(
+    -90deg,
+        rgb(0, 0, 0),
+    rgb(20, 20, 20),
+    rgb(38, 1, 66),
+    rgb(8, 8, 7),
+    rgb(0, 0, 0)
+  );
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+}
+
+.space-bg {
+  position: fixed;
+  inset: 0;
+  background: black;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* moving stars layer */
+.space-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(1px 1px at 70% 80%, white, transparent),
+    radial-gradient(2px 2px at 40% 60%, white, transparent),
+    radial-gradient(1px 1px at 90% 10%, white, transparent);
+  background-size: 300px 300px;
+  animation: starDrift 60s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes starDrift {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-1000px); }
+}
+
+/* earth rotation */
+.earth {
+  position: absolute;
+  right: -120px;
+  bottom: -120px;
+  width: 500px;
+  opacity: 0.35;
+  animation: earthRotate 120s linear infinite;
+  filter: drop-shadow(0 0 40px rgba(255,255,255,0.15));
+}
+
+@keyframes earthRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

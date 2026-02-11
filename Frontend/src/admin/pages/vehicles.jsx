@@ -4,6 +4,7 @@ import DateTimePicker from "../../common/datepicker";
 import API from "../../Api/api";
 import { motion } from "framer-motion";
 import PageMotion from "../../common/pagemotion";
+import SpaceBackground from "../../common/stardust";
 
 export const VehicleCreate = () => {
   const [loading, setLoading] = useState(false);
@@ -204,8 +205,9 @@ export const VehicleCreate = () => {
 
   return (
     <PageMotion>
-      <div className="bg-linear-to-br from-black via-zinc-900 to-black min-h-screen p-5 space-y-5">
-        <div className="flex justify-between items-start">
+        <SpaceBackground/>
+      <div className=" relative min-h-screen p-5 space-y-5">
+        <div className="flex  relative z-10 justify-between items-start">
           <div>
             <h1 className="text-3xl font-bold text-violet-500">
               Vehicle's Fleet
@@ -227,7 +229,7 @@ export const VehicleCreate = () => {
         </div>
 
         {popup && (
-          <div className="fixed inset-0 flex items-center justify-center">
+          <div className="fixed  inset-0 z-50 flex items-center justify-center">
             <div className="absolute inset-0 bg-gray-800/40 backdrop-blur-md min-h-screen" />
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
@@ -408,7 +410,7 @@ export const VehicleCreate = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
-              className="grid grid-cols-9 py-2 px-3 text-center gap-5 justify-center border-violet-500 items-center"
+              className="grid grid-cols-9 py-2 px-3 text-center  gap-5 justify-center border-violet-500 items-center"
             >
               <div>{v.vehicle}</div>
               <div>{v.brand}</div>

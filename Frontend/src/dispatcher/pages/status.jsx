@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../../Api/api";
+import PageMotion from "../../common/pagemotion";
+import  {motion} from "framer-motion"
 const Status = () => {
   const [driver, setdriver] = useState(true);
   const [Dispatcher, setDispatcher] = useState(false);
@@ -35,6 +37,7 @@ const Status = () => {
   }, []);
 
   return (
+    <PageMotion>
     <div className="space-y-5 p-10">
       <div className="flex justify-start items-center">
         <div>
@@ -73,19 +76,22 @@ const Status = () => {
       {driver && (
         <div className="bg-black text-white rounded-2xl shadow border border-violet-500">
           <div className="grid grid-cols-3 py-2 px-3 text-center gap-5 border-b border-violet-500  text-gray-500 font-medium">
-            <div>Drivers</div>
-            <div>UserName</div>
-            <div>Licence Info</div>
+            <div>DRIVER</div>
+            <div>USERNAME</div>
+            <div>LICENCE-INFO</div>
           </div>
-          {driverlist.map((d) => (
-            <div
+          {driverlist.map((d , i) => (
+              <motion.div
               key={d._id}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05 }}
               className="grid grid-cols-3 py-2 px-3 text-center gap-5   border-violet-500 items-center"
             >
-              <div>{d.Name}</div>
-              <div>{d.userName}</div>
-              <div>{d.LicenceInfo}</div>
-            </div>
+              <div>{d.Name.toUpperCase()}</div>
+              <div>{d.userName.toUpperCase()}</div>
+              <div>{d.LicenceInfo.toUpperCase()}</div>
+            </motion.div>
           ))}
         </div>
       )}
@@ -93,21 +99,25 @@ const Status = () => {
       {Dispatcher && (
         <div className="bg-black text-white rounded-2xl shadow border border-violet-500">
           <div className="grid grid-cols-2 py-2 px-3 text-center gap-5 border-b border-violet-500 text-gray-500 font-medium">
-            <div>Dispatcher's</div>
-            <div>UserName</div>
+            <div>DISPATCHER</div>
+            <div>USERNAME</div>
           </div>
-          {displist.map((dis) => (
-            <div
+          {displist.map((dis , i) => (
+             <motion.div
               key={dis._id}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05 }}
               className="grid grid-cols-2 py-2 px-3 text-center gap-5  border-violet-500 items-center"
             >
-              <div>{dis.Name}</div>
-              <div>{dis.userName}</div>
-            </div>
+              <div>{dis.Name.toUpperCase()}</div>
+              <div>{dis.userName.toUpperCase()}</div>
+            </motion.div>
           ))}
         </div>
       )}
     </div>
+    </PageMotion>
   );
 };
 

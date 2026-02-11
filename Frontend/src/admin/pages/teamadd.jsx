@@ -3,6 +3,7 @@ import { Plus, Trash, Ban, CircleSlash2 } from "lucide-react";
 import API from "../../Api/api";
 import { motion } from "framer-motion";
 import PageMotion from "../../common/pagemotion";
+import SpaceBackground from "../../common/stardust";
 const TeamAdd = () => {
   const [driver, setdriver] = useState(true);
   const [Dispatcher, setDispatcher] = useState(false);
@@ -188,7 +189,8 @@ const TeamAdd = () => {
 
   return (
     <PageMotion>
-      <div className="bg-linear-to-br from-black via-zinc-900 to-black p-5 min-h-screen space-y-5">
+      <SpaceBackground className="fixed inset-0 -z-10 w-full h-full"/>
+      <div className=" relative z-10 p-5 min-h-screen space-y-5">
         <div className="flex justify-between items-start">
           <div>
             <h1 className="text-3xl font-bold text-violet-500">
