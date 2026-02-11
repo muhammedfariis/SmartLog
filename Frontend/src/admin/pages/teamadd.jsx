@@ -179,7 +179,7 @@ const TeamAdd = () => {
   }, []);
 
   return (
-    <div className="space-y-5">
+    <div className="bg-linear-to-br from-black via-zinc-900 to-black p-5 min-h-screen space-y-5">
       <div className="flex justify-between items-start">
         <div>
           <h1 className="text-3xl font-bold text-violet-500">

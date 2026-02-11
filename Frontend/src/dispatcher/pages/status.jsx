@@ -72,7 +72,7 @@ const Status = () => {
 
       {driver && (
         <div className="bg-black text-white rounded-2xl shadow border border-violet-500">
-          <div className="grid grid-cols-3 py-2 px-3 text-center gap-5 border-b text-gray-500 font-medium">
+          <div className="grid grid-cols-3 py-2 px-3 text-center gap-5 border-b border-violet-500  text-gray-500 font-medium">
             <div>Drivers</div>
             <div>UserName</div>
             <div>Licence Info</div>
@@ -80,7 +80,7 @@ const Status = () => {
           {driverlist.map((d) => (
             <div
               key={d._id}
-              className="grid grid-cols-3 py-2 px-3 text-center gap-5  border-b border-violet-500 items-center"
+              className="grid grid-cols-3 py-2 px-3 text-center gap-5   border-violet-500 items-center"
             >
               <div>{d.Name}</div>
               <div>{d.userName}</div>
@@ -92,14 +92,14 @@ const Status = () => {
 
       {Dispatcher && (
         <div className="bg-black text-white rounded-2xl shadow border border-violet-500">
-          <div className="grid grid-cols-2 py-2 px-3 text-center gap-5 border-b text-gray-500 font-medium">
+          <div className="grid grid-cols-2 py-2 px-3 text-center gap-5 border-b border-violet-500 text-gray-500 font-medium">
             <div>Dispatcher's</div>
             <div>UserName</div>
           </div>
           {displist.map((dis) => (
             <div
               key={dis._id}
-              className="grid grid-cols-2 py-2 px-3 text-center gap-5  border-b border-violet-500 items-center"
+              className="grid grid-cols-2 py-2 px-3 text-center gap-5  border-violet-500 items-center"
             >
               <div>{dis.Name}</div>
               <div>{dis.userName}</div>

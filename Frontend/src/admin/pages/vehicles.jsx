@@ -2,10 +2,13 @@ import { Plus, CalendarDays, Trash, SquarePen } from "lucide-react";
 import { useState, useEffect } from "react";
 import DateTimePicker from "../../common/datepicker";
 import API from "../../Api/api";
+import { motion } from "framer-motion";
+
 export const VehicleCreate = () => {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [popup, setPopup] = useState(false);
+  const [msg, setMsg] = useState(null); 
   const [vehicle, setVehicle] = useState([]);
   const [editId, setEdit] = useState(null);
   const [form, setForm] = useState({
@@ -126,7 +129,9 @@ export const VehicleCreate = () => {
       form.insurance === null ||
       form.polution === null
     ) {
-      return alert("Please fill all fields!");
+      setMsg({ type: "error", text: "Please fill all fields" });
+return;
+
     }
 
     const convertForm = {
@@ -146,10 +151,10 @@ export const VehicleCreate = () => {
           `/vehicleassignations/updatevehicles/${editId}`,
           convertForm,
         );
-        alert("vehicle updated");
+        setMsg({ type: "success", text: "Vehicle updated successfully" });
       } else {
         api = await API.post("/vehicleassignations/insertvehicle", convertForm);
-        alert("vehicle created");
+         setMsg({ type: "success", text: "Vehicle created successfully" });
       }
       setEdit(null);
       console.log("form submit completed", api.data);
@@ -166,11 +171,18 @@ export const VehicleCreate = () => {
         polution: null,
       });
     } catch (err) {
-      alert("vehicles not created");
+        setMsg({ type: "error", text: "Vehicle create/update failed" });
       console.error(err.response?.data || err.message);
       alert("Failed to create vehicle. Check console for details.");
     }
   };
+
+  useEffect(() => {
+  if (!msg) return;
+  const t = setTimeout(() => setMsg(null), 3000);
+  return () => clearTimeout(t);
+}, [msg]);
+
 
   const getStatus = (status) => {
     switch (status.toLowerCase()) {
@@ -192,7 +204,7 @@ export const VehicleCreate = () => {
   };
 
   return (
-    <div className="space-y-5">
+    <div className="bg-linear-to-br from-black via-zinc-900 to-black min-h-screen p-5 space-y-5">
       <div className="flex justify-between items-start">
         <div>
           <h1 className="text-3xl font-bold text-violet-500">
@@ -217,7 +229,12 @@ export const VehicleCreate = () => {
       {popup && (
         <div className="fixed inset-0 flex items-center justify-center">
           <div className="absolute inset-0 bg-gray-800/40 backdrop-blur-md min-h-screen" />
-          <div className="relative flex flex-col items-center justify-center bg-zinc-900 text-white p-6 rounded-2xl shadow-xl border border-violet-500">
+          <motion.div
+             initial={{ scale: 0.9, opacity: 0 }}
+             animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.25 }}
+              className="relative flex flex-col items-center justify-center bg-zinc-900 text-white p-6 rounded-2xl shadow-xl border border-violet-500"
+              >
             <h2 className="text-xl font-bold mb-4 text-violet-400">
               {editId ? "Update Vehicle" : "Add Vehicle"}
             </h2>
@@ -337,9 +354,24 @@ export const VehicleCreate = () => {
                 </button>
               </div>
             </form>
-          </div>
+
+            
+          </motion.div>
         </div>
       )}
+
+      {msg && (
+  <div
+    className={`px-4 py-3 rounded-xl border text-sm font-medium animate-pulse
+      ${msg.type === "success"
+        ? "bg-green-900 text-green-400 border-green-500"
+        : "bg-red-900 text-red-400 border-red-500"}
+    `}
+  >
+    {msg.text}
+  </div>
+)}
+
 
       <div className="flex gap-4">
         <input
@@ -371,11 +403,14 @@ export const VehicleCreate = () => {
           <div>Insurance-Expiry</div>
           <div>Actions</div>
         </div>
-        {vehicle.map((v) => (
-          <div
-            key={v._id}
-            className="grid grid-cols-9 py-2 px-3 text-center gap-5 justify-center border-violet-500 items-center"
-          >
+        {vehicle.map((v , i) => (
+            <motion.div
+    key={v._id}
+    initial={{ opacity: 0, y: 15 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: i * 0.05 }}
+    className="grid grid-cols-9 py-2 px-3 text-center gap-5 justify-center border-violet-500 items-center"
+  >
             <div>{v.vehicle}</div>
             <div>{v.brand}</div>
             <div>{v.NumberPlate}</div>
@@ -433,7 +468,8 @@ export const VehicleCreate = () => {
                 </button>
               </div>
             </div>
-          </div>
+
+          </motion.div>
         ))}
       </div>
     </div>

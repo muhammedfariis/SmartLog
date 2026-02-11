@@ -90,6 +90,8 @@ class AssignmentServices {
       "returning",
       "returned",
       "completed",
+      "scheduled",
+       "assigned",
     ];
 
     if (!allowed.includes(status)) {

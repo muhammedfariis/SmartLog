@@ -61,6 +61,8 @@ const Assignment = () => {
 
     case "completed":
       return "bg-orange-900 text-orange-300 border-orange-700";
+       case "scheduled" : 
+         return "bg-cyan-950 text-cyan-400 border border-cyan-700"
 
     default:
       return "bg-gray-800 text-gray-300 border-gray-600";

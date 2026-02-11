@@ -31,41 +31,33 @@ class AssignmentControllers {
     }
   };
 
-  driverStatusUpdate = async (req , res , next)=>{
-    try{
+  driverStatusUpdate = async (req, res, next) => {
+    try {
+      const driverId = req.user.id;
       const driverStatus = await this.AssignmentServices.driverStatusUpdate({
-        assignmentId  : req.body.id,
-        driverId : req.user.id,
-        status : req.body.status
-      })
+        assignmentId: req.body.assignmentId,
+        driverId,
+        status: req.body.status,
+      });
 
       res.json({
-        success : true,
-        ...driverStatus
-      })
-
-    }catch(err){
-      next(err)
-      
+        success: true,
+        ...driverStatus,
+      });
+    } catch (err) {
+      next(err);
     }
-  }
+  };
 
-  getDriverTrips = async(req,res,next)=>{
- try{
+  getDriverTrips = async (req, res, next) => {
+    try {
+      const data = await this.AssignmentServices.getDriverTrips(req.user.id);
 
-  const data =
-   await this.AssignmentServices
-    .getDriverTrips(req.user.id)
-
-  res.json(data)
-
- }catch(err){
-  next(err)
- }
+      res.json(data);
+    } catch (err) {
+      next(err);
+    }
+  };
 }
 
-
-}
-
-
-export default AssignmentControllers
+export default AssignmentControllers;

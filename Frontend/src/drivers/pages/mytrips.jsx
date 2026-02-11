@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import API from "../../Api/api";
 import { useNavigate } from "react-router-dom";
 
-
 const Mytrips = () => {
   const navigate = useNavigate();
 
@@ -22,10 +21,10 @@ const Mytrips = () => {
     loadTrips();
   }, []);
 
-  const updateStatus = async (id, status) => {
+  const updateStatus = async (assignmentId, status) => {
     try {
       const api = await API.patch(`/assigndrivers/driverStatus`, {
-        id,
+        assignmentId,
         status,
       });
       loadTrips();
@@ -54,16 +53,30 @@ const Mytrips = () => {
       case "completed":
         return "bg-orange-950 text-orange-400 border border-orange-700";
 
+      case "scheduled":
+        return "bg-cyan-950 text-cyan-400 border border-cyan-700";
+
       default:
         return "bg-gray-800 text-gray-300 border border-gray-700";
     }
   };
 
   const actionButton = (trip) => {
+    if (trip.status === "scheduled") {
+      return (
+        <button
+          className="bg-cyan-950  rounded-2xl h-10 active:scale-95 hover:bg-cyan-900 w-30 text-md text-cyan-300"
+          onClick={() => updateStatus(trip._id, "assigned")}
+        >
+          Ready
+        </button>
+      );
+    }
+
     if (trip.status === "assigned") {
       return (
         <button
-          className="bg-green-950 rounded-2xl h-10 active:scale-95 hover:bg-green-900 w-30 text-md text-green-300"
+          className="bg-green-950  rounded-2xl h-10 active:scale-95 hover:bg-green-900 w-30 text-md text-green-300"
           onClick={() => updateStatus(trip._id, "in_progress")}
         >
           Start
@@ -168,23 +181,25 @@ const Mytrips = () => {
 
             <div className="mt-4 border-t border-zinc-800 pt-4 space-y-3">
               <div className="bg-blue-950/40 border border-blue-800 rounded-xl p-3 text-sm text-blue-200">
-                ⚠️ KM must be updated before closing the trip. Incorrect KM entries will affect fleet records.
+                ⚠️ KM must be updated before closing the trip. Incorrect KM
+                entries will affect fleet records.
               </div>
-
-              <button
-                className="bg-blue-900 hover:bg-blue-800 active:scale-95 transition rounded-xl px-4 py-2 text-blue-200 text-sm"
-                onClick={() =>
-                  navigate("/drivers/kmupdate", {
-                    state: {
-                      assignmentId: t._id,
-                      vehicleId: t.vehicle?._id,
-                      vehiclePlate: t.vehicle?.NumberPlate,
-                    },
-                  })
-                }
-              >
-                Update KM
-              </button>
+              {t.status === "completed" && (
+                <button
+                  className="bg-blue-900 hover:bg-blue-800 active:scale-95 transition rounded-xl px-4 py-2 text-blue-200 text-sm"
+                  onClick={() =>
+                    navigate("/drivers/kmupdate", {
+                      state: {
+                        assignmentId: t._id,
+                        vehicleId: t.vehicle?._id,
+                        vehiclePlate: t.vehicle?.NumberPlate,
+                      },
+                    })
+                  }
+                >
+                  Update KM
+                </button>
+              )}
             </div>
           </div>
         ))}
