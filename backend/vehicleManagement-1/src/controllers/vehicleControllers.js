@@ -74,6 +74,16 @@ class VehicleControllers {
     }
   }
 
+  getVehicleById = async (req,res,next)=>{
+  try{
+    const data = await this.VehicleServices.getVehicleById(req.params.id)
+    res.json(data)
+  }catch(err){
+    next(err)
+  }
+}
+
+
   
 }
 

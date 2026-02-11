@@ -164,6 +164,23 @@ class VehicleServices {
       vehicleActive
     }
   }
+
+  async getVehicleById(id){
+  if(!id){
+    throw new ApiError(Status.BAD_REQUEST,"vehicle id missing")
+  }
+
+  const vehicle = await this.VehicleRepository.findById(id)
+
+  if(!vehicle){
+    throw new ApiError(Status.NOT_FOUND,"vehicle not found")
+  }
+
+  return {
+    vehicle
+  }
+}
+
 }
 
 export default VehicleServices;

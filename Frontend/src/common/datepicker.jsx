@@ -9,6 +9,11 @@ export default function DateTimePicker({value , onChange}) {
       onChange={onChange}
       showTimeSelect
       dateFormat="Pp"
+      showYearDropdown
+      showMonthDropdown
+      dropdownMode="select" 
+      scrollableYearDropdown
+      yearDropdownItemNumber={50}
       className="outline-none"
     />
   );

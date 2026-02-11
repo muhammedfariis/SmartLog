@@ -1,19 +1,28 @@
-import { UserRepository } from "../repositories/userRepo.js";
+import { UserRepository as DriverRepository } from "../repositories/userRepo.js";
 import DriverController from "../controllers/driverControllers.js";
 import DriverServices from "../services/driverServices.js";
 
-import {UserRepository as VehicleRepository} from "../../../vehicleManagement-1/src/repositories/userRepo.js"
+import { UserRepository as VehicleRepository } 
+from "../../../vehicleManagement-1/src/repositories/userRepo.js";
 
+import { UserRepository as AssignmentRepository } 
+from "../../../AssignmentDispatchers-3/src/repositories/userRepository.js";
 
-const driverComposer = ()=>{
-   
-    const driverRepo = new UserRepository()
-    const vehicleRepo = new VehicleRepository()
-    const driverService = new DriverServices(driverRepo , vehicleRepo)
-    const driverController = new DriverController(driverService)
+const driverComposer = () => {
 
-    return driverController
+    const driverRepo = new DriverRepository();
+    const vehicleRepo = new VehicleRepository();
+    const assignmentRepo = new AssignmentRepository();   
 
-}
+    const driverService = new DriverServices(
+        driverRepo,
+        vehicleRepo,
+        assignmentRepo   
+    );
 
-export default driverComposer
+    const driverController = new DriverController(driverService);
+
+    return driverController;
+};
+
+export default driverComposer;

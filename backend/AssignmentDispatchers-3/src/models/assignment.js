@@ -29,14 +29,23 @@ const AssignmentSchema = new mongoose.Schema(
       trim: true,
     },
 
-    load : {
-        type : String,
-        required : true
+    load: {
+      type: String,
+      required: true,
     },
 
     status: {
       type: String,
-      enum: ["scheduled", "assigned", "in_progress", "completed", "cancelled"],
+      enum: [
+        "scheduled",
+        "assigned",
+        "in_progress",
+        "cancelled",
+        "returning",
+        "returned",
+        "completed",
+      ],
+
       default: "assigned",
     },
   },

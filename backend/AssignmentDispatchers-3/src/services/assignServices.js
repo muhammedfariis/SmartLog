@@ -2,9 +2,9 @@ import { ApiError } from "../../../Errors/Error.js";
 import { Messege, Status } from "../../../constants/httpResponse.js";
 
 class AssignmentServices {
-  constructor(UserRepository , vehicleRepository) {
+  constructor(UserRepository, vehicleRepository) {
     this.UserRepository = UserRepository;
-    this.vehicleRepository = vehicleRepository
+    this.vehicleRepository = vehicleRepository;
   }
 
   async assignDriversTrip({
@@ -38,10 +38,10 @@ class AssignmentServices {
       throw new ApiError(Status.BAD_REQUEST, "Vehicle is not active");
     }
 
-    const existing = await this.UserRepository.findOne({ 
-      driver , 
-      status : {$in : ["assigned" , "in_progress"]}
-     });
+    const existing = await this.UserRepository.findOne({
+      driver,
+      status: { $in: ["assigned", "in_progress"] },
+    });
 
     if (existing) {
       throw new ApiError(Status.BAD_REQUEST, Messege.DRIVER_ALREADY_EXIST);
@@ -80,58 +80,51 @@ class AssignmentServices {
     };
   }
 
+  async driverStatusUpdate({ assignmentId, status, driverId }) {
+    if (!assignmentId || !status) {
+      throw new ApiError(Status.CONFLICT, Messege.VALIDATION_ERROR);
+    }
+    const allowed = [
+      "in_progress",
+      "cancelled",
+      "returning",
+      "returned",
+      "completed",
+    ];
 
-  async driverStatusUpdate({assignmentId , status , driverId}){
+    if (!allowed.includes(status)) {
+      throw new ApiError(Status.BAD_REQUEST, "invalid request");
+    }
 
-  if(!assignmentId || !status){
-  throw new ApiError(Status.CONFLICT , Messege.VALIDATION_ERROR)
+    const trip = await this.UserRepository.findOne({
+      _id: assignmentId,
+      driver: driverId,
+    });
 
- }
-    const allowed = [ "in_progress",
-   "completed",
-   "cancelled"]
+    if (!trip) {
+      throw new ApiError(Status.BAD_REQUEST, "trip not found for the driver");
+    }
 
-   if(!allowed.includes(status)){
-    throw new ApiError(Status.BAD_REQUEST , "invalid request")
-   }
+    const update = await this.UserRepository.findByIdAndUpdate(assignmentId, {
+      status,
+    });
+    console.log("dispatcher alert : ", status);
+    return {
+      Messege: "trip status updated",
+      update,
+    };
+  }
 
-   const trip = await this.UserRepository.findOne({
-    _id: assignmentId ,
-     driver : driverId
-   })
-  
-   if(!trip){
-    throw new ApiError(Status.BAD_REQUEST , "trip not found for the driver")
-   }
+  async getDriverTrips(driverId) {
+    const trips = await this.UserRepository.find({ driver: driverId }).populate(
+      "vehicle",
+    );
 
-   const update = await this.UserRepository.findByIdAndUpdate(
-    assignmentId,
-    {status}
-   )
-   console.log("dispatcher alert : " ,status);
-   return{
-    Messege : 'trip status updated',
-    update
-   }
- 
-
-   }
-
-   async getDriverTrips(driverId){
-
- const trips =
-  await this.UserRepository
-  .find({driver : driverId})
-  .populate("vehicle")
-
-
- return {
-  Message :"drivers trips fetched success",
-  trips
- }
-}
-
-
+    return {
+      Message: "drivers trips fetched success",
+      trips,
+    };
+  }
 }
 
 export default AssignmentServices;

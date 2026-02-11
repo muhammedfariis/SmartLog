@@ -1,82 +1,130 @@
-import { useState ,useEffect } from "react";
+import { useState, useEffect } from "react";
 import API from "../../Api/api";
+import { useNavigate } from "react-router-dom";
+
 
 const Mytrips = () => {
+  const navigate = useNavigate();
+
   const [trip, setTrip] = useState([]);
 
-  const loadTrips = async()=>{
-    try{
-    const api = await API.get("/assigndrivers/mytrips")
-    setTrip(api.data.trips)
-    console.log(api);
-    }catch(err){
+  const loadTrips = async () => {
+    try {
+      const api = await API.get("/assigndrivers/mytrips");
+      setTrip(api.data.trips);
+      console.log(api);
+    } catch (err) {
       console.error(err);
     }
-    
-  }
+  };
 
-  useEffect(()=>{
-    loadTrips()
-  },[])
+  useEffect(() => {
+    loadTrips();
+  }, []);
 
-  const updateStatus = async(id , status)=>{
-    try{
-      const api = await API.patch(
-        `/assigndrivers/driverStatus`,{
-          id,
-          status
-        }
-      )
-      loadTrips()
-
-    }catch(err){
+  const updateStatus = async (id, status) => {
+    try {
+      const api = await API.patch(`/assigndrivers/driverStatus`, {
+        id,
+        status,
+      });
+      loadTrips();
+    } catch (err) {
       console.error(err);
-      
     }
-  }
+  };
 
-  const badgeStyle = (status)=>{
-    switch(status){
-       case "assigned":
-        return "bg-yellow-600/20 text-yellow-400";
+  const badgeStyle = (status) => {
+    switch (status) {
+      case "assigned":
+        return "bg-green-950 text-green-300 border border-green-700";
+
       case "in_progress":
-        return "bg-green-600/20 text-green-400";
+        return "bg-violet-950 text-violet-300 border border-violet-700";
+
+      case "cancelled":
+        return "bg-red-950 text-red-400 border border-red-700";
+
+      case "returning":
+        return "bg-yellow-950 text-yellow-300 border border-yellow-700";
+
+      case "returned":
+        return "bg-blue-950 text-blue-300 border border-blue-700";
+
       case "completed":
-        return "bg-gray-600/20 text-gray-400";
+        return "bg-orange-950 text-orange-400 border border-orange-700";
+
       default:
-        return "";
+        return "bg-gray-800 text-gray-300 border border-gray-700";
     }
-  }
+  };
 
-  const actionButton = (trip)=>{
-    if(trip.status === "assigned"){
-      return(
+  const actionButton = (trip) => {
+    if (trip.status === "assigned") {
+      return (
         <button
-        className="bg-green-950 rounded-2xl h-10 active:scale-95 hover:bg-green-900 w-30 text-lg text-green-300"
-        onClick={() => updateStatus(trip._id, "in_progress")}
+          className="bg-green-950 rounded-2xl h-10 active:scale-95 hover:bg-green-900 w-30 text-md text-green-300"
+          onClick={() => updateStatus(trip._id, "in_progress")}
         >
-          start trip
-
+          Start
         </button>
-      )
+      );
     }
 
-    if(trip.status === "in_progress"){
-      return(
-        <button 
-         className="bg-red-950 rounded-2xl h-10 active:scale-95 hover:bg-red-900 w-30 text-lg text-red-300"
-         onClick={()=>updateStatus(trip._id , "completed")}
-        >
-          complete Trip
-        </button>
-      )
+    if (trip.status === "in_progress") {
+      return (
+        <div className="flex justify-between">
+          <button
+            className="bg-violet-950 rounded-2xl h-10 active:scale-95 hover:bg-violet-900 w-30 text-md text-violet-300"
+            onClick={() => updateStatus(trip._id, "completed")}
+          >
+            Complete
+          </button>
+          <button
+            className="bg-red-950 rounded-2xl h-10 active:scale-95 hover:bg-red-900 w-30 text-md text-red-400"
+            onClick={() => updateStatus(trip._id, "cancelled")}
+          >
+            Cancel
+          </button>
+        </div>
+      );
     }
 
-    return null
+    if (trip.status === "cancelled") {
+      return (
+        <button
+          className="bg-yellow-950 rounded-2xl h-10 active:scale-95 hover:bg-yellow-900 w-30 text-md text-yellow-300"
+          onClick={() => updateStatus(trip._id, "returning")}
+        >
+          Return
+        </button>
+      );
+    }
 
-  }
+    if (trip.status === "returning") {
+      return (
+        <button
+          className="bg-blue-950 rounded-2xl h-10 active:scale-95 hover:bg-blue-900 w-30 text-md text-blue-300"
+          onClick={() => updateStatus(trip._id, "returned")}
+        >
+          Reached Hub
+        </button>
+      );
+    }
 
+    if (trip.status === "returned") {
+      return (
+        <button
+          className="bg-orange-950 rounded-2xl h-10 active:scale-95 hover:bg-orange-900 w-30 text-md text-orange-400"
+          onClick={() => updateStatus(trip._id, "completed")}
+        >
+          Close Trip
+        </button>
+      );
+    }
 
+    return null;
+  };
 
   return (
     <div className="space-y-5">
@@ -85,36 +133,61 @@ const Mytrips = () => {
           My Assigned Trips
         </h1>
         {trip.length === 0 && (
-        <p className="text-gray-400">No Trips Assigned Yet</p>
-           
+          <p className="text-gray-400">No Trips Assigned Yet</p>
         )}
       </div>
 
       <div className="space-y-5">
+        {trip.map((t, i) => (
+          <div
+            key={t._id}
+            className="bg-black border border-violet-500 rounded-2xl p-5 shadow space-y-4"
+          >
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2">
+              <h2 className="text-lg font-semibold text-white">
+                Trip ID: {i + 10001}
+              </h2>
 
-        {trip.map((t)=>(
-            <div key={t._id} className="bg-black border border-violet-500 rounded-2xl p-5 shadow space-y-4">
-          <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2">
-            <h2 className="text-lg font-semibold text-white">
-              Trip ID: {t._id.slice(-6)}
-            </h2>
-
-            <span className={`px-3 py-1 rounded-full text-sm bg-yellow-600/20 text-yellow-400 w-fit ${badgeStyle(t.status)}`}>
-              {t.status}
-            </span>
-          </div>
+              <span
+                className={`px-3 py-1 rounded-full text-sm w-fit ${badgeStyle(t.status)}`}
+              >
+                {t.status}
+              </span>
+            </div>
 
             <div className="grid sm:grid-cols-2 gap-2 text-gray-300">
-            <p>Route: {t.fromLocation} → {t.toLocation}</p>
-            <p>Vehicle: {t.vehicle?.NumberPlate}</p>
-            <p>Load: {t.load}</p>
-            <p>Date: {new Date(t.scheduledDate).toDateString()}</p>
-          </div>
+              <p>
+                Route: {t.fromLocation} → {t.toLocation}
+              </p>
+              <p>Vehicle: {t.vehicle?.NumberPlate}</p>
+              <p>Load: {t.load}</p>
+              <p>Date: {new Date(t.scheduledDate).toDateString()}</p>
+            </div>
 
-         {actionButton(t)}
-        </div>
+            {actionButton(t)}
+
+            <div className="mt-4 border-t border-zinc-800 pt-4 space-y-3">
+              <div className="bg-blue-950/40 border border-blue-800 rounded-xl p-3 text-sm text-blue-200">
+                ⚠️ KM must be updated before closing the trip. Incorrect KM entries will affect fleet records.
+              </div>
+
+              <button
+                className="bg-blue-900 hover:bg-blue-800 active:scale-95 transition rounded-xl px-4 py-2 text-blue-200 text-sm"
+                onClick={() =>
+                  navigate("/drivers/kmupdate", {
+                    state: {
+                      assignmentId: t._id,
+                      vehicleId: t.vehicle?._id,
+                      vehiclePlate: t.vehicle?.NumberPlate,
+                    },
+                  })
+                }
+              >
+                Update KM
+              </button>
+            </div>
+          </div>
         ))}
-       
       </div>
     </div>
   );

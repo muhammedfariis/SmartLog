@@ -17,6 +17,7 @@ const Assignment = () => {
     load: "",
     status: "",
   });
+
   useEffect(() => {
     API.get("/vehicleassignations/bystatus")
       .then((response) => {
@@ -33,13 +34,49 @@ const Assignment = () => {
       .catch((err) => console.log("Driver API error:", err));
   }, []);
 
+  const loadAssignments = async () => {
+    try {
+      const res = await API.get("/assigndrivers/assignmentShedule");
+      setAssignment(res.data.Assignments || []);
+    } catch (err) {
+      console.log("assignment fetch error:", err);
+      setAssignment([]);
+    }
+  };
+
+
+   const statusBadge = (status) => {
+  switch (status) {
+    case "assigned":
+      return "bg-green-900 text-green-300 border-green-700";
+
+    case "in_progress":
+      return "bg-violet-900 text-violet-300 border-violet-700";
+
+    case "cancelled":
+      return "bg-red-900 text-red-300 border-red-700";
+
+    case "returned":
+      return "bg-blue-900 text-blue-300 border-blue-700";
+
+    case "completed":
+      return "bg-orange-900 text-orange-300 border-orange-700";
+
+    default:
+      return "bg-gray-800 text-gray-300 border-gray-600";
+  }
+};
+
+
+
+
   useEffect(() => {
-    API.get("/assigndrivers/assignmentShedule").then((response) => {
-      setAssignment(response.data.Assignments || []).catch((err) => {
-        console.log("errorr from useeffect assignment : ", err);
-        setAssignment([]);
-      });
-    });
+    loadAssignments();
+      const interval = setInterval(() => {
+    loadAssignments();
+  }, 5000); 
+
+  return () => clearInterval(interval);
   }, []);
 
   const assignDrivers = async (e) => {
@@ -52,6 +89,16 @@ const Assignment = () => {
 
       console.log(api);
       alert("assignation completed");
+      loadAssignments();
+      setForm({
+        driver: "",
+        vehicle: "",
+        scheduledDate: "",
+        fromLocation: "",
+        toLocation: "",
+        load: "",
+        status: "",
+      });
     } catch (err) {
       console.error(err);
       alert("assignation failed");
@@ -208,6 +255,13 @@ const Assignment = () => {
                 <div className="rounded-2xl px-3 py-2 bg-yellow-900 text-yellow-200">
                   VEHICLE : {d.vehicle?.NumberPlate?.toUpperCase()}
                 </div>
+
+                 <div>
+    <span className={`px-3 py-1 rounded-full border text-sm ${statusBadge(d.status)}`}>
+      STATUS : {d.status}
+    </span>
+  </div>
+
               </div>
             ))}
           </div>

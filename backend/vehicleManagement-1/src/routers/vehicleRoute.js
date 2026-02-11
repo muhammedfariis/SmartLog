@@ -10,5 +10,7 @@ router.put("/updatevehicles/:id", Validation, roleMiddleware("admin"), vehicles.
 router.delete("/deletevehicles/:id",Validation, roleMiddleware("admin"), vehicles.deleteVehicles);
 router.get("/search" ,Validation , roleMiddleware("admin") , vehicles.searchByRegex)
 router.get("/bystatus" , Validation , roleMiddleware("admin","dispatcher"), vehicles.filterByStatus)
+router.get("/startkm/:id", Validation, roleMiddleware("driver","admin"), vehicles.getVehicleById)
+
 export default router
 

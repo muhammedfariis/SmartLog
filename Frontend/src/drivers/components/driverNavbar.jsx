@@ -19,12 +19,7 @@ const DriverNavbar = () => {
               My Trips
             </Link>
           
-             <Link
-              className="hover:bg-linear-to-br from-30% from-violet-500 to-70% to-violet-400  hover:text-black rounded-2xl transition-all duration-500 ease-in-out h-10 w-30 flex items-center justify-center"
-              to="/drivers/kmupdate"
-            >
-              Km Update
-            </Link>
+            
           </div>
 
           <div className="flex items-center justify-center w-20 h-8">
