@@ -113,14 +113,14 @@ const DashboardAdmin = () => {
                   className="flex justify-between items-center bg-black/50 border border-zinc-800 rounded-xl px-4 py-3"
                 >
                   <div>
-                    <p className="font-semibold text-sm">{a.driver?.Name || "Driver"}</p>
+                    <p className="font-semibold text-sm">{a.driver?.Name.toUpperCase() || "Driver"}</p>
                     <p className="text-gray-400 text-xs">
-                      {a.fromLocation} → {a.toLocation}
+                      {a.fromLocation.toUpperCase()} → {a.toLocation.toUpperCase()}
                     </p>
                   </div>
 
                   <div className="text-right">
-                    <p className="text-violet-400 text-sm">{a.vehicle?.NumberPlate}</p>
+                    <p className="text-violet-400 text-sm">{a.vehicle?.NumberPlate.toUpperCase()}</p>
                     <span className="text-xs text-gray-400">{a.status}</span>
                   </div>
                 </motion.div>
@@ -141,7 +141,7 @@ const DashboardAdmin = () => {
               {vehicles.map((v) => (
                 <div key={v._id}>
                   <div className="flex justify-between text-sm mb-1">
-                    <span>{v.NumberPlate}</span>
+                    <span>{v.NumberPlate.toUpperCase()}</span>
                     <span>{v.CurrentKm} km</span>
                   </div>
 

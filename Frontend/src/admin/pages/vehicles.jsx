@@ -394,15 +394,15 @@ export const VehicleCreate = () => {
 
         <div className="bg-black text-white rounded-3xl shadow border border-violet-500">
           <div className="grid grid-cols-9 py-2 px-3 text-center gap-5 border-b border-violet-500 text-gray-500 font-medium">
-            <div>Vehicle</div>
-            <div>Brand</div>
-            <div>NumberPlate</div>
-            <div>Status</div>
-            <div>Current-Km</div>
-            <div>Service-Km</div>
-            <div>Polution-Expiry</div>
-            <div>Insurance-Expiry</div>
-            <div>Actions</div>
+            <div>VEHICLES TYPE</div>
+            <div>BRAND</div>
+            <div>NUMBER PLATE</div>
+            <div>STATUS</div>
+            <div>CURRENT-KM</div>
+            <div>SERVICE-KM</div>
+            <div>POLUTION EXPIRY</div>
+            <div>INSURANCE EXPIRY</div>
+            <div>ACTIONS</div>
           </div>
           {vehicle.map((v, i) => (
             <motion.div
@@ -412,14 +412,14 @@ export const VehicleCreate = () => {
               transition={{ delay: i * 0.05 }}
               className="grid grid-cols-9 py-2 px-3 text-center  gap-5 justify-center border-violet-500 items-center"
             >
-              <div>{v.vehicle}</div>
-              <div>{v.brand}</div>
-              <div>{v.NumberPlate}</div>
+              <div>{v.vehicle.toUpperCase()}</div>
+              <div>{v.brand.toUpperCase()}</div>
+              <div>{v.NumberPlate.toUpperCase()}</div>
               <div className="flex justify-center items-center">
                 <div
                   className={` w-fit px-2 rounded-3xl ${getStatus(v.status)}`}
                 >
-                  {v.status}
+                  {v.status.toUpperCase()}
                 </div>
               </div>
               <div>{v.CurrentKm}</div>

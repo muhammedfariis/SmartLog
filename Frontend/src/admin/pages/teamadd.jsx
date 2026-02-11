@@ -443,10 +443,10 @@ const TeamAdd = () => {
         {driver && (
           <div className="bg-black text-white w-full rounded-2xl shadow border border-violet-500">
             <div className="grid grid-cols-4 py-2 px-3 text-center gap-5 border-b border-violet-500 text-gray-500 font-medium">
-              <div>Driver</div>
-              <div>UserName</div>
-              <div>Licence Info</div>
-              <div>Action</div>
+              <div>DRIVER</div>
+              <div>USERNAME</div>
+              <div>LICENCE-INFO</div>
+              <div>ACTIONS</div>
             </div>
 
             {driverlist.map((d, i) => (
@@ -457,9 +457,9 @@ const TeamAdd = () => {
                 transition={{ delay: i * 0.05 }}
                 className="grid grid-cols-4 py-2 px-3 text-center gap-5   border-violet-500 items-center"
               >
-                <div>{d.Name}</div>
-                <div>{d.userName}</div>
-                <div>{d.LicenceInfo}</div>
+                <div>{d.Name.toUpperCase()}</div>
+                <div>{d.userName.toUpperCase()}</div>
+                <div>{d.LicenceInfo.toUpperCase()}</div>
                 <div className="flex items-center justify-center gap-1">
                   <div>
                     <button
@@ -513,9 +513,9 @@ const TeamAdd = () => {
         {Dispatcher && (
           <div className="bg-black text-white rounded-2xl w-full shadow border border-violet-500">
             <div className="grid grid-cols-3 py-2 px-3 text-center gap-5 border-b border-violet-500 text-gray-500 font-medium">
-              <div>Dispatcher</div>
-              <div>UserName</div>
-              <div>Action</div>
+              <div>DISPATCHER</div>
+              <div>USERNAME</div>
+              <div>ACTIONS</div>
             </div>
             {displist.map((dis, i) => (
               <motion.div
@@ -525,8 +525,8 @@ const TeamAdd = () => {
                 transition={{ delay: i * 0.05 }}
                 className="grid grid-cols-3 py-2 px-3 text-center gap-5  border-violet-500 items-center"
               >
-                <div>{dis.Name}</div>
-                <div>{dis.userName}</div>
+                <div>{dis.Name.toUpperCase()}</div>
+                <div>{dis.userName.toUpperCase()}</div>
                 <div className="flex items-center justify-center gap-1">
                   <div>
                     <button
