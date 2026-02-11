@@ -30,6 +30,41 @@ class AssignmentControllers {
       next(err);
     }
   };
+
+  driverStatusUpdate = async (req , res , next)=>{
+    try{
+      const driverStatus = await this.AssignmentServices.driverStatusUpdate({
+        assignmentId  : req.body.id,
+        driverId : req.user.id,
+        status : req.body.status
+      })
+
+      res.json({
+        success : true,
+        ...driverStatus
+      })
+
+    }catch(err){
+      next(err)
+      
+    }
+  }
+
+  getDriverTrips = async(req,res,next)=>{
+ try{
+
+  const data =
+   await this.AssignmentServices
+    .getDriverTrips(req.user.id)
+
+  res.json(data)
+
+ }catch(err){
+  next(err)
+ }
+}
+
+
 }
 
 

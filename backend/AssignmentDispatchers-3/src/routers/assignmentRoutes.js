@@ -13,5 +13,8 @@ Router.get("/assignmentShedule" , Auth , Role("dispatcher" , "admin"), composer.
 
 Router.post("/assignment" , Auth , Role("dispatcher" , "admin") , composer.assignDriversTrip)
 
+Router.patch("/driverStatus" , Auth ,Role("admin" , "driver"),composer.driverStatusUpdate)
+
+Router.get("/mytrips" , Auth ,Role("admin" , "driver"),composer.getDriverTrips)
 
 export default Router

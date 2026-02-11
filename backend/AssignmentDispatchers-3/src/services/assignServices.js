@@ -40,7 +40,7 @@ class AssignmentServices {
 
     const existing = await this.UserRepository.findOne({ 
       driver , 
-      status : {$in : ["assigned" , "in-progress"]}
+      status : {$in : ["assigned" , "in_progress"]}
      });
 
     if (existing) {
@@ -81,7 +81,7 @@ class AssignmentServices {
   }
 
 
-   async driverStatusUpdate({assignmentId , status , driverId}){
+  async driverStatusUpdate({assignmentId , status , driverId}){
 
   if(!assignmentId || !status){
   throw new ApiError(Status.CONFLICT , Messege.VALIDATION_ERROR)
@@ -108,10 +108,29 @@ class AssignmentServices {
     assignmentId,
     {status}
    )
-
+   console.log("dispatcher alert : " ,status);
+   return{
+    Messege : 'trip status updated',
+    update
+   }
  
 
    }
+
+   async getDriverTrips(driverId){
+
+ const trips =
+  await this.UserRepository
+  .find({driver : driverId})
+  .populate("vehicle")
+
+
+ return {
+  Message :"drivers trips fetched success",
+  trips
+ }
+}
+
 
 }
 

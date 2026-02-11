@@ -25,8 +25,8 @@ export class UserRepository extends BaseRepository{
     .populate("driver")
   }
 
-  findByIdAndUpdate(id){
-    return Assignment.findByIdAndUpdate(id)
+  findByIdAndUpdate(id , data){
+    return Assignment.findByIdAndUpdate(id , data , {new : true})
   }
 
 
