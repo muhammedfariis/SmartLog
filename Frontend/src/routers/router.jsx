@@ -6,6 +6,10 @@ import Login from "../Authentication/pages/login";
 import ROUTEAUTH from "../common/authPath";
 import LandingPage from "../landing/landing";
 
+import Contact from "../landing/contact";
+import Terms from "../landing/terms";
+import About from "../landing/about";
+
 import ROUTEADMIN from "../common/adminPath";
 import DashboardAdmin from "../admin/pages/dashboard";
 import TeamAdd from "../admin/pages/teamadd";
@@ -52,6 +56,11 @@ const Router = () => {
           adminExist ? <Navigate to={ROUTEAUTH.LOGIN} /> : <LandingPage />
         }
       />
+
+      <Route path="/terms" element={<Terms/>}/>
+      <Route path="/contact" element={<Contact/>}/>
+      <Route path="/about" element={<About/>}/>
+
 
       {/* auth */}
 
