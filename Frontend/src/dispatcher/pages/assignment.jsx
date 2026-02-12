@@ -167,7 +167,7 @@ const Assignment = () => {
 
                 <label className="text-sm text-gray-400">Status</label>
                 <select
-                  className="w-full bg-black border border-violet-500 rounded-xl p-2 outline-none"
+                  className="w-full bg-black border border-violet-500 rounded-xl p-2 appearance-none outline-none"
                   name="status"
                   value={form.status}
                   onChange={onchanging}

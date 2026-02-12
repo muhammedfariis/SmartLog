@@ -1,8 +1,24 @@
 import { Link, useNavigate } from "react-router-dom";
 import { User2Icon, LogOut, SunMoonIcon } from "lucide-react";
 import Switch from "../../common/toggle";
+import { useEffect, useState } from "react";
+
 const DispatcherNavbar = () => {
   const go = useNavigate();
+    
+     const [user, setUser] = useState(null);
+  
+    useEffect(() => {
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+      if (!storedUser) {
+        go("/login");
+      } else {
+        setUser(storedUser); 
+      }
+    }, [go]);
+  
+    if (!user) return null;
+  
 
   return (
     <div className="fixed left-0 top-0 z-20 w-56 min-h-screen bg-black/70 backdrop-blur-md border-r border-violet-500">
@@ -68,7 +84,7 @@ const DispatcherNavbar = () => {
 
             <div className="flex flex-col justify-center">
               <h1 className="text-white font-semibold text-sm">Dispatcher</h1>
-              <p className="text-gray-300 text-xs">scheduler</p>
+              <p className="text-gray-300 text-xs">{user.userName}</p>
             </div>
           </div>
 

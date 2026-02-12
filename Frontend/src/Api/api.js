@@ -20,6 +20,7 @@ API.interceptors.response.use(
   (response) => {
     if (response.data?.tokens?.accessToken) {
       localStorage.setItem("token", response.data.tokens.accessToken);
+      localStorage.setItem("user", JSON.stringify(response.data.user))
     }
     return response;
   },
@@ -27,6 +28,7 @@ API.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem("token");
+      localStorage.removeItem("user");
       window.location.replace("/login");
     }
 

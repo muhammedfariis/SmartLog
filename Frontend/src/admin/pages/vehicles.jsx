@@ -410,7 +410,7 @@ export const VehicleCreate = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
-              className="grid grid-cols-9 py-2 px-3 text-center  gap-5 justify-center border-violet-500 items-center"
+              className="grid grid-cols-9 py-2 px-3 text-center   gap-5 justify-center border-violet-500 items-center"
             >
               <div>{v.vehicle.toUpperCase()}</div>
               <div>{v.brand.toUpperCase()}</div>

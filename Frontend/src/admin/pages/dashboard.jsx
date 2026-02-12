@@ -131,7 +131,7 @@ const DashboardAdmin = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex-1 bg-zinc-900/70 border border-violet-600 rounded-2xl p-6 flex flex-col overflow-hidden backdrop-blur-sm"
+            className="flex-1 bg-zinc-900/70 border border-violet-600 rounded-2xl p-6 flex flex-col overflow-hidden backdrop-blur-3xl"
           >
             <h2 className="text-xl font-semibold mb-4 text-violet-400 shrink-0">
               Vehicle KM Overview

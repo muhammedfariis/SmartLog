@@ -5,30 +5,6 @@ body{
   font-family: 'Josefin Sans', sans-serif;
 }
 
-@keyframes gradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.bg-animated-gradient {
-  background: linear-gradient(
-    -90deg,
-        rgb(0, 0, 0),
-    rgb(20, 20, 20),
-    rgb(38, 1, 66),
-    rgb(8, 8, 7),
-    rgb(0, 0, 0)
-  );
-  background-size: 400% 400%;
-  animation: gradientMove 12s ease infinite;
-}
 
 .space-bg {
   position: fixed;
@@ -38,7 +14,6 @@ body{
   z-index: 0;
 }
 
-/* moving stars layer */
 .space-stars {
   position: absolute;
   inset: 0;
@@ -57,7 +32,6 @@ body{
   to { transform: translateY(-1000px); }
 }
 
-/* earth rotation */
 .earth {
   position: absolute;
   right: -120px;
@@ -71,4 +45,22 @@ body{
 @keyframes earthRotate {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 3s ease infinite;
 }
