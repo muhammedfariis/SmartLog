@@ -11,6 +11,10 @@ export class UserRepository extends BaseRepository {
     return vehicles.find(query);
   }
 
+  findById(id){
+    return vehicles.findById(id)
+  }
+
   findByIdAndUpdate(id, data) {
     return vehicles.findByIdAndUpdate(id, data, { new: true });
   }
@@ -26,6 +30,9 @@ export class UserRepository extends BaseRepository {
     return vehicles.find({
       NumberPlate : {$regex : plate , $options : "i"}
     }).limit(50)
+  }
+   findActive() {
+    return vehicles.find({ status: "Active" });
   }
 
 

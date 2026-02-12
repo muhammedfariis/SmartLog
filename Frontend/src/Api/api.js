@@ -7,25 +7,55 @@ const API = axios.create({
   },
 });
 
+/* ---------- REQUEST ---------- */
+
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
-  console.log("token in localStorage:", localStorage.getItem("token"));
-  if (token) {
+
+  if (token && token !== "undefined") {
     config.headers.Authorization = `Bearer ${token}`;
   }
+
   return config;
 });
 
+/* ---------- RESPONSE ---------- */
+
 API.interceptors.response.use(
   (response) => {
-    if (response.data?.tokens?.accessToken) {
-      localStorage.setItem("token", response.data.tokens.accessToken);
-      console.log("token stored automatically successfull");
+    // ✅ only store token on login/register responses
+    if (response.config.url.includes("/login") ||
+        response.config.url.includes("/register")) {
+      
+      const token = response.data?.tokens?.accessToken;
+      const user = response.data?.user;
+
+      if (token) localStorage.setItem("token", token);
+      if (user) localStorage.setItem("user", JSON.stringify(user));
     }
+
     return response;
   },
+  (error) => {
+    const msg = error.response?.data?.message;
 
-  (error) => Promise.reject(error),
+    console.error("API ERROR:", msg || error.message);
+
+    if (
+      error.response?.status === 401 ||
+      msg === "jwt expired" ||
+      msg === "invalid token"
+    ) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
+      if (window.location.pathname !== "/login") {
+        window.location.href = "/login";
+      }
+    }
+
+    return Promise.reject(error);
+  }
 );
 
 export default API;

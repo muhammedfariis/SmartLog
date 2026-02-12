@@ -42,7 +42,7 @@ class AuthService {
     };
   }
 
-  async login({ userName, password }) {
+  async login({ userName, password , status }) {
     const user = await this.UserRepository.findOne(userName);
     logger.debug("email found");
     if (!user) {
@@ -52,6 +52,10 @@ class AuthService {
 
     if (!compare) {
       throw new ApiError(Status.UNAUTHORIZED, Messege.INVALID_CREDENTIALS);
+    }
+
+    if(user.status === "blocked"){
+      throw new ApiError(Status.BAD_REQUEST , Messege.ACCESS_DENIED)
     }
 
     const tokens = generateToken({ _id: user._id, role: user.role });

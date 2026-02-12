@@ -13,7 +13,7 @@ class TeamServices {
       throw new ApiError(Status.CONFLICT, Messege.VALIDATION_ERROR);
     }
 
-    const existing = await this.UserRepository.findOne({userName});
+    const existing = await this.UserRepository.findOne(userName);
     if (existing) {
       throw new ApiError(Status.BAD_REQUEST, Messege.USER_EXIST);
     }
@@ -48,7 +48,7 @@ class TeamServices {
     if (!Name || !userName || !password ) {
       throw new ApiError(Status.CONFLICT, Messege.VALIDATION_ERROR);
     }
-    const existing = await this.UserRepository.findOne({userName});
+    const existing = await this.UserRepository.findOne(userName);
     if (existing) {
       throw new ApiError(Status.BAD_REQUEST, Messege.USER_EXIST);
     }
@@ -127,6 +127,25 @@ class TeamServices {
       deleteDisp,
     };
   }
+
+  async blockDispatcher({id , status}){
+     if (!id || !status ) {
+      throw new ApiError(Status.CONFLICT, Messege.VALIDATION_ERROR);
+    }
+     if (!["blocked", "un-blocked"].includes(status)) {
+    throw new ApiError(Status.BAD_REQUEST, "Invalid status");
+  }
+
+    const blockUser = await this.UserRepository.findAndBlock(id , status)
+    console.log("Blocked User",blockUser); 
+       
+
+    return{
+      Message : Messege.ACCESS_DENIED,
+      blockUser
+    }
+  }
+
 }
 
 export default TeamServices;

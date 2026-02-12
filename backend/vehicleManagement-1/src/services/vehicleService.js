@@ -156,6 +156,31 @@ class VehicleServices {
       count: search.lenght,
     };
   }
+
+  async filterByStatus(){
+    const vehicleActive = await this.VehicleRepository.findActive()
+    return{
+      Messege : "vehicle by status Active",
+      vehicleActive
+    }
+  }
+
+  async getVehicleById(id){
+  if(!id){
+    throw new ApiError(Status.BAD_REQUEST,"vehicle id missing")
+  }
+
+  const vehicle = await this.VehicleRepository.findById(id)
+
+  if(!vehicle){
+    throw new ApiError(Status.NOT_FOUND,"vehicle not found")
+  }
+
+  return {
+    vehicle
+  }
+}
+
 }
 
 export default VehicleServices;

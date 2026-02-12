@@ -4,12 +4,12 @@ const AssignmentSchema = new mongoose.Schema(
   {
     vehicle: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "vehicle_management",
+      ref: "vehicles",
       required: true,
     },
     driver: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Users",
+      ref: "authentications",
       required: true,
     },
     scheduledDate: {
@@ -29,14 +29,23 @@ const AssignmentSchema = new mongoose.Schema(
       trim: true,
     },
 
-    load : {
-        type : String,
-        required : true
+    load: {
+      type: String,
+      required: true,
     },
 
     status: {
       type: String,
-      enum: ["scheduled", "assigned", "in_progress", "completed", "cancelled"],
+      enum: [
+        "scheduled",
+        "assigned",
+        "in_progress",
+        "cancelled",
+        "returning",
+        "returned",
+        "completed",
+      ],
+
       default: "assigned",
     },
   },

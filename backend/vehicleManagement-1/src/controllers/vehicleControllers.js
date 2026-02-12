@@ -65,6 +65,25 @@ class VehicleControllers {
     }
   }
 
+  filterByStatus = async (req , res , next)=>{
+    try{
+      const filterStatus = await this.VehicleServices.filterByStatus()
+       res.json(filterStatus)
+    }catch(err){
+      next(err)
+    }
+  }
+
+  getVehicleById = async (req,res,next)=>{
+  try{
+    const data = await this.VehicleServices.getVehicleById(req.params.id)
+    res.json(data)
+  }catch(err){
+    next(err)
+  }
+}
+
+
   
 }
 

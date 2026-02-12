@@ -4,7 +4,7 @@ import { BaseRepository } from "./baseRepository.js";
 export class UserRepository extends BaseRepository{
 
   find(query = {}){
-    return Assignment.find(data)
+    return Assignment.find(query)
   }
 
   findOne(unique){
@@ -15,11 +15,21 @@ export class UserRepository extends BaseRepository{
     return Assignment.create(user)
   }
 
+  findById(id){
+    return Assignment.findById(id)
+  }
+
   findByPopulate(){
     return Assignment.find()
     .populate("vehicle")
     .populate("driver")
   }
+
+  findByIdAndUpdate(id , data){
+    return Assignment.findByIdAndUpdate(id , data , {new : true})
+  }
+
+
 
 }
 
