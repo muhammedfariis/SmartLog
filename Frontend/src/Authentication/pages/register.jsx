@@ -111,7 +111,7 @@ const Register = () => {
             </motion.div>
             <div className="h-0.5 w-12 bg-violet-500 mb-4" />
             <h1 className="text-3xl font-black italic uppercase tracking-tighter text-white text-center">
-              Initialize <span className="text-violet-500">Fleet</span>
+           Register Your <span className="text-violet-500">Fleet</span>
             </h1>
             <p className="text-zinc-500 text-[10px] font-mono tracking-widest uppercase mt-1">
               New Operator Registration

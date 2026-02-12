@@ -120,8 +120,8 @@ const Login = () => {
             <h1 className="text-3xl font-black italic uppercase tracking-tighter text-white">
               <span className="text-violet-500">Login</span>
             </h1>
-            <p className="text-zinc-500 text-[10px] font-mono tracking-widest uppercase mt-1">
-              Command Center Access
+            <p className="text-zinc-500 text-[10px] tracking-widest uppercase mt-1">
+              Fleet Management System
             </p>
           </div>
 
