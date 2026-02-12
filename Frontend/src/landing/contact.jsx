@@ -8,7 +8,7 @@ import {
   MessageSquare, 
   Clock, 
   Globe, 
-  ShieldCheck // Added this to fix the crash
+  ShieldCheck 
 } from "lucide-react";
 import PageMotion from "../common/pagemotion";
 import SpaceBackground from "../common/stardust";
@@ -131,7 +131,6 @@ const Contact = () => {
             </motion.div>
           </div>
         </div>
-
       
       </div>
       <Footer/>

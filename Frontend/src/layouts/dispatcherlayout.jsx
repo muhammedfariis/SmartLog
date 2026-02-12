@@ -13,12 +13,10 @@ const DisptLayout = () => {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-      {/* Background - full screen */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <SpaceBackground />
       </div>
 
-      {/* Foreground content */}
       <div className="flex min-h-screen relative z-10">
         <DispatcherNavbar />
         <div className="flex-1 ml-56 min-h-screen">
