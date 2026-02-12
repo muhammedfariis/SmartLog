@@ -11,8 +11,7 @@ const FleetAnimation = () => {
   return (
     <div className="relative w-full h-40 overflow-hidden mt-10 pointer-events-none">
       
-      {/* 🛣️ THE ROAD LINE - Solid violet anchor */}
-      <div className="absolute bottom-10 w-full h-[2px] bg-violet-500/40 z-30" />
+      <div className="absolute bottom-10 w-full h-0.5 bg-violet-500/40 z-30" />
 
       <div className="relative w-full h-full">
         {vehicles.map((v, i) => (
@@ -26,18 +25,15 @@ const FleetAnimation = () => {
               delay: v.delay,
               ease: "linear"
             }}
-            // Fix: items-end forces the container to the bottom
             className="absolute bottom-10 flex items-end"
           >
             <div className="relative flex flex-col items-center">
-              {/* Shadow sitting exactly under the tires */}
               <div className="absolute bottom-0 w-[80%] h-2 bg-black/60 blur-md rounded-full" />
               
               <img 
                 src={v.src} 
                 alt="Fleet" 
-                // Adjust translate-y here if your PNGs have extra empty space at the bottom
-                className="w-48 md:w-64 h-auto object-contain translate-y-[4px]" 
+                className="w-48 md:w-64 h-auto object-contain translate-y-1" 
                 style={{ 
                    filter: "brightness(0.9) contrast(1.1)",
                 }}
@@ -47,9 +43,8 @@ const FleetAnimation = () => {
         ))}
       </div>
 
-      {/* Edge Fades for a professional entrance/exit */}
-      <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black to-transparent z-40" />
-      <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black to-transparent z-40" />
+      <div className="absolute inset-y-0 left-0 w-32 bg-linear-to-r from-black to-transparent z-40" />
+      <div className="absolute inset-y-0 right-0 w-32 bg-linear-to-l from-black to-transparent z-40" />
     </div>
   );
 };
