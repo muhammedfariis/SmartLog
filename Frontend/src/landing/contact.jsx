@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import PageMotion from "../common/pagemotion";
 import SpaceBackground from "../common/stardust";
+import Footer from "../common/footer";
+import LandingNav from "../common/landingNav";
 
 const Contact = () => {
   const [focused, setFocused] = useState(null);
@@ -39,6 +41,7 @@ const Contact = () => {
 
   return (
     <PageMotion>
+        <LandingNav/>
       <div className="relative min-h-screen text-white pb-20 pt-28 px-6">
         <SpaceBackground />
 
@@ -131,6 +134,7 @@ const Contact = () => {
 
       
       </div>
+      <Footer/>
     </PageMotion>
   );
 };

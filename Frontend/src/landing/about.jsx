@@ -12,6 +12,8 @@ import {
 import { motion } from "framer-motion";
 import PageMotion from "../common/pagemotion";
 import SpaceBackground from "../common/stardust";
+import LandingNav from "../common/landingNav";
+import Footer from "../common/footer";
 
 const About = () => {
   const coreFeatures = [
@@ -39,6 +41,7 @@ const About = () => {
 
   return (
     <PageMotion>
+        <LandingNav/>
       <div className="relative min-h-screen text-white pb-20">
         <SpaceBackground />
         
@@ -121,7 +124,7 @@ const About = () => {
               
               <div className="bg-zinc-800/30 rounded-3xl p-6 border border-zinc-700/50 flex flex-col justify-center">
                 <div className="flex justify-between items-center mb-6">
-                  <span className="text-sm font-mono text-violet-400">System_Status: Optimal</span>
+                  <span className="text-sm  text-violet-400">System Status: Optimal</span>
                   <Clock size={18} className="text-zinc-500" />
                 </div>
                 <div className="space-y-3">
@@ -133,7 +136,7 @@ const About = () => {
                           className="h-full bg-violet-500" 
                         />
                     </div>
-                    <div className="flex justify-between text-xs font-mono text-zinc-500 uppercase">
+                    <div className="flex justify-between text-xs text-zinc-500 uppercase">
                         <span>Fleet Uptime</span>
                         <span>94%</span>
                     </div>
@@ -143,11 +146,9 @@ const About = () => {
           </div>
         </section>
 
-        {/* Tech Stack Mention */}
-        <footer className="relative z-10 mt-32 text-center text-zinc-600 text-sm font-mono uppercase tracking-[0.2em]">
-          Powered by SmartLog Engine v1.0.4 // Zero Latency Dispatch
-        </footer>
+    
       </div>
+      <Footer/>
     </PageMotion>
   );
 };

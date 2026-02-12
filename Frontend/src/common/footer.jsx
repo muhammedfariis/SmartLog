@@ -51,6 +51,9 @@ const Footer = () => {
           
           <div className="flex flex-col gap-3">
             <h4 className="text-white font-bold text-sm uppercase tracking-tighter mb-2">Support</h4>
+            <Link to="/" className="hover:text-violet-400 transition-colors duration-300 text-sm">
+               Home
+            </Link>
             <Link to="/contact" className="hover:text-violet-400 transition-colors duration-300 text-sm">
               Contact Center
             </Link>
@@ -60,6 +63,7 @@ const Footer = () => {
                <Link to="/about" className="hover:text-violet-400 transition-colors duration-300 text-sm">
                About Services
             </Link>
+            
           </div>
         </div>
 

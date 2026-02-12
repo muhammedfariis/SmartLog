@@ -10,6 +10,9 @@ import {
 } from "lucide-react";
 import PageMotion from "../common/pagemotion";
 import SpaceBackground from "../common/stardust";
+import LandingNav from "../common/landingNav";
+import Footer from "../common/footer";
+
 
 const Terms = () => {
   const protocols = [
@@ -37,6 +40,7 @@ const Terms = () => {
 
   return (
     <PageMotion>
+        <LandingNav/>
       <div className="relative min-h-screen text-white pb-20 pt-28 px-6">
         <SpaceBackground />
 
@@ -106,6 +110,7 @@ const Terms = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </PageMotion>
   );
 };

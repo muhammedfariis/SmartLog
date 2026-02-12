@@ -5,9 +5,10 @@ import Switch from "./toggle";
 
 const LandingNav = () => {
   const navLinks = [
+    {name : "Home" , to : "/"},
     { name: "About", to: "/about" },
     { name: "Contact", to: "/contact" },
-    { name: "Terms & Conditions", to: "/terms" },
+    { name: "Terms", to: "/terms" },
   ];
 
   return (
