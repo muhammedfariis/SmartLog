@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import API from "../../../Api/api";
 import { Card } from "../../../common/card";
 import SpaceBackground from "../../../common/stardust";
+import styles from "./dashboard.module.css"
 
 const DashboardAdmin = () => {
   const [drivers, setDrivers] = useState([]);
@@ -35,20 +36,20 @@ const DashboardAdmin = () => {
   const statusCount = (s) => assignments.filter((a) => a.status === s).length;
 
   return (
-    <div className="relative h-screen overflow-hidden text-white">
+    <div className={styles.wrapper}>
       <SpaceBackground />
 
-      <div className="absolute inset-0 p-6 flex flex-col gap-6 z-10">
+      <div className={styles.header}>
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
-          className="space-y-2 shrink-0"
+          
         >
-          <h1 className="text-4xl font-bold text-violet-500">Admin Dashboard</h1>
-          <p className="text-gray-400">Fleet & Driver & Assignment overview</p>
+          <h1 className={styles.title}>Admin Dashboard</h1>
+          <p className={styles.subtitle}>Fleet & Driver & Assignment overview</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 shrink-0">
+        <div className={styles.cardGrid}>
           <Card
             title="Total Drivers"
             value={drivers.length}
@@ -85,25 +86,25 @@ const DashboardAdmin = () => {
           ].map(([label, key]) => (
             <div
               key={key}
-              className="bg-zinc-900 border border-violet-700 rounded-xl p-4 text-center"
+              className={styles.statusCard}
             >
-              <p className="text-gray-400 text-sm">{label}</p>
-              <p className="text-xl font-bold text-violet-400">{statusCount(key)}</p>
+              <p className={styles.statusLabel}>{label}</p>
+              <p className={styles.statusValue}>{statusCount(key)}</p>
             </div>
           ))}
         </motion.div>
 
-        <div className="flex gap-6 flex-1 overflow-hidden">
+        <div className={styles.content}>
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex-1 bg-zinc-900/70 border border-violet-600 rounded-2xl p-6 flex flex-col overflow-hidden backdrop-blur-sm"
+            className={styles.panel}
           >
-            <h2 className="text-xl font-semibold mb-4 text-violet-400 shrink-0">
+            <h2 className={styles.panelTitle}>
               Recent Assignments
             </h2>
 
-            <div className="space-y-3 flex-1 overflow-y-auto pr-2 scrollbar-hide">
+            <div className={styles.scrollArea}>
               {assignments.map((a, i) => (
                 <motion.div
                   key={a._id}

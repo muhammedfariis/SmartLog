@@ -81,9 +81,8 @@ const AdminNavbar = () => {
       Logout
     </span>
   </button>
-</div>
-
-        
+    </div>
+  
       </div>
     </div>
   );
