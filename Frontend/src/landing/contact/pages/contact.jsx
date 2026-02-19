@@ -10,10 +10,10 @@ import {
   Globe, 
   ShieldCheck 
 } from "lucide-react";
-import PageMotion from "../common/pagemotion";
-import SpaceBackground from "../common/stardust";
-import Footer from "../common/footer";
-import LandingNav from "../common/landingNav";
+import PageMotion from "../../../common/pagemotion";
+import SpaceBackground from "../../../common/stardust";
+import Footer from "../../../common/footer";
+import LandingNav from "../../../common/landingNav";
 
 const Contact = () => {
   const [focused, setFocused] = useState(null);

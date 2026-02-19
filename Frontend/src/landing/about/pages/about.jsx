@@ -10,10 +10,10 @@ import {
   ChevronRight
 } from "lucide-react";
 import { motion } from "framer-motion";
-import PageMotion from "../common/pagemotion";
-import SpaceBackground from "../common/stardust";
-import LandingNav from "../common/landingNav";
-import Footer from "../common/footer";
+import PageMotion from "../../../common/pagemotion";
+import SpaceBackground from "../../../common/stardust";
+import LandingNav from "../../../common/landingNav";
+import Footer from "../../../common/footer";
 
 const About = () => {
   const coreFeatures = [

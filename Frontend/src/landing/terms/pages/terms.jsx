@@ -8,10 +8,10 @@ import {
   AlertCircle,
 
 } from "lucide-react";
-import PageMotion from "../common/pagemotion";
-import SpaceBackground from "../common/stardust";
-import LandingNav from "../common/landingNav";
-import Footer from "../common/footer";
+import PageMotion from "../../../common/pagemotion";
+import SpaceBackground from "../../../common/stardust";
+import LandingNav from "../../../common/landingNav";
+import Footer from "../../../common/footer";
 
 
 const Terms = () => {
