@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Plus, Trash, Ban, CircleSlash2 } from "lucide-react";
-import API from "../../Api/api";
+import API from "../../../Api/api";
 import { motion } from "framer-motion";
-import PageMotion from "../../common/pagemotion";
-import SpaceBackground from "../../common/stardust";
+import PageMotion from "../../../common/pagemotion";
+import SpaceBackground from "../../../common/stardust";
 const TeamAdd = () => {
   const [driver, setdriver] = useState(true);
   const [Dispatcher, setDispatcher] = useState(false);

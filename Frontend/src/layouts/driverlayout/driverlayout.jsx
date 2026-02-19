@@ -1,4 +1,4 @@
-import DriverNavbar from "../drivers/components/driverNavbar";
+import DriverNavbar from "../../drivers/components/driverNavbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 

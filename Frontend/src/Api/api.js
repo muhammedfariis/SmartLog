@@ -7,7 +7,6 @@ const API = axios.create({
   },
 });
 
-/* ---------- REQUEST ---------- */
 
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
@@ -19,11 +18,9 @@ API.interceptors.request.use((config) => {
   return config;
 });
 
-/* ---------- RESPONSE ---------- */
 
 API.interceptors.response.use(
   (response) => {
-    // ✅ only store token on login/register responses
     if (response.config.url.includes("/login") ||
         response.config.url.includes("/register")) {
       

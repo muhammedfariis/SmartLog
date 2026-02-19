@@ -1,10 +1,10 @@
 import { Plus, CalendarDays, Trash, SquarePen } from "lucide-react";
 import { useState, useEffect } from "react";
-import DateTimePicker from "../../common/datepicker";
-import API from "../../Api/api";
+import DateTimePicker from "../../../common/datepicker";
+import API from "../../../Api/api";
 import { motion } from "framer-motion";
-import PageMotion from "../../common/pagemotion";
-import SpaceBackground from "../../common/stardust";
+import PageMotion from "../../../common/pagemotion";
+import SpaceBackground from "../../../common/stardust";
 
 export const VehicleCreate = () => {
   const [loading, setLoading] = useState(false);

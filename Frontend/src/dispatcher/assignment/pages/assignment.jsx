@@ -33,7 +33,13 @@ const Assignment = () => {
   const loadAssignments = async () => {
     try {
       const res = await API.get("/assigndrivers/assignmentShedule");
-      setAssignment(res.data.Assignments || []);
+
+      const list = res.data.Assignments || []
+       const active = list.filter(
+        s => s.status !== "completed"
+       )
+        
+      setAssignment(active);
     } catch (err) {
       console.log("assignment fetch error:", err);
       setAssignment([]);
@@ -106,7 +112,6 @@ const Assignment = () => {
           </div>
 
           <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 overflow-hidden">
-            {/* New Assignment Form */}
             <div className="bg-zinc-900 border border-violet-500/40 rounded-2xl p-4 space-y-5 flex flex-col overflow-auto">
               <h2 className="text-xl font-semibold mb-2">New Assignment</h2>
 

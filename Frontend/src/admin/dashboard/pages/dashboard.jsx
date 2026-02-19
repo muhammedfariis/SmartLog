@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import API from "../../Api/api";
-import { Card } from "../../common/card";
-import SpaceBackground from "../../common/stardust";
+import API from "../../../Api/api";
+import { Card } from "../../../common/card";
+import SpaceBackground from "../../../common/stardust";
 
 const DashboardAdmin = () => {
   const [drivers, setDrivers] = useState([]);

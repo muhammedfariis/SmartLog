@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import AdminNavbar from "../admin/components/adminNavbar";
+import AdminNavbar from "../../admin/components/adminNavbar";
 import { useEffect } from "react";
-import SpaceBackground from "../common/stardust";
+import SpaceBackground from "../../common/stardust";
 
 const AdminLayout = () => {
 

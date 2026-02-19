@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import ROUTEAUTH from "../../common/authPath";
-import API from "../../Api/api";
+import ROUTEAUTH from "../../../common/authPath";
+import API from "../../../Api/api";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
@@ -12,7 +12,7 @@ import {
   XCircle,
   CheckCircle2,
 } from "lucide-react";
-import PageMotion from "../../common/pagemotion";
+import PageMotion from "../../../common/pagemotion";
 
 const Login = () => {
   const navigate = useNavigate();

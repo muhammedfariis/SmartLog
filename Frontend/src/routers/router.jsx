@@ -1,22 +1,22 @@
 import { useState, useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 
-import Register from "../Authentication/pages/register";
-import Login from "../Authentication/pages/login";
+import Register from "../Authentication/register/pages/register";
+import Login from "../Authentication/login/pages/login";
 import ROUTEAUTH from "../common/authPath";
-import LandingPage from "../landing/landing";
+import LandingPage from "../landing/pages/landing";
 
 import Contact from "../landing/contact";
 import Terms from "../landing/terms";
 import About from "../landing/about";
 
 import ROUTEADMIN from "../common/adminPath";
-import DashboardAdmin from "../admin/pages/dashboard";
-import TeamAdd from "../admin/pages/teamadd";
-import AdminLayout from "../layouts/adminlayout";
-import { VehicleCreate } from "../admin/pages/vehicles";
+import DashboardAdmin from "../admin/dashboard/pages/dashboard";
+import TeamAdd from "../admin/teamaddings/pages/teamadd";
+import AdminLayout from "../layouts/adminlayout/adminlayout";
+import { VehicleCreate } from "../admin/vehicles/pages/vehicles";
 
-import DisptLayout from "../layouts/dispatcherlayout";
+import DisptLayout from "../layouts/dispatcherlayout/dispatcherlayout";
 import Assignment from "../dispatcher/pages/assignment";
 import Status from "../dispatcher/pages/status";
 import DISPATCHERPATH from "../common/dispatcherPath";
@@ -24,7 +24,7 @@ import DISPATCHERPATH from "../common/dispatcherPath";
 import Mytrips from "../drivers/pages/mytrips";
 import DRIVERSPATH from "../common/driverspath";
 import Kmupdate from "../drivers/pages/kmupdate";
-import DriverLayout from "../layouts/driverlayout";
+import DriverLayout from "../layouts/driverlayout/driverlayout";
 
 import API from "../Api/api";
 import ProtectedRoute from "./protectRouter";

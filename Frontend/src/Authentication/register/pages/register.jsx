@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import ROUTEAUTH from "../../common/authPath";
-import API from "../../Api/api";
+import ROUTEAUTH from "../../../common/authPath";
+import API from "../../../Api/api";
 import { useState, useEffect } from "react"; // Added useEffect
 import { motion, AnimatePresence } from "framer-motion"; // Added AnimatePresence
 import {
@@ -11,7 +11,7 @@ import {
   XCircle,
   CheckCircle2,
 } from "lucide-react";
-import PageMotion from "../../common/pagemotion";
+import PageMotion from "../../../common/pagemotion";
 
 const Register = () => {
   const [focused, setFocused] = useState(null);
@@ -93,7 +93,7 @@ const Register = () => {
         <div className="absolute inset-0 z-0">
           <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-violet-600 blur-[120px] rounded-full animate-pulse" />
           <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/20 rounded-full animate-pulse delay-700" />
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-50 contrast-150"></div>
+          <div className="absolute inset-0  opacity-20 brightness-50 contrast-150"></div>
         </div>
 
         <motion.div
@@ -110,7 +110,7 @@ const Register = () => {
               />
             </motion.div>
             <div className="h-0.5 w-12 bg-violet-500 mb-4" />
-            <h1 className="text-3xl font-black italic uppercase tracking-tighter text-white text-center">
+            <h1 className="text-3xl font-black italic uppercase tracking-tight text-white text-center">
            Register Your <span className="text-violet-500">Fleet</span>
             </h1>
             <p className="text-zinc-500 text-[10px] font-mono tracking-widest uppercase mt-1">
@@ -165,7 +165,7 @@ const Register = () => {
                   to="/terms"
                   className="text-violet-400 hover:text-violet-300 underline underline-offset-4"
                 >
-                  System Protocols
+                  Terms&Condition
                 </Link>
               </span>
             </label>
