@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import API from "../../Api/api";
-import PageMotion from "../../common/pagemotion";
+import API from "../../../Api/api";
+import PageMotion from "../../../common/pagemotion";
 import  {motion} from "framer-motion"
 const Status = () => {
   const [driver, setdriver] = useState(true);

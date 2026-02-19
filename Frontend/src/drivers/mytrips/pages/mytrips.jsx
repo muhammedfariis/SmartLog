@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import API from "../../Api/api";
+import API from "../../../Api/api";
 import { useNavigate } from "react-router-dom";
 
 const Mytrips = () => {
