@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import AdminNavbar from "../../admin/components/adminNavbar";
 import { useEffect } from "react";
 import SpaceBackground from "../../common/stardust";
-
+import style from "../adminlayout/adminlayout.module.css"
 const AdminLayout = () => {
 
   useEffect(() => {
@@ -13,15 +13,15 @@ const AdminLayout = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen">
+    <div className={style.admin}>
 
-      <SpaceBackground />
+      {/* <SpaceBackground /> */}
 
-      <div className="flex min-h-screen relative z-10">
+      <div className={style.adminNav}>
 
         <AdminNavbar />
 
-        <div className="flex-1 ml-56 min-h-screen">
+        <div className={style.contents}>
           <Outlet />
         </div>
 

@@ -37,7 +37,7 @@ const DashboardAdmin = () => {
 
   return (
     <div className={styles.dashboardContainer}>
-      <SpaceBackground />
+      {/* <SpaceBackground /> */}
 
       <div className={styles.contentWrapper}>
         <motion.div

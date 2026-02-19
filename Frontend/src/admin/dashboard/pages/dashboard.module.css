@@ -6,9 +6,8 @@
 }
 
 .contentWrapper {
-  position: absolute;
+  position: relative;
   inset: 0;
-  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -24,6 +23,7 @@
   font-size: 2.25rem;
   line-height: 2.5rem;
   font-weight: 700;
+  margin: 2px;
   color: #8b5cf6; 
 }
 
@@ -36,6 +36,8 @@
   grid-template-columns: 1fr;
   gap: 1.5rem;
   flex-shrink: 0;
+  height: 150px;
+  padding: 5px;
 }
 
 @media (min-width: 768px) {
@@ -93,7 +95,7 @@
   flex-direction: column;
   overflow: hidden;
   backdrop-filter: blur(4px);
-  /* height: 30vh; */
+  height: 30vh;
 }
 
 .panelBlur3xl {
@@ -115,13 +117,11 @@
   flex: 1 1 0%;
   overflow-y: auto;
   padding-right: 0.5rem;
+  
 }
 
-.scrollList::-webkit-scrollbar {
-  display: none;
-}
+
 .scrollList {
-  -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
