@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import ROUTEAUTH from "../../../common/authPath";
 import API from "../../../Api/api";
-import { useState, useEffect } from "react"; // Added useEffect
-import { motion, AnimatePresence } from "framer-motion"; // Added AnimatePresence
+import { useState, useEffect } from "react"; 
+import { motion, AnimatePresence } from "framer-motion"; 
 import {
   User,
   Lock,
