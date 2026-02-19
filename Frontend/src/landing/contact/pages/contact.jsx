@@ -11,7 +11,7 @@ import {
   ShieldCheck 
 } from "lucide-react";
 import PageMotion from "../../../common/pagemotion";
-import SpaceBackground from "../../../common/stardust";
+import SpaceBackground from "../../../common/spacebackground/stardust";
 import Footer from "../../../common/footer";
 import LandingNav from "../../../common/landingNav";
 

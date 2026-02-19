@@ -4,7 +4,7 @@ import DateTimePicker from "../../../common/datepicker";
 import API from "../../../Api/api";
 import { motion } from "framer-motion";
 import PageMotion from "../../../common/pagemotion";
-import SpaceBackground from "../../../common/stardust";
+import SpaceBackground from "../../../common/spacebackground/stardust";
 
 export const VehicleCreate = () => {
   const [loading, setLoading] = useState(false);
