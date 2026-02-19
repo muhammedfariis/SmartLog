@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import API from "../../../Api/api";
 import { Card } from "../../../common/card";
 import SpaceBackground from "../../../common/stardust";
-import styles from "./dashboard.module.css"
+import styles from "./dashboard.module.css";
 
 const DashboardAdmin = () => {
   const [drivers, setDrivers] = useState([]);
@@ -36,46 +36,46 @@ const DashboardAdmin = () => {
   const statusCount = (s) => assignments.filter((a) => a.status === s).length;
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.dashboardContainer}>
       <SpaceBackground />
 
-      <div className={styles.header}>
+      <div className={styles.contentWrapper}>
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
-          
+          className={styles.headerSection}
         >
           <h1 className={styles.title}>Admin Dashboard</h1>
           <p className={styles.subtitle}>Fleet & Driver & Assignment overview</p>
         </motion.div>
 
-        <div className={styles.cardGrid}>
+        <div className={styles.statsGrid}>
           <Card
             title="Total Drivers"
             value={drivers.length}
-            color="border-violet-600 bg-violet-950/40"
+            color={styles.cardDrivers}
           />
           <Card
             title="Total Vehicles"
             value={vehicles.length}
-            color="border-indigo-600 bg-indigo-950/40"
+            color={styles.cardvehicles}
           />
           <Card
             title="Active Trips"
             value={statusCount("in_progress")}
-            color="border-green-600 bg-green-950/40"
+            color={styles.cardTrips}
           />
           <Card
             title="Dispatchers"
             value={dispatchers.length}
-            color="border-pink-600 bg-pink-950/40"
+            color={styles.cardDispatcher}
           />
         </div>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="grid grid-cols-2 md:grid-cols-5 gap-4 shrink-0"
+          className={styles.statusGrid}
         >
           {[
             ["Scheduled", "scheduled"],
@@ -84,45 +84,44 @@ const DashboardAdmin = () => {
             ["Completed", "completed"],
             ["Cancelled", "cancelled"],
           ].map(([label, key]) => (
-            <div
-              key={key}
-              className={styles.statusCard}
-            >
+            <div key={key} className={styles.statusCard}>
               <p className={styles.statusLabel}>{label}</p>
               <p className={styles.statusValue}>{statusCount(key)}</p>
             </div>
           ))}
         </motion.div>
 
-        <div className={styles.content}>
+        <div className={styles.panelsContainer}>
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             className={styles.panel}
           >
-            <h2 className={styles.panelTitle}>
-              Recent Assignments
-            </h2>
+            <h2 className={styles.panelTitle}>Recent Assignments</h2>
 
-            <div className={styles.scrollArea}>
+            <div className={styles.scrollList}>
               {assignments.map((a, i) => (
                 <motion.div
                   key={a._id}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: i * 0.05 }}
-                  className="flex justify-between items-center bg-black/50 border border-zinc-800 rounded-xl px-4 py-3"
+                  className={styles.assignmentItem}
                 >
                   <div>
-                    <p className="font-semibold text-sm">{a.driver?.Name.toUpperCase() || "Driver"}</p>
-                    <p className="text-gray-400 text-xs">
+                    <p className={styles.driverName}>
+                      {a.driver?.Name.toUpperCase() || "Driver"}
+                    </p>
+                    <p className={styles.locationText}>
                       {a.fromLocation.toUpperCase()} → {a.toLocation.toUpperCase()}
                     </p>
                   </div>
 
-                  <div className="text-right">
-                    <p className="text-violet-400 text-sm">{a.vehicle?.NumberPlate.toUpperCase()}</p>
-                    <span className="text-xs text-gray-400">{a.status}</span>
+                  <div className={styles.rightAlign}>
+                    <p className={styles.vehiclePlate}>
+                      {a.vehicle?.NumberPlate.toUpperCase()}
+                    </p>
+                    <span className={styles.statusText}>{a.status}</span>
                   </div>
                 </motion.div>
               ))}
@@ -132,23 +131,21 @@ const DashboardAdmin = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex-1 bg-zinc-900/70 border border-violet-600 rounded-2xl p-6 flex flex-col overflow-hidden backdrop-blur-3xl"
+            className={`${styles.panel} ${styles.panelBlur3xl}`}
           >
-            <h2 className="text-xl font-semibold mb-4 text-violet-400 shrink-0">
-              Vehicle KM Overview
-            </h2>
+            <h2 className={styles.panelTitle}>Vehicle KM Overview</h2>
 
-            <div className="space-y-3 flex-1 overflow-y-auto pr-2 scrollbar-hide">
+            <div className={styles.scrollList}>
               {vehicles.map((v) => (
                 <div key={v._id}>
-                  <div className="flex justify-between text-sm mb-1">
+                  <div className={styles.progressContainer}>
                     <span>{v.NumberPlate.toUpperCase()}</span>
                     <span>{v.CurrentKm} km</span>
                   </div>
 
-                  <div className="w-full bg-zinc-800/50 h-2 rounded">
+                  <div className={styles.progressBarTrack}>
                     <div
-                      className="bg-violet-600 h-2 rounded transition-all"
+                      className={styles.progressBarFill}
                       style={{ width: `${Math.min(v.CurrentKm / 10, 100)}%` }}
                     />
                   </div>

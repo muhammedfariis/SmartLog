@@ -1,284 +1,210 @@
-.dashboard {
+.dashboardContainer {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
+  width: 100%;
   overflow: hidden;
-  color: white;
 }
 
-.wrapper {
+.contentWrapper {
   position: absolute;
   inset: 0;
-  padding: 24px;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 1.5rem;
   z-index: 10;
 }
 
-
-.header {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.headerSection {
+  margin-bottom: 0.5rem;
   flex-shrink: 0;
 }
 
 .title {
-  font-size: 36px;
-  font-weight: bold;
-  color: #8b5cf6;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  color: #8b5cf6; 
 }
 
 .subtitle {
+  color: #9ca3af; 
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .statsGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.statusGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .statusGrid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.statusCard {
+  background-color: #18181b; 
+  border: 1px solid #6d28d9; 
+  border-radius: 0.75rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.statusLabel {
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+
+.statusValue {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #a78bfa; 
+}
+
+.panelsContainer {
+  display: flex;
+  gap: 1.5rem;
+  flex: 1 1 0%;
+  overflow: hidden;
+}
+
+.panel {
+  flex: 1 1 0%;
+  background-color: rgba(24, 24, 27, 0.7); 
+  border: 1px solid #7c3aed; 
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  backdrop-filter: blur(4px);
+  /* height: 30vh; */
+}
+
+.panelBlur3xl {
+  backdrop-filter: blur(64px);
+}
+
+.panelTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #a78bfa;
+  flex-shrink: 0;
+}
+
+.scrollList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1 1 0%;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.scrollList::-webkit-scrollbar {
+  display: none;
+}
+.scrollList {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.assignmentItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid #27272a; 
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+}
+
+.driverName {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.locationText {
+  color: #9ca3af;
+  font-size: 0.75rem;
+}
+
+.rightAlign {
+  text-align: right;
+}
+
+.vehiclePlate {
+  color: #a78bfa;
+  font-size: 0.875rem;
+}
+
+.statusText {
+  font-size: 0.75rem;
   color: #9ca3af;
 }
 
-
-
-.cardGrid {
-
- display:grid;
- grid-template-columns:1fr;
- gap:24px;
-
- flex-shrink:0;
+.progressContainer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
 }
 
-@media(min-width:768px){
-
-.cardGrid{
-grid-template-columns:repeat(4,1fr);
+.progressBarTrack {
+  width: 100%;
+  background-color: rgba(39, 39, 42, 0.5);
+  height: 0.5rem;
+  border-radius: 0.25rem;
+  
 }
 
+.progressBarFill {
+  background-color: #7c3aed; 
+  height: 0.5rem;
+  border-radius: 0.25rem;
+  transition: all 0.3s ease;
 }
 
-
-
-.statusGrid{
-
-display:grid;
-grid-template-columns:repeat(2,1fr);
-
-gap:16px;
-
-flex-shrink:0;
-
+.cardDrivers {
+  background-color: rgba(0, 128, 0, 0.4); 
+  border: 1px solid #7c3aed;
+  border-radius: 12px;
+  padding: 1.5rem;
 }
 
-@media(min-width:768px){
-
-.statusGrid{
-
-grid-template-columns:repeat(5,1fr);
-
+.cardDispatcher {
+  background-color: rgba(179, 6, 9, 0.4);
+  border: 1px solid #7c3aed;
+  border-radius: 12px;
+  padding: 1.5rem;
 }
 
+.cardvehicles {
+  background-color: rgba(79, 70, 229, 0.4); 
+  border: 1px solid #7c3aed;
+  border-radius: 15px;
+  padding: 1.5rem;
 }
 
-.statusCard{
-
-background:#18181b;
-
-border:1px solid #6d28d9;
-
-border-radius:12px;
-
-padding:16px;
-
-text-align:center;
-
-}
-
-.statusLabel{
-
-color:#9ca3af;
-
-font-size:14px;
-
-}
-
-.statusValue{
-
-font-size:20px;
-
-font-weight:bold;
-
-color:#a78bfa;
-
-}
-
-
-
-.content{
-
-display:flex;
-
-gap:24px;
-
-flex:1;
-
-overflow:hidden;
-
-}
-
-
-
-.panel{
-
-flex:1;
-
-display:flex;
-
-flex-direction:column;
-
-overflow:hidden;
-
-padding:24px;
-
-border-radius:16px;
-
-background:rgba(24,24,27,.7);
-
-border:1px solid #8b5cf6;
-
-backdrop-filter:blur(8px);
-
-}
-
-.panelBlur{
-
-backdrop-filter:blur(30px);
-
-}
-
-.panelTitle{
-
-font-size:20px;
-
-font-weight:600;
-
-margin-bottom:16px;
-
-color:#a78bfa;
-
-flex-shrink:0;
-
-}
-
-
-
-.scrollArea{
-
-display:flex;
-
-flex-direction:column;
-
-gap:12px;
-
-flex:1;
-
-overflow-y:auto;
-
-padding-right:8px;
-
-}
-
-
-
-.assignment{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-background:rgba(0,0,0,.5);
-
-border:1px solid #27272a;
-
-border-radius:12px;
-
-padding:12px 16px;
-
-}
-
-.driver{
-
-font-weight:600;
-
-font-size:14px;
-
-}
-
-.route{
-
-color:#9ca3af;
-
-font-size:12px;
-
-}
-
-.vehicle{
-
-color:#a78bfa;
-
-font-size:14px;
-
-}
-
-.status{
-
-color:#9ca3af;
-
-font-size:12px;
-
-text-align:right;
-
-}
-
-
-
-.kmRow{
-
-margin-bottom:12px;
-
-}
-
-.kmHeader{
-
-display:flex;
-
-justify-content:space-between;
-
-font-size:14px;
-
-margin-bottom:4px;
-
-}
-
-.progress{
-
-width:100%;
-
-height:8px;
-
-border-radius:6px;
-
-background:rgba(39,39,42,.6);
-
-overflow:hidden;
-
-}
-
-.progressBar{
-
-height:8px;
-
-background:#7c3aed;
-
-border-radius:6px;
-
-transition:all .3s ease;
-
+.cardTrips {
+  background-color: rgba(18, 88, 201, 0.4); 
+  border: 1px solid #7c3aed;
+  border-radius: 12px;
+  padding: 1.5rem;
 }
