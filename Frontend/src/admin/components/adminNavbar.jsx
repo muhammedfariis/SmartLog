@@ -3,6 +3,7 @@ import { User2Icon, LogOut, SunMoonIcon } from "lucide-react";
 import Switch from "../../common/toggle";
 import { useEffect, useState } from "react";
 import API from "../../Api/api";
+import styles from "./adminNavbar.module.css"
 const AdminNavbar = () => {
   const go = useNavigate();
     
@@ -20,7 +21,7 @@ const AdminNavbar = () => {
   if (!user) return null;
 
   return (
-    <div className="fixed left-0 top-0 z-20 w-56 min-h-screen bg-black/70 backdrop-blur-md border-r border-violet-500">
+    <div className={styles.sidebar}>
       <div className="flex min-h-screen pb-5 flex-col justify-between items-center">
         <div className="flex flex-col items-center w-40 h-20">
           <img src="/images/logosmartlog-removebg-preview.png" alt="" />

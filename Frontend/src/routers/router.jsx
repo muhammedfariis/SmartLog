@@ -6,9 +6,9 @@ import Login from "../Authentication/login/pages/login";
 import ROUTEAUTH from "../common/authPath";
 import LandingPage from "../landing/pages/landing";
 
-import Contact from "../landing/contact";
-import Terms from "../landing/terms";
-import About from "../landing/about";
+import Contact from "../landing/contact/pages/contact";
+import Terms from "../landing/terms/pages/terms";
+import About from "../landing/about/pages/about";
 
 import ROUTEADMIN from "../common/adminPath";
 import DashboardAdmin from "../admin/dashboard/pages/dashboard";
@@ -17,13 +17,13 @@ import AdminLayout from "../layouts/adminlayout/adminlayout";
 import { VehicleCreate } from "../admin/vehicles/pages/vehicles";
 
 import DisptLayout from "../layouts/dispatcherlayout/dispatcherlayout";
-import Assignment from "../dispatcher/pages/assignment";
-import Status from "../dispatcher/pages/status";
+import Assignment from "../dispatcher/assignment/pages/assignment";
+import Status from "../dispatcher/status/pages/status";
 import DISPATCHERPATH from "../common/dispatcherPath";
 
-import Mytrips from "../drivers/pages/mytrips";
+import Mytrips from "../drivers/mytrips/pages/mytrips";
 import DRIVERSPATH from "../common/driverspath";
-import Kmupdate from "../drivers/pages/kmupdate";
+import Kmupdate from "../drivers/kmupdate/pages/kmupdate";
 import DriverLayout from "../layouts/driverlayout/driverlayout";
 
 import API from "../Api/api";
