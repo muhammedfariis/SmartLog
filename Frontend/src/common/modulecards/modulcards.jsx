@@ -1,4 +1,3 @@
-import React from "react";
 import Buttons from "../button/button";
 import { SquareArrowOutUpRight } from "lucide-react";
 import styles from "./ModuleCard.module.css";
@@ -38,7 +37,6 @@ const ModuleCard = ({ title, icon, desc, features, badge }) => (
       <Buttons 
         name="GetReady" 
         Icon={SquareArrowOutUpRight} 
-        // We pass a custom style object for specific button overrides
         style={{ 
           width: '100%', 
           justifyContent: 'center', 

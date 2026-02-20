@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import styles from "./FleetAnimation.module.css";
 
 const FleetAnimation = () => {
   const vehicles = [
@@ -9,11 +10,11 @@ const FleetAnimation = () => {
   ];
 
   return (
-    <div className="relative w-full h-40 overflow-hidden mt-10 pointer-events-none">
+    <div className={styles.animationContainer}>
       
-      <div className="absolute bottom-10 w-full h-0.5 bg-violet-500/40 z-30" />
+      <div className={styles.roadLine} />
 
-      <div className="relative w-full h-full">
+      <div style={{ position: 'relative', width: '100%', height: '100%' }}>
         {vehicles.map((v, i) => (
           <motion.div
             key={i}
@@ -25,26 +26,23 @@ const FleetAnimation = () => {
               delay: v.delay,
               ease: "linear"
             }}
-            className="absolute bottom-10 flex items-end"
+            className={styles.vehicleWrapper}
           >
-            <div className="relative flex flex-col items-center">
-              <div className="absolute bottom-0 w-[80%] h-2 bg-black/60 blur-md rounded-full" />
+            <div className={styles.imageContainer}>
+              <div className={styles.shadow} />
               
               <img 
                 src={v.src} 
                 alt="Fleet" 
-                className="w-48 md:w-64 h-auto object-contain translate-y-1" 
-                style={{ 
-                   filter: "brightness(0.9) contrast(1.1)",
-                }}
+                className={styles.vehicleImage} 
               />
             </div>
           </motion.div>
         ))}
       </div>
 
-      <div className="absolute inset-y-0 left-0 w-32 bg-linear-to-r from-black to-transparent z-40" />
-      <div className="absolute inset-y-0 right-0 w-32 bg-linear-to-l from-black to-transparent z-40" />
+      <div className={styles.fadeLeft} />
+      <div className={styles.fadeRight} />
     </div>
   );
 };

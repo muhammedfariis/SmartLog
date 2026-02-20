@@ -4,7 +4,7 @@ import FadeSection from "../../common/framer";
 import Footer from "../components/footer";
 import { UserCircle2, TruckIcon, PackageCheck, ArrowBigRight, ShieldCheck, Zap } from "lucide-react";
 import { motion } from "framer-motion";
-import FleetAnimation from "../../common/fleetanimation";
+import FleetAnimation from "../../common/fleetanimation/fleetanimation";
 import ModuleCard from "../../common/modulecards/modulcards";
 import styles from "./landing.module.css"
 
@@ -13,7 +13,6 @@ const LandingPage = () => {
     <div className={styles.pageWrapper}>
       <LandingNav />
 
-      {/* Hero */}
       <FadeSection>
         <section className={styles.heroSection}>
           <motion.div 
@@ -48,7 +47,6 @@ const LandingPage = () => {
         </section>
       </FadeSection>
 
-      {/* Analytics Video */}
       <FadeSection>
         <section className={styles.videoSectionContainer}>
           <div className={styles.videoCard}>
@@ -68,7 +66,6 @@ const LandingPage = () => {
         </section>
       </FadeSection>
 
-      {/* Core Modules */}
       <section className={styles.modulesSection}>
         <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
           <h2 style={{ fontSize: '3rem', fontWeight: '900', fontStyle: 'italic', textTransform: 'uppercase' }}>Core Modules</h2>
@@ -100,7 +97,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Enterprise Security */}
       <FadeSection>
         <section className={styles.videoSectionContainer}>
           <div className={styles.securityCard}>
@@ -114,8 +110,8 @@ const LandingPage = () => {
                 Role-based permissions ensure that only authorized personnel can touch critical infrastructure.
               </p>
             </div>
-            <div style={{ borderRadius: '1.5rem', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
-              <video style={{ width: '100%' }} loop autoPlay muted>
+            <div style={{ borderRadius: '1.5rem', overflow: 'hidden', }}>
+              <video style={{ width: '100%'  , border : '0px'}} loop autoPlay muted>
                 <source src="/videos/security.mp4" type="video/mp4" />
               </video>
             </div>
