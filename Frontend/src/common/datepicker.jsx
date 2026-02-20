@@ -1,6 +1,5 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
-
 export default function DateTimePicker({value , onChange}) {
 
   return (
@@ -14,7 +13,6 @@ export default function DateTimePicker({value , onChange}) {
       dropdownMode="select" 
       scrollableYearDropdown
       yearDropdownItemNumber={50}
-      className="outline-none"
     />
   );
 }

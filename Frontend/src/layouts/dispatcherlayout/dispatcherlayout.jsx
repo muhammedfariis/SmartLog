@@ -14,12 +14,10 @@ const DisptLayout = () => {
 
   return (
     <div className={styles.layoutContainer}>
-      {/* Background layer */}
       <div className={styles.backgroundWrapper}>
         <SpaceBackground />
       </div>
 
-      {/* UI layer */}
       <div className={styles.mainWrapper}>
         <DispatcherNavbar />
         

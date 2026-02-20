@@ -1,12 +1,10 @@
-/* Container for the whole page */
 .layoutContainer {
   position: relative;
   min-height: 100vh;
   overflow: hidden;
-  background-color: #050505; /* Matching your login theme */
+  background-color: #050505; 
 }
 
-/* Background wrapper */
 .backgroundWrapper {
   position: absolute;
   inset: 0;
@@ -14,7 +12,6 @@
   pointer-events: none;
 }
 
-/* Main content wrapper */
 .mainWrapper {
   display: flex;
   min-height: 100vh;
@@ -22,16 +19,13 @@
   z-index: 10;
 }
 
-/* The area to the right of the Sidebar */
 .contentArea {
   flex: 1;
-  /* 56 in Tailwind is 14rem (56 * 0.25rem) */
-  margin-left: 14rem; 
+  margin-left: 12rem; 
   min-height: 100vh;
-  padding: 2rem; /* Optional: adds breathing room for your Outlet content */
+  padding: 2rem; 
 }
 
-/* Mobile responsive adjustment */
 @media (max-width: 768px) {
   .contentArea {
     margin-left: 0;

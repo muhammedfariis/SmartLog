@@ -1,208 +1,274 @@
 .container {
   height: 100vh;
+  width: 100%;
   position: relative;
   overflow: hidden;
+  background-color: #000;
 }
 
 .contentWrapper {
-  height: 100vh;
+  height: 100%;
   position: relative;
   z-index: 10;
-  background-color: #000000;
-  color: #ffffff;
-  padding: 1rem;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  padding: 1.5rem; /* Balanced padding */
+  box-sizing: border-box;
 }
 
 .header {
-  margin-bottom: 0.5rem;
   flex-shrink: 0;
+  margin-bottom: 1.5rem; /* Controlled space below header */
 }
 
 .header h1 {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-  font-weight: 700;
-  color: rgb(139, 92, 246); /* violet-500 */
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: rgb(139, 92, 246);
+  margin: 0; /* Removed the 10px height fix */
+  line-height: 1;
 }
 
 .header p {
-  color: rgb(156, 163, 175); /* gray-400 */
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  color: rgb(156, 163, 175);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
 }
 
-/* Grid Layout */
 .mainGrid {
   flex: 1;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  overflow: hidden;
+  grid-template-columns: 1fr 1fr; /* Side by side */
+  gap: 1.5rem;
+  overflow: hidden; /* Prevents page scroll */
+  min-height: 0; /* Critical for inner scrolling */
 }
 
-@media (min-width: 768px) {
-  .mainGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* Common Card Style */
 .card {
-  background-color: rgb(24, 24, 27); /* zinc-900 */
-  border: 1px solid rgba(139, 92, 246, 0.4); /* violet-500/40 */
-  border-radius: 1rem;
-  padding: 1rem;
+  background-color: rgb(12, 12, 15);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-}
-
-.formCard {
-  gap: 1.25rem; /* space-y-5 */
-  overflow: auto;
+  overflow: hidden;
 }
 
 .card h2 {
   font-size: 1.25rem;
-  line-height: 1.75rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-/* Inputs and Selects */
-.inputFieldWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem; /* space-y-2 */
-}
-
-.label {
-  font-size: 0.875rem;
-  color: rgb(156, 163, 175);
-}
-
-.select, .input, .dateContainer {
-  width: 100%;
-  background-color: #000000;
-  border: 1px solid rgb(139, 92, 246);
-  border-radius: 0.75rem;
-  padding: 0.5rem;
-  outline: none;
-  color: #ffffff;
-}
-
-.select {
-  appearance: none;
-}
-
-.dateContainer {
+  margin-bottom: 1.25rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.locationGroup {
+/* Form Styling */
+.formCard {
+  overflow-y: auto;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.inputFieldWrapper {
   display: flex;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
-.locationInput {
-  flex: 1;
-  height: 2.5rem;
-  border-radius: 1rem;
-  padding: 0.5rem;
-  background-color: #000000;
-  border: 1px solid rgb(139, 92, 246);
-  outline: none;
-  color: #ffffff;
+.fullWidth {
+  grid-column: span 2;
 }
 
-/* Button */
-.submitButton {
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgb(107, 114, 128);
+}
+
+.inputGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputGroup i, .inputGroup svg {
+  position: absolute;
+  left: 0.75rem;
+  color: rgb(139, 92, 246);
+  pointer-events: none;
+}
+
+/* Standardized Height for all Inputs */
+.select, .input, .dateContainer, .locationInput {
   width: 100%;
-  background-color: rgb(124, 58, 237); /* violet-600 */
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  height: 42px; /* Fixed height for consistency */
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+
   border-radius: 0.75rem;
-  font-weight: 500;
-  margin-top: 0.5rem;
-  border: none;
-  cursor: pointer;
-  color: white;
-  transition: background-color 0.2s;
+  padding: 0 0.75rem 0 2.5rem; /* Space for icons */
+  color: #fff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.2s;
+  box-sizing: border-box;
+  appearance: none;
+}
+ 
+
+
+.select option {
+  background-color: #000000;
+  color: rgb(186, 130, 238)
+}
+.locationInput {
+    padding: 0 0.75rem; /* Locations don't have absolute icons in this specific layout */
 }
 
-.submitButton:hover {
-  background-color: rgb(109, 40, 217); /* violet-700 */
+.select:focus, .input:focus {
+  border-color: rgb(139, 92, 246);
+  background-color: rgba(139, 92, 246, 0.05);
 }
 
 /* Assignments List */
 .listContainer {
   flex: 1;
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem; /* space-y-2 */
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.locationGroup{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .assignmentItem {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1.5fr 0.5fr 1.5fr 1fr;
   align-items: center;
-  justify-content: space-between;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  width: 100%;
-  border: 1px solid rgb(124, 58, 237);
-  background-color: #000000;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(124, 58, 237, 0.2);
   border-radius: 1rem;
-  height: 4rem;
+  margin-bottom: 0.75rem;
+  transition: transform 0.2s;
 }
 
-.colThird {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 33.33%;
-  text-align: center;
+.assignmentItem:hover {
+    border-color: rgba(124, 58, 237, 0.5);
+    background-color: rgba(255, 255, 255, 0.04);
 }
 
-.colSixth {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 16.66%;
+.infoBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }
 
-.driverName {
-  font-size: 0.875rem;
-  color: rgb(163, 230, 53); /* lime-400 */
+.infoLabel {
+    font-size: 0.65rem;
+    color: #6b7280;
+    text-transform: uppercase;
+}
+
+.driverName { color: rgb(163, 230, 53); font-weight: 600; font-size: 0.9rem; }
+.vehiclePlate { color: rgb(253, 224, 71); font-weight: 600; font-size: 0.9rem; }
+
+
+
+
+
+.submitButton {
+  width: 100%;
+  height: 45px;
+  background-color: rgb(124, 58, 237);
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
   font-weight: 600;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: all 0.5s ease-in-out;
+  transform-style: preserve-3d;
 }
 
-.vehiclePlate {
-  font-size: 0.875rem;
-  color: rgb(253, 224, 71); /* yellow-300 */
-  font-weight: 600;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.submitButton:hover{
+   background: rgb(71, 8, 98);
+   transform: translateY(-2px) scale(1);
+   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
+.submitButton:active {
+  transform: translateY(0) scale(0.98);
+}
+
 
 .badge {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  padding: 0.25rem 0.75rem;
   border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
   border: 1px solid;
-  font-size: 0.75rem;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Assigned - Soft Violet */
+.badgeAssigned {
+  color: #a78bfa; /* violet-400 */
+  background-color: rgba(139, 92, 246, 0.15);
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+/* In Progress - Bright Yellow/Amber */
+.badgeInProgress {
+  color: #fbbf24; /* amber-400 */
+  background-color: rgba(251, 191, 36, 0.1);
+  border-color: rgba(251, 191, 36, 0.4);
+}
+
+/* Cancelled - Sharp Red */
+.badgeCancelled {
+  color: #f87171; /* red-400 */
+  background-color: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* Returned - Cool Blue */
+.badgeReturned {
+  color: #60a5fa; /* blue-400 */
+  background-color: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+/* Completed - Fresh Green */
+.badgeCompleted {
+  color: #4ade80; /* green-400 */
+  background-color: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+/* Scheduled - Light Cyan/Sky */
+.badgeScheduled {
+  color: #38bdf8; /* sky-400 */
+  background-color: rgba(14, 165, 233, 0.1);
+  border-color: rgba(14, 165, 233, 0.4);
+}
+
+/* Default - Neutral Gray */
+.badgeDefault {
+  color: #9ca3af; /* gray-400 */
+  background-color: rgba(156, 163, 175, 0.1);
+  border-color: rgba(156, 163, 175, 0.4);
 }
