@@ -124,11 +124,14 @@
   color: #f87171;
   border-radius: 0.5rem;
   transition: background 0.2s ease, color 0.2s ease;
+  border: none;
 }
 
 .logoutBtn:hover {
   background: #ef4444;
   color: #fff;
+  border: none;
+
 }
 
 .mobile {
@@ -149,10 +152,12 @@
   border-radius: 0.5rem;
   transition: background 0.2s ease;
   background: transparent;
+  border: none;
 }
 
 .mobileToggle:hover {
   background: transparent;
+  border: none;
 }
 
 .dropdown {
