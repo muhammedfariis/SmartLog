@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import DispatcherNavbar from "../../dispatcher/components/dispatcherNavbar";
 import { useEffect } from "react";
 import SpaceBackground from "../../common/spacebackground/stardust";
+import styles from "./disptLayout.module.css"; 
 
 const DisptLayout = () => {
   useEffect(() => {
@@ -12,16 +13,19 @@ const DisptLayout = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0 z-0 pointer-events-none">
+    <div className={styles.layoutContainer}>
+      {/* Background layer */}
+      <div className={styles.backgroundWrapper}>
         <SpaceBackground />
       </div>
 
-      <div className="flex min-h-screen relative z-10">
+      {/* UI layer */}
+      <div className={styles.mainWrapper}>
         <DispatcherNavbar />
-        <div className="flex-1 ml-56 min-h-screen">
+        
+        <main className={styles.contentArea}>
           <Outlet />
-        </div>
+        </main>
       </div>
     </div>
   );
