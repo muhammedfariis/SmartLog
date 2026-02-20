@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import DispatcherNavbar from "../../dispatcher/components/dispatcherNavbar";
 import { useEffect } from "react";
 import SpaceBackground from "../../common/spacebackground/stardust";
-import styles from "./disptLayout.module.css"; 
+import styles from "./dispatcherlayout.module.css"; 
 
 const DisptLayout = () => {
   useEffect(() => {

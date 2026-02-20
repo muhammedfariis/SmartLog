@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { User2Icon, LogOut, SunMoonIcon } from "lucide-react";
 import Switch from "../../common/toggle";
 import { useEffect, useState } from "react";
-import API from "../../Api/api";
 import styles from "./adminNavbar.module.css"
 const AdminNavbar = () => {
   const go = useNavigate();
