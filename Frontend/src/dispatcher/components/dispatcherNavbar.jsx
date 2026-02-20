@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { User2Icon, LogOut, SunMoonIcon } from "lucide-react";
 import Switch from "../../common/toggle";
 import { useEffect, useState } from "react";
-import styles from "./adminNavbar.module.css"
+import styles from "./dispatcherNavbar.module.css"
 const AdminNavbar = () => {
   const go = useNavigate();
     
@@ -24,7 +24,7 @@ const AdminNavbar = () => {
       <div className={styles.container}>
         <div className={styles.logobox}>
           <img src="/images/logosmartlog-removebg-preview.png" alt="" />
-          <h1 className={styles.title}>ADMIN PANEL</h1>
+          <h1 className={styles.title}>CONTROL CENTER</h1>
         </div>
 
         <div className={styles.menu}>
