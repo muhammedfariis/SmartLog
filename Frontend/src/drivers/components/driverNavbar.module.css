@@ -1,0 +1,246 @@
+.nav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.5);
+}
+
+.inner {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 640px) {
+  .inner {
+    height: 5rem;
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo {
+  height: 2.5rem;
+  width: auto;
+}
+
+@media (min-width: 640px) {
+  .logo {
+    height: 3.75rem;
+  }
+}
+
+.title {
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+  .title {
+    font-size: 1rem;
+  }
+}
+
+.desktop {
+  display: none;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .desktop {
+    display: flex;
+  }
+}
+
+.link {
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: #7c3aed;
+  transition: background 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.link:hover {
+  background: #8b5cf6;
+}
+
+.desktopRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.userPanel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.userName {
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.userRole {
+  color: #9ca3af;
+  font-size: 0.625rem;
+}
+
+.logoutBtn {
+  padding: 0.5rem;
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  border-radius: 0.5rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.logoutBtn:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+.mobile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .mobile {
+    display: none;
+  }
+}
+
+.mobileToggle {
+  padding: 0.5rem;
+  color: #fff;
+  border-radius: 0.5rem;
+  transition: background 0.2s ease;
+  background: transparent;
+}
+
+.mobileToggle:hover {
+  background: transparent;
+}
+
+.dropdown {
+  display: block;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  background: rgba(0, 0, 0, 0.95);
+  border-bottom: 1px solid #7c3aed;
+}
+
+.dropdownOpen {
+  max-height: 400px;
+  opacity: 1;
+}
+
+.dropdownClosed {
+  max-height: 0;
+  opacity: 0;
+}
+
+.dropdownInner {
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dropdownLink {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: #7c3aed;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.dropdownCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdownCardLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background: #7c3aed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatarIcon {
+  color: #fff;
+}
+
+.dropdownUserName {
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.dropdownUserRole {
+  color: #9ca3af;
+  font-size: 0.75rem;
+}
+
+.dropdownLogout {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}

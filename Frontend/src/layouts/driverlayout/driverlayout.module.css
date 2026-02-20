@@ -1,0 +1,33 @@
+.root {
+  min-height: 100vh; /* min-h-screen */
+  background: #0f0f0f; /* bg-[#0f0f0f] */
+  display: flex; /* flex */
+  flex-direction: column; /* flex-col */
+  overflow-x: hidden; /* overflow-x-hidden */
+}
+
+.main {
+  flex: 1; /* flex-1 */
+  width: 100%; /* w-full */
+  padding: 4rem 1rem 2.5rem; /* pt-16 px-4 pb-10 */
+  margin-left: auto; /* mx-auto */
+  margin-right: auto; /* mx-auto */
+  max-width: 80rem; /* max-w-7xl */
+  transition: all 0.3s ease; /* transition-all duration-300 */
+}
+
+@media (min-width: 640px) {
+  .main {
+    padding-top: 5rem; /* sm:pt-20 */
+  }
+}
+
+.content {
+  margin-top: 1rem; /* mt-4 */
+}
+
+@media (min-width: 640px) {
+  .content {
+    margin-top: 1.5rem; /* sm:mt-6 */
+  }
+}

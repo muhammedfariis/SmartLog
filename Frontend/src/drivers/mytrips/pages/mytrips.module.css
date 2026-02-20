@@ -1,0 +1,60 @@
+.container { display: flex; flex-direction: column; gap: 1.25rem; }
+.header { display: flex; align-items: flex-start; gap: 0.5rem; flex-direction: column; }
+.title { font-size: 1.875rem; font-weight: 700; color: #7c3aed; }
+.subtitle { color: #9ca3af; }
+
+.list { display: flex; flex-direction: column; gap: 1.25rem; }
+.card { background: #000; border: 1px solid #7c3aed; border-radius: 1rem; padding: 1.25rem; box-shadow: 0 10px 25px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 1rem; }
+
+.cardHeader { display: flex; flex-direction: column; gap: 0.5rem; }
+@media (min-width: 768px) {
+  .cardHeader { flex-direction: row; justify-content: space-between; align-items: center; }
+}
+.cardTitle { color: #fff; font-weight: 600; font-size: 1.125rem; }
+.badge { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; width: fit-content; border: 1px solid #374151; color: #d1d5db; background: #1f2937; text-transform: capitalize; }
+
+.badge_assigned { background: #052e16; color: #86efac; border-color: #15803d; }
+.badge_in_progress { background: #1e1b4b; color: #c4b5fd; border-color: #6d28d9; }
+.badge_cancelled { background: #450a0a; color: #fca5a5; border-color: #b91c1c; }
+.badge_returning { background: #422006; color: #fde68a; border-color: #a16207; }
+.badge_returned { background: #172554; color: #93c5fd; border-color: #1d4ed8; }
+.badge_completed { background: #7c2d12; color: #fdba74; border-color: #c2410c; }
+.badge_scheduled { background: #083344; color: #67e8f9; border-color: #0e7490; }
+
+.grid { display: grid; grid-template-columns: 1fr; gap: 0.5rem; color: #d1d5db; }
+@media (min-width: 640px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.actionsRow { display: flex; justify-content: space-between; gap: 0.5rem; }
+
+.btn { border-radius: 1rem; height: 2.5rem; padding: 0 1rem; font-size: 0.95rem; transition: transform .05s ease, background .2s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.btn:active { transform: scale(0.95); }
+
+.btnReady { background: #083344; color: #67e8f9; }
+.btnReady:hover { background: #0e7490; }
+
+.btnStart { background: #052e16; color: #86efac; }
+.btnStart:hover { background: #166534; }
+
+.btnComplete { background: #1e1b4b; color: #c4b5fd; }
+.btnComplete:hover { background: #4c1d95; }
+
+.btnCancel { background: #450a0a; color: #fca5a5; }
+.btnCancel:hover { background: #991b1b; }
+
+.btnReturn { background: #422006; color: #fde68a; }
+.btnReturn:hover { background: #a16207; }
+
+.btnReached { background: #172554; color: #93c5fd; }
+.btnReached:hover { background: #1e3a8a; }
+
+.btnClose { background: #7c2d12; color: #fdba74; }
+.btnClose:hover { background: #9a3412; }
+
+.note { margin-top: 1rem; border-top: 1px solid #27272a; padding-top: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.alert { background: rgba(30, 58, 138, 0.4); border: 1px solid #1e40af; border-radius: 0.75rem; padding: 0.75rem; font-size: 0.875rem; color: #bfdbfe; }
+
+.updateBtn { background: #1e3a8a; color: #bfdbfe; border-radius: 0.75rem; padding: 0.5rem 1rem; font-size: 0.875rem; transition: transform .05s ease, background .2s ease; width: fit-content; }
+.updateBtn:hover { background: #1e40af; }
+.updateBtn:active { transform: scale(0.95); }

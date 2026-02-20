@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import API from "../../../Api/api";
 import { useNavigate } from "react-router-dom";
+import styles from "./mytrips.module.css";
 
 const Mytrips = () => {
   const navigate = useNavigate();
@@ -36,28 +37,21 @@ const Mytrips = () => {
   const badgeStyle = (status) => {
     switch (status) {
       case "assigned":
-        return "bg-green-950 text-green-300 border border-green-700";
-
+        return styles.badge_assigned;
       case "in_progress":
-        return "bg-violet-950 text-violet-300 border border-violet-700";
-
+        return styles.badge_in_progress;
       case "cancelled":
-        return "bg-red-950 text-red-400 border border-red-700";
-
+        return styles.badge_cancelled;
       case "returning":
-        return "bg-yellow-950 text-yellow-300 border border-yellow-700";
-
+        return styles.badge_returning;
       case "returned":
-        return "bg-blue-950 text-blue-300 border border-blue-700";
-
+        return styles.badge_returned;
       case "completed":
-        return "bg-orange-950 text-orange-400 border border-orange-700";
-
+        return styles.badge_completed;
       case "scheduled":
-        return "bg-cyan-950 text-cyan-400 border border-cyan-700";
-
+        return styles.badge_scheduled;
       default:
-        return "bg-gray-800 text-gray-300 border border-gray-700";
+        return styles.badge;
     }
   };
 
@@ -65,7 +59,7 @@ const Mytrips = () => {
     if (trip.status === "scheduled") {
       return (
         <button
-          className="bg-cyan-950  rounded-2xl h-10 active:scale-95 hover:bg-cyan-900 w-30 text-md text-cyan-300"
+          className={[styles.btn, styles.btnReady].join(' ')}
           onClick={() => updateStatus(trip._id, "assigned")}
         >
           Ready
@@ -76,7 +70,7 @@ const Mytrips = () => {
     if (trip.status === "assigned") {
       return (
         <button
-          className="bg-green-950  rounded-2xl h-10 active:scale-95 hover:bg-green-900 w-30 text-md text-green-300"
+          className={[styles.btn, styles.btnStart].join(' ')}
           onClick={() => updateStatus(trip._id, "in_progress")}
         >
           Start
@@ -86,15 +80,15 @@ const Mytrips = () => {
 
     if (trip.status === "in_progress") {
       return (
-        <div className="flex justify-between">
+        <div className={styles.actionsRow}>
           <button
-            className="bg-violet-950 rounded-2xl h-10 active:scale-95 hover:bg-violet-900 w-30 text-md text-violet-300"
+            className={[styles.btn, styles.btnComplete].join(' ')}
             onClick={() => updateStatus(trip._id, "completed")}
           >
             Complete
           </button>
           <button
-            className="bg-red-950 rounded-2xl h-10 active:scale-95 hover:bg-red-900 w-30 text-md text-red-400"
+            className={[styles.btn, styles.btnCancel].join(' ')}
             onClick={() => updateStatus(trip._id, "cancelled")}
           >
             Cancel
@@ -106,7 +100,7 @@ const Mytrips = () => {
     if (trip.status === "cancelled") {
       return (
         <button
-          className="bg-yellow-950 rounded-2xl h-10 active:scale-95 hover:bg-yellow-900 w-30 text-md text-yellow-300"
+          className={[styles.btn, styles.btnReturn].join(' ')}
           onClick={() => updateStatus(trip._id, "returning")}
         >
           Return
@@ -117,7 +111,7 @@ const Mytrips = () => {
     if (trip.status === "returning") {
       return (
         <button
-          className="bg-blue-950 rounded-2xl h-10 active:scale-95 hover:bg-blue-900 w-30 text-md text-blue-300"
+          className={[styles.btn, styles.btnReached].join(' ')}
           onClick={() => updateStatus(trip._id, "returned")}
         >
           Reached Hub
@@ -128,7 +122,7 @@ const Mytrips = () => {
     if (trip.status === "returned") {
       return (
         <button
-          className="bg-orange-950 rounded-2xl h-10 active:scale-95 hover:bg-orange-900 w-30 text-md text-orange-400"
+          className={[styles.btn, styles.btnClose].join(' ')}
           onClick={() => updateStatus(trip._id, "completed")}
         >
           Close Trip
@@ -140,35 +134,35 @@ const Mytrips = () => {
   };
 
   return (
-    <div className="space-y-5">
-      <div className="flex items-start gap-2 flex-col">
-        <h1 className="text-3xl font-bold text-violet-500">
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>
           My Assigned Trips
         </h1>
         {trip.length === 0 && (
-          <p className="text-gray-400">No Trips Assigned Yet</p>
+          <p className={styles.subtitle}>No Trips Assigned Yet</p>
         )}
       </div>
 
-      <div className="space-y-5">
+      <div className={styles.list}>
         {trip.map((t, i) => (
           <div
             key={t._id}
-            className="bg-black border border-violet-500 rounded-2xl p-5 shadow space-y-4"
+            className={styles.card}
           >
-            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2">
-              <h2 className="text-lg font-semibold text-white">
+            <div className={styles.cardHeader}>
+              <h2 className={styles.cardTitle}>
                 Trip ID: {i + 10001}
               </h2>
 
               <span
-                className={`px-3 py-1 rounded-full text-sm w-fit ${badgeStyle(t.status)}`}
+                className={[styles.badge, badgeStyle(t.status)].join(' ')}
               >
                 {t.status}
               </span>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-2 text-gray-300">
+            <div className={styles.grid}>
               <p>
                 Route: {t.fromLocation} → {t.toLocation}
               </p>
@@ -179,14 +173,14 @@ const Mytrips = () => {
 
             {actionButton(t)}
 
-            <div className="mt-4 border-t border-zinc-800 pt-4 space-y-3">
-              <div className="bg-blue-950/40 border border-blue-800 rounded-xl p-3 text-sm text-blue-200">
+            <div className={styles.note}>
+              <div className={styles.alert}>
                 ⚠️ KM must be updated before closing the trip. Incorrect KM
                 entries will affect fleet records.
               </div>
               {t.status === "completed" && (
                 <button
-                  className="bg-blue-900 hover:bg-blue-800 active:scale-95 transition rounded-xl px-4 py-2 text-blue-200 text-sm"
+                  className={styles.updateBtn}
                   onClick={() =>
                     navigate("/drivers/kmupdate", {
                       state: {
