@@ -12,8 +12,8 @@ import {
 } from "lucide-react";
 import PageMotion from "../../../common/pagemotion";
 import SpaceBackground from "../../../common/spacebackground/stardust";
-import Footer from "../../../common/footer";
-import LandingNav from "../../../common/landingNav";
+import Footer from "../../components/footer";
+import LandingNav from "../../components/landingNav";
 
 const Contact = () => {
   const [focused, setFocused] = useState(null);

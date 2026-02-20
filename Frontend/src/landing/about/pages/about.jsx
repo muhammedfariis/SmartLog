@@ -12,8 +12,8 @@ import {
 import { motion } from "framer-motion";
 import PageMotion from "../../../common/pagemotion";
 import SpaceBackground from "../../../common/spacebackground/stardust";
-import LandingNav from "../../../common/landingNav";
-import Footer from "../../../common/footer";
+import LandingNav from "../../components/landingNav";
+import Footer from "../../components/footer";
 
 const About = () => {
   const coreFeatures = [
