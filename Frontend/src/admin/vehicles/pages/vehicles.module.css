@@ -235,6 +235,7 @@
   color: white;
   font-size: 0.95rem;
   transition: border-color 0.2s;
+  appearance: none;
 }
 
 .inputField:focus { border-color: #8b5cf6; outline: none; }
@@ -285,7 +286,6 @@
   font-weight: 600;
 }
 
-/* Alert Messages */
 .alert {
   position: fixed;
   top: 2rem;
@@ -314,7 +314,6 @@
   display: inline-block;
 }
 
-/* Dynamic styling based on the data-status attribute */
 
 .statusBadge[data-status="active"] {
   background-color: rgba(6, 78, 59, 0.4);
