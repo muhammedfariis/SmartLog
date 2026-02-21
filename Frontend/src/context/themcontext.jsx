@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [mode, setMode] = useState("light");
+  const [mode, setMode] = useState("dark");
 
   // Load saved theme
   useEffect(() => {
@@ -24,7 +24,7 @@ export const ThemeProvider = ({ children }) => {
   }, [mode]);
 
   const toggleTheme = () => {
-    setMode(prev => (prev === "light" ? "dark" : "light"));
+    setMode(prev => (prev === "dark" ? "light" : "dark"));
   };
 
   return (

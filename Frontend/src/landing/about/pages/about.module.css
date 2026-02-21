@@ -1,0 +1,208 @@
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f4f4f5;
+  --bg-card: rgba(255, 255, 255, 0.8);
+  --text-main: #09090b;
+  --text-muted: #71717a;
+  --violet-primary: #8b5cf6;
+  --violet-soft: rgba(139, 92, 246, 0.1);
+  --border-color: rgba(139, 92, 246, 0.2);
+  --accent-zinc: #e4e4e7;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #000000;
+    --bg-secondary: #09090b;
+    --bg-card: rgba(24, 24, 27, 0.4);
+    --text-main: #ffffff;
+    --text-muted: #a1a1aa;
+    --violet-primary: #8b5cf6;
+    --violet-soft: rgba(139, 92, 246, 0.1);
+    --border-color: rgba(139, 92, 246, 0.3);
+    --accent-zinc: #27272a;
+  }
+}
+
+.aboutContainer {
+  position: relative;
+  min-height: 100vh;
+  color: var(--text-main);
+  background-color: var(--bg-primary);
+  padding-bottom: 5rem;
+}
+
+.heroSection {
+  position: relative;
+  z-index: 10;
+  padding-top: 5rem;
+  padding-inline: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.badge {
+  background-color: var(--violet-soft);
+  border: 1px solid var(--border-color);
+  padding: 0.25rem 1rem;
+  border-radius: 9999px;
+  color: var(--violet-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.heroTitle {
+  font-size: clamp(3rem, 8vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.textGradient {
+  color: var(--violet-primary);
+}
+
+.heroDesc {
+  max-width: 42rem;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+.stepSection {
+  position: relative;
+  z-index: 10;
+  margin-top: 6rem;
+  padding-inline: 2.5rem;
+}
+
+.stepGrid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.stepCard {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.stepNumber {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 9999px;
+  background-color: var(--violet-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.875rem;
+  color: white;
+}
+
+.featuresSection {
+  position: relative;
+  z-index: 10;
+  margin-top: 8rem;
+  padding-inline: 2.5rem;
+  max-width: 80rem;
+  margin-inline: auto;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.featureCard {
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(4px);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.featureCard:hover {
+  border-color: var(--violet-primary);
+}
+
+.iconWrapper {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: var(--violet-soft);
+  width: fit-content;
+  border-radius: 1rem;
+}
+
+.roleSection {
+  position: relative;
+  z-index: 10;
+  margin-top: 8rem;
+  padding-inline: 2.5rem;
+  max-width: 64rem;
+  margin-inline: auto;
+}
+
+.roleContainer {
+  background: linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary));
+  border: 1px solid var(--border-color);
+  border-radius: 3rem;
+  padding: 3rem;
+}
+
+.roleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+}
+
+.roleItem {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dot {
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--violet-primary);
+  margin-top: 0.6rem;
+  flex-shrink: 0;
+}
+
+.statusCard {
+  background-color: var(--bg-card);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.progressBg {
+  height: 0.5rem;
+  width: 100%;
+  background-color: var(--accent-zinc);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 0.75rem;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--violet-primary);
+}

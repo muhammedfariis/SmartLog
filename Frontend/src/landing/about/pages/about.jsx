@@ -2,7 +2,6 @@ import React from "react";
 import { 
   Truck, 
   ShieldCheck, 
-  MapPin, 
   Users, 
   Activity, 
   Clock, 
@@ -11,9 +10,9 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import PageMotion from "../../../common/pagemotion";
-import SpaceBackground from "../../../common/spacebackground/stardust";
 import LandingNav from "../../components/landingNav";
 import Footer from "../../components/footer";
+import styles from "./about.module.css";
 
 const About = () => {
   const coreFeatures = [
@@ -41,114 +40,102 @@ const About = () => {
 
   return (
     <PageMotion>
-        <LandingNav/>
-      <div className="relative min-h-screen text-white pb-20">
-        <SpaceBackground />
+      <LandingNav />
+      <div className={styles.aboutContainer}>
         
-        <section className="relative z-10 pt-20 px-10 flex flex-col items-center text-center space-y-6">
+        <section className={styles.heroSection}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-violet-500/10 border border-violet-500/50 px-4 py-1 rounded-full text-violet-400 text-sm font-medium"
+            className={styles.badge}
           >
             Logistics Reimagined
           </motion.div>
           
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight">
+          <h1 className={styles.heroTitle}>
             The Pulse of Your <br />
-            <span className="text-violet-500 bg-clip-text">Supply Chain.</span>
+            <span className={styles.textGradient}>Supply Chain.</span>
           </h1>
           
-          <p className="max-w-2xl text-gray-400 text-lg md:text-xl leading-relaxed">
-            <span className="text-white font-semibold">SmartLog</span> is a high-performance logistics ecosystem 
+          <p className={styles.heroDesc}>
+            <strong style={{ color: 'var(--text-main)' }}>SmartLog</strong> is a high-performance logistics ecosystem 
             designed to synchronize dispatchers, drivers, and vehicles in a single, seamless flow.
           </p>
         </section>
 
-        <section className="relative z-10 mt-24 px-10">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-4">
+        <section className={styles.stepSection}>
+          <div className={styles.stepGrid}>
             {["Schedule", "Assign", "Execute", "Analyze"].map((step, idx) => (
-              <div key={step} className="flex items-center gap-3 bg-zinc-900/50 border border-violet-500/20 p-4 rounded-2xl">
-                <div className="h-8 w-8 rounded-full bg-violet-600 flex items-center justify-center font-bold text-sm">
-                  {idx + 1}
-                </div>
-                <span className="font-semibold text-gray-300">{step}</span>
-                {idx !== 3 && <ChevronRight className="hidden md:block text-zinc-700" />}
+              <div key={step} className={styles.stepCard}>
+                <div className={styles.stepNumber}>{idx + 1}</div>
+                <span style={{ fontWeight: 600 }}>{step}</span>
+                {idx !== 3 && <ChevronRight style={{ opacity: 0.2 }} />}
               </div>
             ))}
           </div>
         </section>
 
-        <section className="relative z-10 mt-32 px-10 max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <section className={styles.featuresSection}>
+          <div className={styles.featuresGrid}>
             {coreFeatures.map((feature, index) => (
               <motion.div
                 key={index}
                 whileHover={{ y: -10 }}
-                className="p-8 rounded-3xl bg-zinc-900/40 border border-violet-500/30 backdrop-blur-sm hover:border-violet-500 transition-all duration-300"
+                className={styles.featureCard}
               >
-                <div className="mb-4 p-3 bg-violet-500/10 w-fit rounded-2xl">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-white">{feature.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{feature.desc}</p>
+                <div className={styles.iconWrapper}>{feature.icon}</div>
+                <h3 style={{ marginBottom: '0.5rem' }}>{feature.title}</h3>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>{feature.desc}</p>
               </motion.div>
             ))}
           </div>
         </section>
 
-        {/* Role Overview */}
-        <section className="relative z-10 mt-32 px-10 max-w-5xl mx-auto">
-          <div className="bg-linear-to-b from-zinc-900 to-black border border-violet-500/40 rounded-[3rem] p-10 md:p-16">
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 text-violet-400 font-bold uppercase tracking-widest text-xs">
-                  <Users size={16} /> Roles
+        <section className={styles.roleSection}>
+          <div className={styles.roleContainer}>
+            <div className={styles.roleGrid}>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--violet-primary)', fontWeight: 'bold', fontSize: '0.75rem', marginBottom: '1rem' }}>
+                  <Users size={16} /> ROLES
                 </div>
-                <h2 className="text-3xl font-bold">Built for the Entire Team</h2>
-                <div className="space-y-4 pt-4">
-                  <div className="flex gap-4">
-                    <div className="h-2 w-2 rounded-full bg-violet-500 mt-2 shrink-0" />
-                    <p className="text-gray-300"><span className="text-white font-medium">Dispatchers:</span> Strategic planning and driver monitoring.</p>
-                  </div>
-                  <div className="flex gap-4">
-                    <div className="h-2 w-2 rounded-full bg-violet-500 mt-2 shrink-0" />
-                    <p className="text-gray-300"><span className="text-white font-medium">Drivers:</span> Real-time trip execution and KM verification.</p>
-                  </div>
-                  <div className="flex gap-4">
-                    <div className="h-2 w-2 rounded-full bg-violet-500 mt-2 shrink-0" />
-                    <p className="text-gray-300"><span className="text-white font-medium">Admins:</span> Fleet lifecycle management and document safety.</p>
-                  </div>
+                <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>Built for the Entire Team</h2>
+                <div className={styles.roleItem}>
+                  <div className={styles.dot} />
+                  <p><strong style={{ color: 'var(--text-main)' }}>Dispatchers:</strong> Strategic planning and monitoring.</p>
+                </div>
+                <div className={styles.roleItem}>
+                  <div className={styles.dot} />
+                  <p><strong style={{ color: 'var(--text-main)' }}>Drivers:</strong> Real-time trip execution and KM verification.</p>
+                </div>
+                <div className={styles.roleItem}>
+                  <div className={styles.dot} />
+                  <p><strong style={{ color: 'var(--text-main)' }}>Admins:</strong> Fleet lifecycle and safety compliance.</p>
                 </div>
               </div>
               
-              <div className="bg-zinc-800/30 rounded-3xl p-6 border border-zinc-700/50 flex flex-col justify-center">
-                <div className="flex justify-between items-center mb-6">
-                  <span className="text-sm  text-violet-400">System Status: Optimal</span>
-                  <Clock size={18} className="text-zinc-500" />
+              <div className={styles.statusCard}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                  <span style={{ color: 'var(--violet-primary)', fontSize: '0.875rem' }}>System Status: Optimal</span>
+                  <Clock size={18} style={{ opacity: 0.4 }} />
                 </div>
-                <div className="space-y-3">
-                    <div className="h-2 w-full bg-zinc-700 rounded-full overflow-hidden">
-                        <motion.div 
-                          initial={{ width: 0 }} 
-                          animate={{ width: "94%" }} 
-                          transition={{ duration: 2 }}
-                          className="h-full bg-violet-500" 
-                        />
-                    </div>
-                    <div className="flex justify-between text-xs text-zinc-500 uppercase">
-                        <span>Fleet Uptime</span>
-                        <span>94%</span>
-                    </div>
+                <div className={styles.progressBg}>
+                  <motion.div 
+                    initial={{ width: 0 }} 
+                    animate={{ width: "94%" }} 
+                    transition={{ duration: 2 }}
+                    className={styles.progressFill} 
+                  />
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', marginTop: '0.5rem', opacity: 0.6 }}>
+                  <span>Fleet Uptime</span>
+                  <span>94%</span>
                 </div>
               </div>
             </div>
           </div>
         </section>
-
-    
       </div>
-      <Footer/>
+      <Footer />
     </PageMotion>
   );
 };
