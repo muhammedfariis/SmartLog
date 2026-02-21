@@ -1,0 +1,241 @@
+.registerWrapper {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #050505;
+  overflow: hidden;
+  padding-inline: 1rem;
+  
+}
+
+.body{
+    margin: 50px;
+}
+
+.toast {
+  position: fixed;
+  top: 2rem;
+  z-index: 100;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(12px);
+  border: 1px solid;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.toastError {
+  background-color: rgba(69, 10, 10, 0.8);
+  border-color: #ef4444;
+  color: #fecaca;
+}
+
+.toastSuccess {
+  background-color: rgba(6, 78, 59, 0.8);
+  border-color: #10b981;
+  color: #d1fae5;
+}
+
+.backgroundGlows {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.glowViolet {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 40%;
+  height: 40%;
+  background-color: #7c3aed;
+  filter: blur(120px);
+  border-radius: 9999px;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.glowBlue {
+  position: absolute;
+  bottom: -10%;
+  right: -10%;
+  width: 40%;
+  height: 40%;
+  background-color: rgba(37, 99, 235, 0.2);
+  border-radius: 9999px;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation-delay: 700ms;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+.card {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 28rem;
+  background-color: rgba(24, 24, 27, 0.4);
+  backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2.5rem;
+  border-radius: 2.5rem;
+  box-shadow: 0 25px 50px -12px #000000;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.logoContainer {
+  height: 4rem;
+  margin-bottom: 1rem;
+}
+
+.divider {
+  height: 2px;
+  width: 3rem;
+  background-color: #8b5cf6;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  text-align: center;
+}
+
+.subtitle {
+  color: #71717a;
+  font-size: 10px;
+  font-family: monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: color 0.3s ease;
+}
+
+.inputField {
+  height: 3.5rem;
+  width: 85%;
+  padding-left: 3rem;
+  padding-right: 1rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  color: #ffffff;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.inputField::placeholder {
+  color: #3f3f46;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: #a1a1aa;
+  cursor: pointer;
+  user-select: none;
+  padding-block: 0.5rem;
+}
+
+.checkboxContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.hiddenCheckbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.customCheckbox {
+  height: 1.25rem;
+  width: 1.25rem;
+  border: 1px solid #3f3f46;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+}
+
+.hiddenCheckbox:checked + .customCheckbox {
+  background-color: #8b5cf6;
+  border-color: #8b5cf6;
+}
+
+.submitButton {
+  height: 3.5rem;
+  width: 100%;
+  background-color: #7c3aed;
+  color: #ffffff;
+  font-weight: 700;
+  border: none;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 10px 15px -3px rgba(76, 29, 149, 0.2);
+}
+
+.submitButton:hover {
+  background-color: #8b5cf6;
+}
+
+.footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+.footerText {
+  font-size: 0.875rem;
+  color: #71717a;
+}
+
+.link {
+  color: #a78bfa;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
