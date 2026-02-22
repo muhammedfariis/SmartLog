@@ -3,7 +3,8 @@
   inset: 0;
   z-index: -10;
   overflow: hidden;
-  background-color: #000;
+  background-color: transparent;
+  backdrop-filter: blur(10px) ;
 }
 
 .starFieldWrapper {
@@ -21,11 +22,15 @@
   animation: spinSlow 200s linear infinite;
 }
 
+:global(.dark) .star {
+  background-color: #1796cd;
+}
+
 .star {
   position: absolute;
-  background-color: #fff;
+  background-color: #b647d7;
   border-radius: 50%;
-  opacity: 0.7;
+  opacity: 0.9;
   top: 50%;
   left: 50%;
 }

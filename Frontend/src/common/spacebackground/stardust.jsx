@@ -2,12 +2,11 @@ import { useMemo } from "react";
 import styles from "./startdust.module.css";
 
 const SpaceBackground = () => {
-  // We use useMemo to prevent stars from re-generating on every render
   const stars = useMemo(() => {
     return [...Array(200)].map((_, i) => {
       const size = Math.random() * 1 + 1;
       const angle = Math.random() * 360;
-      const distance = Math.random() * 800 + 50; // Increased range for better coverage
+      const distance = Math.random() * 800 + 50; 
       
       return (
         <div

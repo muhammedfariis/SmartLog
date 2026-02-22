@@ -1,10 +1,11 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Plus, CalendarDays, Trash, SquarePen, Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import DateTimePicker from "../../../common/datepicker";
 import API from "../../../Api/api";
 import PageMotion from "../../../common/pagemotion";
 import SpaceBackground from "../../../common/spacebackground/stardust";
+import Switch from "../../../common/toggle"
 import styles from "./vehicles.module.css";
 
 export const VehicleCreate = () => {
@@ -101,7 +102,6 @@ export const VehicleCreate = () => {
     }
   };
 
-  // --- Effects ---
   useEffect(() => { fetchVehicle(); }, []);
   useEffect(() => {
     const timer = setTimeout(() => vehicleSearch(search), 500);
@@ -111,28 +111,20 @@ export const VehicleCreate = () => {
     if (msg) { const t = setTimeout(() => setMsg(null), 3000); return () => clearTimeout(t); }
   }, [msg]);
 
-  const getStatusStyle = (status) => {
-    switch (status?.toLowerCase()) {
-      case "active": return "bg-green-900/40 text-green-400 border border-green-500/30";
-      case "retired": return "bg-red-900/40 text-red-400 border border-red-500/30";
-      case "maintainance": return "bg-yellow-900/40 text-yellow-400 border border-yellow-500/30";
-      case "in-transist": return "bg-violet-900/40 text-violet-400 border border-violet-500/30";
-      default: return "bg-gray-800 text-white";
-    }
-  };
-
   return (
     <PageMotion>
-      <SpaceBackground />
       <div className={styles.container}>
         <div className={styles.headerRow}>
           <div>
             <h1 className={styles.title}>Vehicle Fleet</h1>
             <p className={styles.subtitle}>Real-time management of transport assets</p>
           </div>
-          <button className={styles.addButton} onClick={() => { setPopup(true); setEdit(null); setForm({}); }}>
-            <Plus size={20} strokeWidth={3} /> Add New Vehicle
-          </button>
+          <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+            <Switch />
+            <button className={styles.addButton} onClick={() => { setPopup(true); setEdit(null); setForm({}); }}>
+              <Plus size={20} strokeWidth={3} /> Add New Vehicle
+            </button>
+          </div>
         </div>
 
         <div className={styles.searchContainer}>
@@ -227,7 +219,7 @@ export const VehicleCreate = () => {
                   <input className={styles.inputField} placeholder="Service KM" name="Service" type="number" value={form.Service} onChange={handleChange} />
                 </div>
                 
-                <div className={styles.dateGrid}>
+                <div className={styles.date}>
                   <div className={styles.dateGroup}>
                     <label>Insurance Expiry</label>
                     <div className={styles.dateInputBox}>

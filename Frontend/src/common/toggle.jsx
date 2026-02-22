@@ -35,13 +35,15 @@ const StyledWrapper = styled.div`
   }
 
   .slider {
-    --background: #28096b;
+    /* Background for Light Mode */
+    --background: #f4f4f5; 
     position: absolute;
     cursor: pointer;
     inset: 0;
     background-color: var(--background);
     transition: .5s;
     border-radius: 30px;
+    border: 1px solid #e4e4e7;
   }
 
   .slider:before {
@@ -52,18 +54,23 @@ const StyledWrapper = styled.div`
     border-radius: 50%;
     left: 10%;
     bottom: 15%;
-    box-shadow: inset 8px -4px 0px 0px #fff000;
-    background: var(--background);
+    /* SUN APPEARANCE (Default/Light Mode) */
+    background: #ffdb00; 
+    box-shadow: 0 0 10px #ffdb00, 0 0 20px #ffdb00;
     transition: .5s;
   }
 
+  /* Background for Dark Mode */
   input:checked + .slider {
-    background-color: #522ba7;
+    background-color: #28096b;
+    border-color: #28096b;
   }
 
   input:checked + .slider:before {
     transform: translateX(100%);
-    box-shadow: inset 15px -4px 0px 15px #fff000;
+    /* MOON APPEARANCE (Dark Mode) */
+    background: #28096b; /* Match slider background to hide part of the circle */
+    box-shadow: inset 8px -4px 0px 0px #fff000; /* This creates the crescent moon shape */
   }
 `;
 
