@@ -19,65 +19,46 @@ const AdminNavbar = () => {
 
   if (!user) return null;
 
-  return (
+   return (
     <div className={styles.sidebar}>
       <div className={styles.container}>
         <div className={styles.logobox}>
-          <img src="/images/logosmartlog-removebg-preview.png" alt="" />
-          <h1 className={styles.title}>CONTROL CENTER</h1>
+          <img src="/images/logosmartlog-removebg-preview.png" alt="Logo" />
+          <h1 className={styles.title}>ADMIN PANEL</h1>
         </div>
 
         <div className={styles.menu}>
-          
-          <Link
-            to="/dispatcher/assignment"
-            className={styles.menuLink}
-          >
-            Assignments
+          <Link to="/dispatcher/assignment" className={styles.menuLink}>
+            Assignment
           </Link>
 
-          <Link
-            to="/dispatcher/details"
-            className={styles.menuLink}
-          >
-            Details
+          <Link to="/dispatcher/details" className={styles.menuLink}>
+             Users Details
           </Link>
 
-          
         </div>
 
         <div className={styles.switchBox}>
           <Switch />
         </div>
-           <div className={styles.userCard}>
-  <div className={styles.userHeader}>
-    <div className={styles.avatar}>
-      <User2Icon size={24}  />
-    </div>
 
-    <div className={styles.userInfo}>
-      <h1 className={styles.adminText}>Dispatcher</h1>
-      <p className={styles.username}>{user.userName}</p>
-         
-      
-    </div>
-  </div>
+        <div className={styles.userCard}>
+          <div className={styles.userHeader}>
+            <div className={styles.avatar}>
+              <User2Icon size={20} />
+            </div>
 
-  
-  <button
-    onClick={() => go("/login")}
-    className={styles.logoutBtn}
-  >
-    <LogOut
-      size={20}
-      className={styles.logoutLogo}
-    />
-    <span className={styles.logoutText}>
-      Logout
-    </span>
-  </button>
-    </div>
-  
+            <div className={styles.userInfo}>
+              <h1 className={styles.adminText}>Administrator</h1>
+              <p className={styles.username}>{user.userName}</p>
+            </div>
+          </div>
+
+          <button onClick={() => go("/login")} className={styles.logoutBtn}>
+            <LogOut size={20} className={styles.logoutLogo} />
+            <span className={styles.logoutText}>Logout</span>
+          </button>
+        </div>
       </div>
     </div>
   );

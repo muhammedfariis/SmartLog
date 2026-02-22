@@ -15,7 +15,6 @@ const AdminLayout = () => {
   return (
     <div className={style.admin}>
 
-      {/* <SpaceBackground /> */}
 
       <div className={style.adminNav}>
 

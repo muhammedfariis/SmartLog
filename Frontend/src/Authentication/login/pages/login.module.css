@@ -75,7 +75,7 @@
 
 .titleHighlight {
   background: linear-gradient(to right, #8b5cf6, #d8b4fe);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 

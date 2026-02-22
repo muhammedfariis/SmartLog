@@ -31,6 +31,8 @@
   --link-border: rgba(255, 255, 255, 0.1);
   --card-bg: rgba(255, 255, 255, 0.1);
   --card-border: rgba(255, 255, 255, 0.2);
+  background-color: #0c0d0e;
+
 }
 
 .container {
