@@ -1,4 +1,17 @@
 .dashboardContainer {
+  /* LIGHT MODE VARIABLES - Synced with your shared container */
+  --bg-main: #f8fafc;
+  --bg-secondary: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --panel-bg: rgba(255, 255, 255, 0.8);
+  --panel-border: rgba(139, 92, 246, 0.2);
+  --status-card-bg: #ffffff;
+  --item-bg: #f1f5f9;
+  --track-bg: #e2e8f0;
+  --plate-bg: #e2e8f0;
+  --plate-text: #1e293b;
+
   position: relative;
   min-height: 100vh;
   padding: 2rem;
@@ -6,15 +19,30 @@
   flex-direction: column;
   gap: 2rem;
   font-family: 'Inter', sans-serif;
-  color: white;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
   overflow-x: hidden;
+}
+
+/* DARK MODE OVERRIDES - Synced with your shared :global(.dark) */
+:global(.dark) .dashboardContainer {
+  --bg-main: #09090b;
+  --bg-secondary: #111113;
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --panel-bg: rgba(0, 0, 0, 0.7);
+  --panel-border: rgba(139, 92, 246, 0.3);
+  --status-card-bg: #111113;
+  --item-bg: rgba(255, 255, 255, 0.03);
+  --track-bg: rgba(255, 255, 255, 0.05);
+  --plate-bg: #03092b;
+  --plate-text: yellow;
 }
 
 .headerSection {
   position: relative;
   z-index: 10;
-  display: flex;
-  flex-direction: column;
 }
 
 .title {
@@ -22,12 +50,13 @@
   font-weight: 800;
   background: linear-gradient(to right, #8b5cf6, #d8b4fe);
   background-clip: text;
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0;
 }
 
 .subtitle {
-  color: #9ca3af;
+  color: var(--text-secondary);
   margin-top: 0.5rem;
   font-size: 1rem;
 }
@@ -41,19 +70,19 @@
 }
 
 .cardDrivers, .cardDispatcher, .cardvehicles, .cardTrips {
-  border: 1px solid rgba(139, 92, 246, 0.3);
+  border: 1px solid var(--panel-border);
   backdrop-filter: blur(12px);
   border-radius: 20px;
-  padding-left: 20px;
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  padding: 1.5rem 1.5rem 1.5rem 20px; /* Matched padding logic */
+  transition: transform 0.3s ease, box-shadow 0.3s;
 }
 
-.cardDrivers { background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(0, 0, 0, 0.6)); }
-.cardvehicles { background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(0, 0, 0, 0.6)); }
-.cardTrips { background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(0, 0, 0, 0.6)); }
-.cardDispatcher { background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(0, 0, 0, 0.6)); }
+.cardDrivers { background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), var(--status-card-bg)); }
+.cardvehicles { background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), var(--status-card-bg)); }
+.cardTrips { background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), var(--status-card-bg)); }
+.cardDispatcher { background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), var(--status-card-bg)); }
 
-/* Small Status Grid */
+/* Status Grid */
 .statusGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -62,19 +91,21 @@
 }
 
 .statusCard {
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(139, 92, 246, 0.2);
+  background: var(--status-card-bg);
+  border: 1px solid var(--panel-border);
   border-radius: 16px;
   padding: 1.25rem;
   text-align: center;
   backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .statusLabel {
-  color: #9ca3af;
+  color: var(--text-secondary);
   font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  font-weight: 700;
   margin-bottom: 0.5rem;
 }
 
@@ -84,40 +115,30 @@
   color: #a78bfa;
 }
 
-/* Lower Panels Section */
+/* Lower Panels */
 .panelsContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   z-index: 10;
-  min-height: 400px;
-}
-
-@media (max-width: 1024px) {
-  .panelsContainer {
-    grid-template-columns: 1fr;
-  }
 }
 
 .panel {
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--panel-bg);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(139, 92, 246, 0.3);
+  border: 1px solid var(--panel-border);
   border-radius: 24px;
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .panelTitle {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #a78bfa;
+  color: #8b5cf6;
   margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
 .scrollList {
@@ -125,81 +146,71 @@
   flex-direction: column;
   gap: 1rem;
   overflow-y: auto;
-  padding-right: 0.5rem;
   max-height: 350px;
+  padding-right: 0.5rem;
 }
 
-.scrollList::-webkit-scrollbar {
-  width: 4px;
-}
+.scrollList::-webkit-scrollbar { width: 5px; }
+.scrollList::-webkit-scrollbar-thumb { background: var(--panel-border); border-radius: 10px; }
 
-.scrollList::-webkit-scrollbar-thumb {
-  background: rgba(139, 92, 246, 0.3);
-  border-radius: 10px;
-}
-
+/* Assignment Item */
 .assignmentItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--item-bg);
+  border: 1px solid var(--panel-border);
   border-radius: 14px;
   padding: 1rem;
-  transition: background 0.2s;
-}
-
-.assignmentItem:hover {
-  background: rgba(139, 92, 246, 0.05);
 }
 
 .driverName {
   font-weight: 700;
   font-size: 0.95rem;
-  color: #f3f4f6;
+  color: var(--text-primary);
 }
 
 .locationText {
-  color: #9ca3af;
+  color: var(--text-secondary);
   font-size: 0.75rem;
   margin-top: 0.25rem;
 }
 
 .vehiclePlate {
-  background: #03092b;
-  color: #fbbf24;
+  background: var(--plate-bg);
+  color: var(--plate-text);
   font-family: monospace;
   font-size: 0.8rem;
-  padding: 2px 8px;
-  border-radius: 4px;
-  border: 1px solid rgba(251, 191, 36, 0.3);
-  margin-bottom: 0.25rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 700;
   display: inline-block;
+  margin-bottom: 4px;
 }
 
 .statusText {
   display: block;
   font-size: 0.7rem;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 800;
   color: #8b5cf6;
 }
 
-/* Progress Section */
+/* FIX: Progress Section - Perfect Space Between */
 .progressContainer {
   display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+  justify-content: space-between; /* This forces plate left and KM right */
+  align-items: center;
+  width: 100%;
+  margin-bottom: 0.75rem;
 }
 
 .progressBarTrack {
   width: 100%;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--track-bg);
   height: 0.6rem;
   border-radius: 50px;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
   overflow: hidden;
 }
 
@@ -207,5 +218,9 @@
   background: linear-gradient(to right, #7c3aed, #a78bfa);
   height: 100%;
   border-radius: 50px;
-  box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
+}
+
+@media (max-width: 1024px) {
+  .panelsContainer { grid-template-columns: 1fr; }
 }

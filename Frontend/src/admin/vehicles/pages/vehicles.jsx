@@ -219,7 +219,7 @@ export const VehicleCreate = () => {
                   <input className={styles.inputField} placeholder="Service KM" name="Service" type="number" value={form.Service} onChange={handleChange} />
                 </div>
                 
-                <div className={styles.date}>
+                <div className={styles.dateGrid}>
                   <div className={styles.dateGroup}>
                     <label>Insurance Expiry</label>
                     <div className={styles.dateInputBox}>
