@@ -1,226 +1,176 @@
-import { 
-  Truck, 
-  User, 
-  CalendarDays, 
-  Navigation, 
-  Package, 
-  ClipboardList, 
-  ArrowBigDownDash,
-  ArrowRight
-} from 'lucide-react';
+import { useState, useEffect } from "react";
+import { Plus, CalendarDays } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import DateTimePicker from "../../../common/datepicker";
-import { useEffect, useState } from "react";
 import API from "../../../Api/api";
-import SpaceBackground from "../../../common/spacebackground/stardust";
 import PageMotion from "../../../common/pagemotion";
-import styles from "./assignment.module.css"
-const Assignment = () => {
-  const [driver, setDriver] = useState([]);
-  const [vehicle, setVehicle] = useState([]);
-  const [assignment, setAssignment] = useState([]);
+import Switch from "../../../common/toggle";
+import styles from "./assignment.module.css";
 
+const Assignment = () => {
+  const [popup, setPopup] = useState(false);
+  const [msg, setMsg] = useState(null);
+  const [drivers, setDrivers] = useState([]);
+  const [vehicles, setVehicles] = useState([]);
+  const [assignments, setAssignments] = useState([]);
+  
   const [form, setForm] = useState({
     driver: "",
     vehicle: "",
-    scheduledDate: "",
+    scheduledDate: null,
     fromLocation: "",
     toLocation: "",
     load: "",
-    status: "",
+    status: "scheduled",
   });
 
-  useEffect(() => {
-    API.get("/vehicleassignations/bystatus")
-      .then((response) => setVehicle(response.data.vehicleActive || []))
-      .catch((err) => console.log("Vehicle API error:", err));
-
-    API.get("/addteamMembers/alldrivers")
-      .then((res) => setDriver(res.data.readDriver || []))
-      .catch((err) => console.log("Driver API error:", err));
-  }, []);
-
-  const loadAssignments = async () => {
+  const fetchData = async () => {
     try {
-      const res = await API.get("/assigndrivers/assignmentShedule");
-
-      const list = res.data.Assignments || []
-       const active = list.filter(
-        s => s.status !== "completed"
-       )
-        
-      setAssignment(active);
+      const [vRes, dRes, aRes] = await Promise.all([
+        API.get("/vehicleassignations/bystatus"),
+        API.get("/addteamMembers/alldrivers"),
+        API.get("/assigndrivers/assignmentShedule")
+      ]);
+      setVehicles(vRes.data.vehicleActive || []);
+      setDrivers(dRes.data.readDriver || []);
+      setAssignments((aRes.data.Assignments || []).filter(a => a.status !== "completed"));
     } catch (err) {
-      console.log("assignment fetch error:", err);
-      setAssignment([]);
+      console.error("Fetch Error:", err);
     }
   };
-   const statusBadge = (status) => {
-  switch (status) {
-    case "assigned": return styles.badgeAssigned;
-    case "in_progress": return styles.badgeInProgress;
-    case "cancelled": return styles.badgeCancelled;
-    case "returned": return styles.badgeReturned;
-    case "completed": return styles.badgeCompleted;
-    case "scheduled": return styles.badgeScheduled;
-    default: return styles.badgeDefault;
-  }
-};
 
   useEffect(() => {
-    loadAssignments();
-    const interval = setInterval(loadAssignments, 5000);
+    fetchData();
+    const interval = setInterval(fetchData, 15000);
     return () => clearInterval(interval);
   }, []);
 
-  const assignDrivers = async (e) => {
+  useEffect(() => {
+    if (msg) {
+      const t = setTimeout(() => setMsg(null), 3000);
+      return () => clearTimeout(t);
+    }
+  }, [msg]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await API.post("/assigndrivers/assignment", form);
-      alert("assignation completed");
-      loadAssignments();
-      setForm({
-        driver: "",
-        vehicle: "",
-        scheduledDate: "",
-        fromLocation: "",
-        toLocation: "",
-        load: "",
-        status: "",
-      });
+      setMsg({ type: "success", text: "Driver Assigned Successfully" });
+      setPopup(false);
+      setForm({ driver: "", vehicle: "", scheduledDate: null, fromLocation: "", toLocation: "", load: "", status: "scheduled" });
+      fetchData();
     } catch (err) {
-      console.error(err);
-      alert("assignation failed");
+      setMsg({ type: "error", text: "Assignment Failed" });
     }
   };
 
-  const onchanging = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
   return (
-  <PageMotion>
-    <div className={styles.container}>
-      <SpaceBackground />
+    <PageMotion>
+      <div className={styles.mainWrapper}>
+        <div className={styles.container}>
+          
+          <div className={styles.headerRow}>
+            <div>
+              <h1 className={styles.title}>Dispatch Center</h1>
+              <p className={styles.subtitle}>Real-time management of transport assets</p>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+              <Switch />
+              <button className={styles.addButton} onClick={() => setPopup(true)}>
+                <Plus size={20} strokeWidth={3} /> New Assignment
+              </button>
+            </div>
+          </div>
 
-      <div className={styles.contentWrapper}>
-        <div className={styles.header}>
-          <h1>Dispatch Center</h1>
-          <p>Schedule trips and manage driver assignments</p>
-        </div>
+          <div className={styles.tableContainer}>
+            <div className={`${styles.tableGrid} ${styles.tableHeader}`}>
+              <div>DRIVER</div>
+              <div>VEHICLE</div>
+              <div>LOAD</div>
+              <div>FROM</div>
+              <div>TO</div>
+              <div>SCHEDULED</div>
+              <div>STATUS</div>
+            </div>
 
-        <div className={styles.mainGrid}>
-          <div className={`${styles.card} ${styles.formCard}`}>
-            <h2><ClipboardList size={22} /> New Assignment</h2>
+            <AnimatePresence>
+              {assignments.length > 0 ? (
+                assignments.map((a, i) => (
+                  <motion.div
+                    key={a._id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    className={`${styles.tableGrid} ${styles.tableRow}`}
+                  >
+                    <div style={{ fontWeight: 700, color: '#10b981' }}>{a.driver?.Name || "Unassigned"}</div>
+                    <div className={styles.plateBadge}>{a.vehicle?.NumberPlate}</div>
+                    <div>{a.load || 'General'}</div>
+                    <div>{a.fromLocation}</div>
+                    <div>{a.toLocation}</div>
+                    <div>{a.scheduledDate ? new Date(a.scheduledDate).toLocaleDateString() : 'N/A'}</div>
+                    <div>
+                      <span className={styles.statusBadge} data-status={a.status}>
+                        {a.status.replace('_', ' ')}
+                      </span>
+                    </div>
+                  </motion.div>
+                ))
+              ) : (
+                <div className={styles.emptyState}>No active assignments found</div>
+              )}
+            </AnimatePresence>
+          </div>
 
-            <div className={styles.formGrid}>
-              <div className={styles.inputFieldWrapper}>
-                <label className={styles.label}>Vehicle</label>
-                <div className={styles.inputGroup}>
-                  <Truck size={18} />
-                  <select className={styles.select} value={form.vehicle} name="vehicle" onChange={onchanging}>
+          {popup && (
+            <div className={styles.modalOverlay}>
+              <div className={styles.modalBackdrop} onClick={() => setPopup(false)} />
+              <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className={styles.modalContent}>
+                <h2 className={styles.modalTitle}>Register Assignment</h2>
+                <form onSubmit={handleSubmit} className={styles.modalForm}>
+                  
+                  <select required value={form.vehicle} onChange={(e)=>setForm({...form, vehicle: e.target.value})} className={styles.selectField}>
                     <option value="">Select Vehicle</option>
-                    {vehicle.map((veh) => (
-                      <option key={veh._id} value={veh._id}>{veh.NumberPlate}</option>
-                    ))}
+                    {vehicles.map(v => <option key={v._id} value={v._id}>{v.NumberPlate} ({v.brand})</option>)}
                   </select>
-                </div>
-              </div>
 
-              <div className={styles.inputFieldWrapper}>
-                <label className={styles.label}>Driver</label>
-                <div className={styles.inputGroup}>
-                  <User size={18} />
-                  <select className={styles.select} value={form.driver} name="driver" onChange={onchanging}>
+                  <select required value={form.driver} onChange={(e)=>setForm({...form, driver: e.target.value})} className={styles.selectField}>
                     <option value="">Select Driver</option>
-                    {driver.map((data) => (
-                      <option key={data._id} value={data._id}>{data.Name}</option>
-                    ))}
+                    {drivers.map(d => <option key={d._id} value={d._id}>{d.Name}</option>)}
                   </select>
-                </div>
-              </div>
 
-              <div className={styles.inputFieldWrapper}>
-                <label className={styles.label}>Schedule Date</label>
-                <div className={styles.inputGroup}>
-                  <CalendarDays size={18} />
-                  <div className={styles.dateContainer}>
-                    <DateTimePicker
-                      value={form.scheduledDate || null}
-                      onChange={(date) => setForm({ ...form, scheduledDate: date || "" })}
-                    />
+                  <div className={styles.dateGrid}>
+                    <input className={styles.inputField} placeholder="From Location" value={form.fromLocation} required onChange={(e)=>setForm({...form, fromLocation: e.target.value})} />
+                    <input className={styles.inputField} placeholder="To Location" value={form.toLocation} required onChange={(e)=>setForm({...form, toLocation: e.target.value})} />
                   </div>
-                </div>
-              </div>
 
-              <div className={styles.inputFieldWrapper}>
-                <label className={styles.label}>Load</label>
-                <div className={styles.inputGroup}>
-                  <Package size={18} />
-                  <input className={styles.input} type="text" name="load" value={form.load} onChange={onchanging} placeholder="e.g. Tyre/Logs" />
-                </div>
-              </div>
+                  <input className={styles.inputField} placeholder="Load Details" value={form.load} onChange={(e)=>setForm({...form, load: e.target.value})} />
 
-              <div className={`${styles.inputFieldWrapper} ${styles.fullWidth}`}>
-                <label className={styles.label}>Route (From - To)</label>
-                <div className={styles.locationGroup}>
-                  <input className={styles.locationInput} placeholder="Starting" name="fromLocation" value={form.fromLocation} onChange={onchanging} />
-                  <div style={{display:'flex', alignItems:'center' , justifyContent : "center"}}><ArrowBigDownDash size={16} /></div>
-                  <input className={styles.locationInput} placeholder="Ending" name="toLocation" value={form.toLocation} onChange={onchanging} />
-                </div>
-              </div>
+                  <div className={styles.dateInputBox}>
+                    <CalendarDays size={18} />
+                    <DateTimePicker value={form.scheduledDate} onChange={(d) => setForm({ ...form, scheduledDate: d })} />
+                  </div>
 
-              <div className={`${styles.inputFieldWrapper} ${styles.fullWidth}`}>
-                <label className={styles.label}>Status</label>
-                <div className={styles.inputGroup}>
-                  <Navigation size={18} />
-                  <select className={styles.select} name="status" value={form.status} onChange={onchanging}>
-                    <option value="scheduled">Scheduled</option>
-                    <option value="assigned">Assigned</option>
-                    <option value="in_progress">In Progress</option>
-                    <option value="completed">Completed</option>
-                  </select>
-                </div>
-              </div>
+                  <div className={styles.modalActions}>
+                    <button type="button" className={styles.cancelBtn} onClick={() => setPopup(false)}>Cancel</button>
+                    <button type="submit" className={styles.saveBtn}>Confirm</button>
+                  </div>
+                </form>
+              </motion.div>
             </div>
+          )}
 
-            <button className={styles.submitButton} onClick={assignDrivers}>
-              Assign Driver
-            </button>
-          </div>
-
-          <div className={styles.card}>
-            <h2><Navigation size={22} /> Recent Assignments</h2>
-            <div className={styles.listContainer}>
-              {assignment.map((d) => (
-                <div key={d._id} className={styles.assignmentItem}>
-                  <div className={styles.infoBlock}>
-                    <span className={styles.infoLabel}>Driver</span>
-                    <span className={styles.driverName}>{d.driver?.Name}</span>
-                  </div>
-
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <ArrowRight size={18} color="#4b5563" />
-                  </div>
-
-                  <div className={styles.infoBlock}>
-                    <span className={styles.infoLabel}>Vehicle</span>
-                    <span className={styles.vehiclePlate}>{d.vehicle?.NumberPlate}</span>
-                  </div>
-
-                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <span className={`${styles.badge} ${statusBadge(d.status)}`}>
-                      {d.status.replace('_', ' ')}
-                    </span>
-                  </div>
-                </div>
-              ))}
+          {msg && (
+            <div className={`${styles.alert} ${msg.type === "success" ? styles.successAlert : styles.errorAlert}`}>
+              {msg.text}
             </div>
-          </div>
+          )}
         </div>
       </div>
-    </div>
-  </PageMotion>
-);
+    </PageMotion>
+  );
 };
 
-export default Assignment;
+export default Assignment; 

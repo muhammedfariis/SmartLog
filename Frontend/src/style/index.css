@@ -7,8 +7,19 @@
 body {
   font-family: 'Josefin Sans', sans-serif;
   margin: 0px;
+  background-color: #f8fafc; 
+  color: #1e293b;
+  transition: background-color 0.5s ease;
 }
 
+body.dark {
+  background-color: #09090b;
+  color: #e5e7eb;
+}
+
+#root {
+  min-height: 100vh;
+}
 .dark .space-bg {
   position: fixed;
   inset: 0;
@@ -41,21 +52,6 @@ body {
   to { transform: translateY(-1000px); }
 }
 
-.earth {
-  position: absolute;
-  right: -120px;
-  bottom: -120px;
-  width: 500px;
-  opacity: 0.25;
-  animation: earthRotate 120s linear infinite;
-  filter: drop-shadow(0 0 40px rgba(255,255,255,0.15));
-  pointer-events: none;
-}
-
-@keyframes earthRotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
 
 @keyframes gradient-x {
   0% { background-position: 0% 50%; }

@@ -21,9 +21,8 @@
 
 .contentArea {
   flex: 1;
-  margin-left: 12rem; 
+  margin-left: 14rem; 
   min-height: 100vh;
-  padding: 2rem; 
 }
 
 @media (max-width: 768px) {
