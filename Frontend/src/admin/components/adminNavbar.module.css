@@ -1,52 +1,72 @@
-.sidebar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 20;
-    width: 224px;
-    min-height: 100vh;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(10px);
-    border-right: 1px solid  #8b5cf6;
-    
+.sidebar {
+  /* LIGHT MODE VARIABLES */
+  --side-bg: rgba(255, 255, 255, 0.8);
+  --side-border: #e2e8f0;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --link-bg: rgba(0, 0, 0, 0.05);
+  --link-border: rgba(0, 0, 0, 0.1);
+  --card-bg: rgba(0, 0, 0, 0.05);
+  --card-border: rgba(0, 0, 0, 0.1);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  width: 224px;
+  min-height: 100vh;
+  background: var(--side-bg);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid var(--side-border);
+  transition: all 0.3s ease;
 }
 
-.container{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 50px;
-    min-height: 100vh;
+/* DARK MODE OVERRIDES */
+:global(.dark) .sidebar {
+  --side-bg: rgba(0, 0, 0, 0.7);
+  --side-border: #8b5cf6;
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --link-bg: rgba(255, 255, 255, 0.05);
+  --link-border: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --card-border: rgba(255, 255, 255, 0.2);
 }
 
-.logobox{
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   width: 160px;
-   height: 80px;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 50px;
+  min-height: 100vh;
 }
 
-
-.logobox img{
-    width: 100%;
-    object-fit: contain;
+.logobox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 160px;
+  height: 80px;
+  margin-top: 20px;
 }
 
-.title{
-    color: white;
-    margin-top: 0px;
-    font-size: medium;
+.logobox img {
+  width: 100%;
+  object-fit: contain;
 }
 
+.title {
+  color: var(--text-primary);
+  margin-top: 0px;
+  font-size: medium;
+}
 
 .menu {
   display: flex;
   flex-direction: column;
   gap: 24px;
   padding: 20px;
-  color: white;
   align-items: center;
 }
 
@@ -57,17 +77,19 @@
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  color: white;
+  background: var(--link-bg);
+  border: 1px solid var(--link-border);
+  color: var(--text-primary);
   text-decoration: none;
   transition: all .3s ease;
+  font-weight: 500;
 }
 
 .menuLink:hover {
   background: #7c3aed;
   border-color: #a78bfa;
-  box-shadow: 0 10px 20px rgba(139,92,246,.3);
+  color: white;
+  box-shadow: 0 10px 20px rgba(139, 92, 246, .3);
   transform: translateY(-2px);
 }
 
@@ -77,111 +99,132 @@
   justify-content: center;
   width: 80px;
   height: 32px;
+  margin: 20px 0;
 }
 
 .userCard {
-  width: 150px;
-  padding: 20px;
+  width: 170px; /* Slightly wider to prevent text clipping */
+  padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 16px;
-  background: rgba(255,255,255,.1);
-  border: 1px solid rgba(255,255,255,.2);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   backdrop-filter: blur(10px);
   margin-bottom: 25px;
   transition: all .3s ease;
 }
 
 .userCard:hover {
-  background:#7c3aed;
-  border-color:#a78bfa;
-  box-shadow:0 10px 20px rgba(139,92,246,.4);
-  transform:translateY(-2px);
+  background: #7c3aed;
+  border-color: #a78bfa;
+  box-shadow: 0 10px 20px rgba(139, 92, 246, .4);
+  transform: translateY(-2px);
 }
 
 .userHeader {
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  width: 100%;
 }
 
 .avatar {
-  width:48px;
-  height:48px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border-radius:50%;
-
-  background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.2);
-
-  transition:.3s;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--link-bg);
+  border: 1px solid var(--link-border);
+  color: var(--text-primary);
+  transition: .3s;
+  flex-shrink: 0;
+  transition: all 0.3s ease-in-out;
 }
 
 .avatar:hover{
-  background:#7c3aed;
-  border-color:#a78bfa;
-  box-shadow:0 10px 20px rgba(139,92,246,.4);
-  transform:translateY(-2px);
+transform: scale(1.1) translateY(-3px);
+background: #7c3aed;
+  border-color: #a78bfa;
+  color: white;
+  box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
 }
 
-.userInfo{
- display:flex;
- flex-direction:column;
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  gap: 5px;
 }
 
-.adminText{
- color:white;
- font-weight:600;
- font-size:14px;
+.adminText {
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 13px;
+  margin: 0;
 }
 
-.username{
- margin:0px;  
- padding: 0px; 
- color:#d1d5db;
- font-size:12px;
+.username {
+  margin: 0;
+  padding: 0;
+  color: var(--text-secondary);
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.logoutBtn{
- display:flex;
- align-items:center;
- height:40px;
- width:40px;
- border-radius:100px;
- background:rgba(0,0,0,.4);
- color:white;
- overflow:hidden;
- border:1px solid rgba(255,255,255,.2);
- backdrop-filter:blur(6px);
- padding:0 12px;
- cursor:pointer;
- transition:all .3s ease;
+/* User Card Hover Colors */
+.userCard:hover .adminText,
+.userCard:hover .username,
+.userCard:hover .avatar {
+  color: white;
 }
 
-.logoutBtn:hover{
- width:112px;
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 100px;
+  background: rgba(0, 0, 0, 0.1);
+  color: var(--text-primary);
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(6px);
+  padding: 0 10px;
+  cursor: pointer;
+  transition: all .3s ease;
 }
 
-.logoutText{
- margin-left:10px;
- opacity:0;
- transition:.2s;
+:global(.dark) .logoutBtn {
+  background: rgba(0, 0, 0, 0.4);
 }
 
-.logoutBtn:hover .logoutText{
- opacity:1;
+.logoutBtn:hover {
+  width: 112px;
+  background: #ef4444;
+  border-color: #f87171;
+  color: white;
 }
 
-.logoutLogo{
-    flex-shrink: 0;
-    transition: transform 0.4s ease-in-out;
+.logoutText {
+  margin-left: 10px;
+  opacity: 0;
+  transition: .2s;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-.logoutBtn:hover .logoutText{
-    transform: translateX(1px);
+.logoutBtn:hover .logoutText {
+  opacity: 1;
+}
+
+.logoutLogo {
+  flex-shrink: 0;
+  transition: transform 0.4s ease-in-out;
 }
