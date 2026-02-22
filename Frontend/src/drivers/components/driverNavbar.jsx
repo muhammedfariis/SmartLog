@@ -38,6 +38,7 @@ const DriverNavbar = () => {
           </span>
         </div>
 
+        {/* Desktop Navigation */}
         <div className={styles.desktop}>
           <Link
             to="/drivers/trips"
@@ -56,6 +57,7 @@ const DriverNavbar = () => {
               <button 
                 onClick={handleLogout}
                 className={styles.logoutBtn}
+                title="Logout"
               >
                 <LogOut size={18} />
               </button>
@@ -63,6 +65,7 @@ const DriverNavbar = () => {
           </div>
         </div>
 
+        {/* Mobile Controls */}
         <div className={styles.mobile}>
           <Switch />
           <button
@@ -79,10 +82,7 @@ const DriverNavbar = () => {
       {/* Mobile Menu Dropdown */}
       <div
         id="driver-mobile-menu"
-        className={[
-          styles.dropdown,
-          menuOpen ? styles.dropdownOpen : styles.dropdownClosed
-        ].join(" ")}
+        className={`${styles.dropdown} ${menuOpen ? styles.dropdownOpen : styles.dropdownClosed}`}
       >
         <div className={styles.dropdownInner}>
           <Link
@@ -108,7 +108,7 @@ const DriverNavbar = () => {
               className={styles.dropdownLogout}
             >
               <LogOut size={18} />
-              <span className="text-sm">Logout</span>
+              <span>Logout</span>
             </button>
           </div>
         </div>
