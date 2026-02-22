@@ -1,303 +1,241 @@
 .loginContainer {
-  position: relative;
+  /* Sync variables with your Dashboard/Theme context */
+  --bg-main: #f8fafc;
+  --text-primary: #1e293b;
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --input-bg: #ffffff;
+  --border-color: rgba(139, 92, 246, 0.2);
+  
   min-height: 100vh;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #050505;
-  overflow: hidden;
- 
-}
-
-.errorAlert {
-  position: fixed;
-  top: 2rem;
-  z-index: 100;
-  transition: all 0.5s ease;
-  transform: translateY(0);
-  background-color: rgba(127, 29, 29, 0.8);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgb(239, 68, 68);
-  color: rgb(254, 226, 226);
-  padding: 1.5rem 1.5rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 25px 25px -5px rgba(0, 0, 0, 0.5);
-}
-
-.errorAlert.hidden {
-  opacity: 0;
-  transform: translateY(-1.5rem);
-  pointer-events: none;
-}
-
-.errorAlert.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.errorAlertContent {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.errorAlertTitle {
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-}
-
-.errorAlertMessage {
-  font-size: 0.875rem;
-}
-
-.successAlert {
-  position: fixed;
-  top: 2rem;
-  z-index: 100;
-  transition: all 0.5s ease;
-  transform: translateY(0);
-  background-color: rgba(5, 107, 47, 0.8);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgb(16, 185, 129);
-  color: rgb(209, 250, 229);
-  padding: 1.5rem 1.5rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 25px 25px -5px rgba(0, 0, 0, 0.5);
-}
-
-.successAlert.hidden {
-  opacity: 0;
-  transform: translateY(-1.5rem);
-  pointer-events: none;
-}
-
-.successAlert.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.successAlertContent {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.successAlertTitle {
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-}
-
-.successAlertMessage {
-  font-size: 0.875rem;
-}
-
-/* Background Effects */
-.backgroundEffects {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  color: white;
-}
-
-.bgGradient1 {
-  position: absolute;
-  top: -10%;
-  left: -10%;
-  width: 40%;
-  height: 40%;
-  background-color: rgba(109, 40, 217, 0.2);
-  border-radius: 50%;
-  filter: blur(120px);
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-.bgGradient2 {
-  position: absolute;
-  bottom: -10%;
-  right: -10%;
-  width: 40%;
-  height: 40%;
-  background-color: rgba(37, 99, 235, 0.1);
-  border-radius: 50%;
-  filter: blur(120px);
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite 0.7s;
-}
-
-.bgNoise {
-  position: absolute;
-  inset: 0;
-  background-image: url('https://grainy-gradients.vercel.app/noise.svg');
-  opacity: 0.2;
-  filter: brightness(0.5) contrast(1.5);
-}
-
-.formCard {
   position: relative;
-  z-index: 10;
-  width: 100%;
-  max-width: 28rem;
-  background-color: rgba(24, 24, 27, 0.4);
-  backdrop-filter: blur(40px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2rem;
-  border-radius: 2.5rem;
-  box-shadow: 0 25px 25px -5px rgba(0, 0, 0, 1);
+  background-color: var(--bg-main);
+  overflow: hidden;
+  transition: background-color 0.5s ease;
 }
 
-@media (min-width: 768px) {
-  .formCard {
-    padding: 2.5rem;
-  }
+:global(.dark) .loginContainer {
+  --bg-main: #09090b;
+  --text-primary: #f3f4f6;
+  --card-bg: rgba(15, 15, 20, 0.7);
+  --input-bg: rgba(0, 0, 0, 0.3);
+  --border-color: rgba(139, 92, 246, 0.3);
+}
+
+/* Theme Toggle Position */
+.toggleWrapper {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: 100;
+}
+
+/* Glass Card */
+.formCard {
+  width: 100%;
+  max-width: 420px;
+  padding: 3rem;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  border-radius: 32px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .cardHeader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 2rem;
+  text-align: center;
 }
 
 .logo {
-  height: 4rem;
-  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
 }
 
 .logoImg {
-  height: 100%;
-  width: 100%;
-  object-fit: contain;
-}
-
-.divider {
-  height: 0.125rem;
-  width: 5rem;
-  background-color: rgb(168, 85, 247);
-  margin-bottom: 0px;
-
+  height: 60px;
+  width: auto;
+  filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.3));
 }
 
 .title {
-  font-size: 1.875rem;
-  font-weight: 900;
-  font-style: italic;
-  text-transform: uppercase;
-  letter-spacing: -0.05em;
-  color: white;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.02em;
 }
 
 .titleHighlight {
-  color: rgb(168, 85, 247);
+  background: linear-gradient(to right, #8b5cf6, #d8b4fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
-  color: rgb(133, 133, 137);
-  font-size: 0.625rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-top: 0.25rem;
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
 }
 
+/* Form Styling */
 .form {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  
 }
 
 .inputGroup {
   position: relative;
-  width: 100%;
-
+  display: flex;
+  align-items: center;
 }
 
 .inputIcon {
   position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1.25rem;
-  height: 1.25rem;
-  transition: color 0.3s ease;
+  left: 1.25rem;
+  transition: all 0.3s ease;
+  color: #94a3b8;
 }
 
 .inputIcon.focused {
-  color: rgb(167, 139, 250);
-}
-
-.inputIcon.unfocused {
-  color: rgb(113, 113, 122);
+  color: #8b5cf6;
+  transform: scale(1.1);
 }
 
 .input {
-  height: 3.5rem;
-  width: 85%;
-  padding-left: 3rem;
-  padding-right: 1rem;
-  background-color: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 1.5rem;
-  color: white;
+  width: 100%;
+  padding: 1rem 1rem 1rem 3.5rem;
+  background: var(--input-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
   outline: none;
   transition: all 0.3s ease;
-  font-family: "Saira" , sans-serif ;
-}
-
-.input::placeholder {
-  color: rgb(161, 161, 170);
 }
 
 .input:focus {
-  border-color: rgba(168, 85, 247, 0.5);
-  border: 2;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
 }
 
 .submitButton {
-  height: 3.5rem;
-  width: 100%;
-  background-color: rgb(147, 51, 234);
+  margin-top: 1rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #7c3aed, #a78bfa);
   color: white;
+  border: none;
+  border-radius: 16px;
   font-weight: 700;
-  border-radius: 1.5rem;
-  transition: all 0.3s ease;
+  font-size: 1rem;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgba(109, 40, 217, 0.2);
+  gap: 0.75rem;
+  box-shadow: 0 10px 20px -5px rgba(124, 58, 237, 0.4);
+}
+
+/* Alerts */
+.errorAlert, .successAlert {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.visible { opacity: 1; top: 2rem; }
+.hidden { opacity: 0; top: -5rem; pointer-events: none; }
+
+.errorAlert { background: rgba(220, 38, 38, 0.9); color: white; }
+.successAlert { background: rgba(16, 185, 129, 0.9); color: white; }
+
+/* Animated Background Shapes */
+.backgroundEffects {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.bgGradient1 {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  top: -100px;
+  left: -100px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+  filter: blur(50px);
+  animation: float 20s infinite alternate;
+}
+
+.bgGradient2 {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  bottom: -150px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(216, 180, 254, 0.15) 0%, transparent 70%);
+  filter: blur(60px);
+  animation: float 25s infinite alternate-reverse;
+}
+
+@keyframes float {
+  from { transform: translate(0, 0) rotate(0deg); }
+  to { transform: translate(100px, 50px) rotate(15deg); }
+}
+
+
+.inputGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.eyeButton {
+  position: absolute;
+  right: 1.25rem;
+  background: none;
   border: none;
   cursor: pointer;
-  text-transform: uppercase;
+  color: #94a3b8; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: color 0.3s ease;
+  z-index: 11;
 }
 
-.submitButton:hover {
-  background-color: rgb(168, 85, 247);
+.eyeButton:hover {
+  color: #8b5cf6; 
 }
 
-.submitButton:active {
-  transform: scale(0.98);
-}
-
-.submitButtonIcon {
-  transition: transform 0.3s ease;
-}
-
-.submitButton:hover .submitButtonIcon {
-  transform: translateX(0.25rem);
-}
-
-/* Animations */
-@keyframes pulse {
-  0%, 100% {
-    opacity: 2;
-  }
-  50% {
-    opacity: 0;
-  }
+.input {
+  width: 100%;
+  padding: 1rem 3.5rem 1rem 3.5rem; 
+  background: var(--input-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s ease;
 }
