@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
 import API from "../../../Api/api";
 import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Undo2, MapPin, Truck,CircleX, Box, Calendar, Play, CheckCircle, XCircle, RefreshCcw, AlertCircle, ChevronRight } from "lucide-react";
+import PageMotion from "../../../common/pagemotion";
+import Switch from "../../../common/toggle";
 import styles from "./mytrips.module.css";
 
 const Mytrips = () => {
   const navigate = useNavigate();
-
   const [trip, setTrip] = useState([]);
 
   const loadTrips = async () => {
     try {
       const api = await API.get("/assigndrivers/mytrips");
-      setTrip(api.data.trips);
-      console.log(api);
+      setTrip(api.data.trips || []);
     } catch (err) {
       console.error(err);
     }
@@ -24,181 +26,117 @@ const Mytrips = () => {
 
   const updateStatus = async (assignmentId, status) => {
     try {
-      const api = await API.patch(`/assigndrivers/driverStatus`, {
-        assignmentId,
-        status,
-      });
+      await API.patch(`/assigndrivers/driverStatus`, { assignmentId, status });
       loadTrips();
     } catch (err) {
       console.error(err);
     }
   };
 
-  const badgeStyle = (status) => {
-    switch (status) {
-      case "assigned":
-        return styles.badge_assigned;
-      case "in_progress":
-        return styles.badge_in_progress;
-      case "cancelled":
-        return styles.badge_cancelled;
-      case "returning":
-        return styles.badge_returning;
-      case "returned":
-        return styles.badge_returned;
-      case "completed":
-        return styles.badge_completed;
+  const getActions = (t) => {
+    switch (t.status) {
       case "scheduled":
-        return styles.badge_scheduled;
+        return <button className={`${styles.btn} ${styles.btnReady}`} onClick={() => updateStatus(t._id, "assigned")}><CheckCircle size={20}/> Confirm My Presence</button>;
+      case "assigned":
+        return <button className={`${styles.btn} ${styles.btnStart}`} onClick={() => updateStatus(t._id, "in_progress")}><Play size={20}/> Start Trip Engine</button>;
+      case "in_progress":
+        return (
+          <div className={styles.actionsContainer}>
+            <button className={`${styles.btn} ${styles.btnComplete}`} onClick={() => updateStatus(t._id, "completed")}><CheckCircle size={20}/> Mark as Delivered</button>
+            <button className={`${styles.btn} ${styles.btnCancel}`} onClick={() => updateStatus(t._id, "cancelled")}><XCircle size={20}/> Cancel Mission</button>
+          </div>
+        );
+      case "cancelled":
+        return <button className={`${styles.btn} ${styles.btnReturn}`} onClick={() => updateStatus(t._id, "returning")}><RefreshCcw size={20}/> Start Return Trip</button>;
+        case "returning" : 
+        return <button className={`${styles.btn} ${styles.btnReturned}`} onClick={() => updateStatus(t._id, "returned")}><Undo2 size={20}/>Complete Return </button>;
+        case "returned" : 
+        return <button className={`${styles.btn} ${styles.btnClose}`} onClick={() => updateStatus(t._id, "completed")}><CircleX size={20}/>Close Trip </button>;
+
+        
       default:
-        return styles.badge;
+        return null;
     }
-  };
-
-  const actionButton = (trip) => {
-    if (trip.status === "scheduled") {
-      return (
-        <button
-          className={[styles.btn, styles.btnReady].join(' ')}
-          onClick={() => updateStatus(trip._id, "assigned")}
-        >
-          Ready
-        </button>
-      );
-    }
-
-    if (trip.status === "assigned") {
-      return (
-        <button
-          className={[styles.btn, styles.btnStart].join(' ')}
-          onClick={() => updateStatus(trip._id, "in_progress")}
-        >
-          Start
-        </button>
-      );
-    }
-
-    if (trip.status === "in_progress") {
-      return (
-        <div className={styles.actionsRow}>
-          <button
-            className={[styles.btn, styles.btnComplete].join(' ')}
-            onClick={() => updateStatus(trip._id, "completed")}
-          >
-            Complete
-          </button>
-          <button
-            className={[styles.btn, styles.btnCancel].join(' ')}
-            onClick={() => updateStatus(trip._id, "cancelled")}
-          >
-            Cancel
-          </button>
-        </div>
-      );
-    }
-
-    if (trip.status === "cancelled") {
-      return (
-        <button
-          className={[styles.btn, styles.btnReturn].join(' ')}
-          onClick={() => updateStatus(trip._id, "returning")}
-        >
-          Return
-        </button>
-      );
-    }
-
-    if (trip.status === "returning") {
-      return (
-        <button
-          className={[styles.btn, styles.btnReached].join(' ')}
-          onClick={() => updateStatus(trip._id, "returned")}
-        >
-          Reached Hub
-        </button>
-      );
-    }
-
-    if (trip.status === "returned") {
-      return (
-        <button
-          className={[styles.btn, styles.btnClose].join(' ')}
-          onClick={() => updateStatus(trip._id, "completed")}
-        >
-          Close Trip
-        </button>
-      );
-    }
-
-    return null;
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <h1 className={styles.title}>
-          My Assigned Trips
-        </h1>
-        {trip.length === 0 && (
-          <p className={styles.subtitle}>No Trips Assigned Yet</p>
-        )}
-      </div>
-
-      <div className={styles.list}>
-        {trip.map((t, i) => (
-          <div
-            key={t._id}
-            className={styles.card}
-          >
-            <div className={styles.cardHeader}>
-              <h2 className={styles.cardTitle}>
-                Trip ID: {i + 10001}
-              </h2>
-
-              <span
-                className={[styles.badge, badgeStyle(t.status)].join(' ')}
-              >
-                {t.status}
-              </span>
+    <PageMotion>
+      <div className={styles.mainWrapper}>
+        <div className={styles.container}>
+          <div className={styles.headerRow}>
+            <div>
+              <h1 className={styles.title}>Trip Dashboard</h1>
+              <p className={styles.subtitle}>Manage your active assignments</p>
             </div>
-
-            <div className={styles.grid}>
-              <p>
-                Route: {t.fromLocation} → {t.toLocation}
-              </p>
-              <p>Vehicle: {t.vehicle?.NumberPlate}</p>
-              <p>Load: {t.load}</p>
-              <p>Date: {new Date(t.scheduledDate).toDateString()}</p>
-            </div>
-
-            {actionButton(t)}
-
-            <div className={styles.note}>
-              <div className={styles.alert}>
-                ⚠️ KM must be updated before closing the trip. Incorrect KM
-                entries will affect fleet records.
-              </div>
-              {t.status === "completed" && (
-                <button
-                  className={styles.updateBtn}
-                  onClick={() =>
-                    navigate("/drivers/kmupdate", {
-                      state: {
-                        assignmentId: t._id,
-                        vehicleId: t.vehicle?._id,
-                        vehiclePlate: t.vehicle?.NumberPlate,
-                      },
-                    })
-                  }
-                >
-                  Update KM
-                </button>
-              )}
-            </div>
+            <Switch />
           </div>
-        ))}
+
+          <div className={styles.list}>
+            <AnimatePresence mode="popLayout">
+              {trip.length > 0 ? (
+                trip.map((t, i) => (
+                  <motion.div
+                    key={t._id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    className={styles.card}
+                  >
+                    <div className={styles.cardHeader}>
+                      <span className={styles.tripId}>ID: {i + 10001}</span>
+                      <span className={styles.statusBadge} data-status={t.status}>
+                        {t.status.replace('_', ' ')}
+                      </span>
+                    </div>
+
+                    <div className={styles.routeContainer}>
+                      <div className={styles.routeItem}>
+                        <MapPin size={18} color="#ef4444" />
+
+                        <span>{t.fromLocation}</span>
+                      </div>
+                      <ChevronRight size={14} style={{ color: '#94a3b8'}} />
+                      <div className={styles.routeItem}>
+                        <span>{t.toLocation}</span>
+                      </div>
+                    </div>
+
+                    <div className={styles.detailsGrid}>
+                      <div className={styles.detailItem}><Truck size={16}/> {t.vehicle?.NumberPlate}</div>
+                      <div className={styles.detailItem}><Box size={16}/> {t.load || "Standard Load"}</div>
+                      <div className={styles.detailItem}><Calendar size={16}/> {new Date(t.scheduledDate).toLocaleDateString()}</div>
+                    </div>
+
+                    <div className={styles.actionsContainer}>
+                      {getActions(t)}
+                      
+                      {t.status === "completed" && (
+                        <button 
+                          className={styles.updateBtn}
+                          onClick={() => navigate("/drivers/kmupdate", { state: { assignmentId: t._id, vehicleId: t.vehicle?._id }})}
+                        >
+                           Update Kilometers
+                        </button>
+                      )}
+                    </div>
+
+                    <div className={styles.warningBanner}>
+                      <AlertCircle size={20} />
+                      <p>Ensure Ending KM matches dashboard before closing the trip.</p>
+                    </div>
+                  </motion.div>
+                ))
+              ) : (
+                <div className={styles.emptyState}>
+                  <p>You have no assigned trips at the moment.</p>
+                </div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
       </div>
-    </div>
+    </PageMotion>
   );
 };
 
