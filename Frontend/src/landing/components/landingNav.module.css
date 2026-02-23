@@ -22,18 +22,32 @@
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* LIGHT MODE SUPPORT */
-/* This looks for a .light class on the <html> or <body> tag */
-:global(html.light) .navContainer,
-:global(body.light) .navContainer {
-  --nav-bg: rgba(255, 255, 255, 0.9);
-  --nav-border: #e2e8f0;
-  --text-color: #1e293b;
-  --link-bg: rgba(0, 0, 0, 0.05);
-  --link-border: rgba(0, 0, 0, 0.1);
-  --shadow: rgba(0, 0, 0, 0.05);
+
+
+/* LIGHT DEFAULT */
+.navContainer {
+
+ --nav-bg: rgba(255,255,255,0.9);
+ --nav-border:#e2e8f0;
+ --text-color:#1e293b;
+ --link-bg:rgba(0,0,0,.05);
+ --link-border:rgba(0,0,0,.1);
+ --shadow:rgba(0,0,0,.05);
+
+ background-color:var(--nav-bg);
 }
 
+/* DARK MODE */
+:global(.dark) .navContainer {
+
+ --nav-bg:black;
+ --nav-border:#1f2937;
+ --text-color:#ffffff;
+ --link-bg:rgba(255,255,255,.05);
+ --link-border:rgba(255,255,255,.1);
+ --shadow:rgba(0,0,0,.3);
+
+}
 .brandWrapper {
   display: flex;
   align-items: center;

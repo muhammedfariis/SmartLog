@@ -1,35 +1,42 @@
-:root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f4f4f5;
-  --bg-card: rgba(255, 255, 255, 0.7);
-  --text-main: #09090b;
-  --text-muted: #71717a;
-  --violet-primary: #8b5cf6;
-  --violet-soft: rgba(139, 92, 246, 0.1);
-  --border-color: rgba(139, 92, 246, 0.2);
-  --input-bg: rgba(0, 0, 0, 0.05);
+.pageWrapper {
+  --bg-main:        #f8fafc;
+  --text-primary:   #0f172a;
+  --text-secondary: #475569;
+  --card-bg:        rgba(255, 255, 255, 0.7);
+  --card-border:    rgba(139, 92, 246, 0.2);
+  --violet:         #7c3aed;
+  --violet-soft:    rgba(139, 92, 246, 0.08);
+  --orange:         #ea580c;
+  --orange-soft:    #fff7ed;
+  --input-bg:       rgba(0, 0, 0, 0.04);
+  --btn-bg:         #09090b;
+  --btn-text:       #ffffff;
+
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #000000;
-    --bg-secondary: #09090b;
-    --bg-card: rgba(24, 24, 27, 0.4);
-    --text-main: #ffffff;
-    --text-muted: #a1a1aa;
-    --violet-primary: #a78bfa;
-    --violet-soft: rgba(139, 92, 246, 0.15);
-    --border-color: rgba(139, 92, 246, 0.3);
-    --input-bg: rgba(0, 0, 0, 0.5);
-  }
+:global(.dark) .pageWrapper {
+  --bg-main:        #000000;
+  --text-primary:   #ffffff;
+  --text-secondary: #94a3b8;
+  --card-bg:        rgba(22, 21, 21, 0.8);
+  --card-border:    rgba(139, 92, 246, 0.3);
+  --violet:         #a78bfa;
+  --violet-soft:    rgba(139, 92, 246, 0.15);
+  --orange:         #f97316;
+  --orange-soft:    rgba(249, 115, 22, 0.1);
+  --input-bg:       rgba(0, 0, 0, 0.5);
+  --btn-bg:         #ffffff;
+  --btn-text:       #000000;
 }
 
 .contactContainer {
   position: relative;
   min-height: 100vh;
-  color: var(--text-main);
+  color: var(--text-primary);
   padding-bottom: 5rem;
   padding-top: 7rem;
   padding-inline: 1.5rem;
@@ -52,11 +59,12 @@
   padding: 0.375rem 1rem;
   border-radius: 9999px;
   background-color: var(--violet-soft);
-  border: 1px solid var(--border-color);
-  color: var(--violet-primary);
+  border: 1px solid var(--card-border);
+  color: var(--violet);
   font-size: 0.75rem;
   font-family: monospace;
   margin-bottom: 1.5rem;
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
 }
 
 .pingWrapper {
@@ -67,7 +75,7 @@
 }
 
 .pingEffect {
-  animation: ping 1s cubic-bezier(0,0, 0.5, 1) infinite;
+  animation: ping 1s cubic-bezier(0, 0, 0.5, 1) infinite;
   position: absolute;
   display: inline-flex;
   height: 100%;
@@ -75,13 +83,6 @@
   border-radius: 9999px;
   background-color: #4ade80;
   opacity: 0.75;
-}
-
-@keyframes ping {
-  75%, 100% {
-    transform: scale(2);
-    opacity: 0;
-  }
 }
 
 .statusDot {
@@ -99,10 +100,13 @@
   letter-spacing: -0.05em;
   font-style: italic;
   text-transform: uppercase;
+  color: var(--text-primary);
+  transition: color 0.4s ease;
 }
 
 .textHighlight {
-  color: var(--violet-primary);
+  color: var(--violet);
+  transition: color 0.4s ease;
 }
 
 .contentGrid {
@@ -136,39 +140,60 @@
 .methodCard {
   padding: 1.5rem;
   border-radius: 1.5rem;
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
   backdrop-filter: blur(8px);
-  transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(8px);
+  transition: background-color 0.4s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.methodCard:hover {
+  border-color: var(--violet);
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.12);
 }
 
 .iconContainer {
   padding: 0.75rem;
   background-color: var(--violet-soft);
+  color: var(--violet);
   width: fit-content;
   border-radius: 1rem;
   margin-bottom: 1rem;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 .methodLabel {
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  transition: color 0.4s ease;
 }
 
 .methodValue {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 700;
   margin-top: 0.25rem;
+  color: var(--text-primary);
+  transition: color 0.4s ease;
+}
+
+.methodDesc {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  transition: color 0.4s ease;
 }
 
 .formContainer {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
   padding: 2rem;
   border-radius: 3rem;
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
 @media (min-width: 768px) {
@@ -183,65 +208,132 @@
   }
 }
 
+.formBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
 .inputGroup {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  justify-content: center;
-  align-items: center;
 }
 
 .label {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  color: var(--text-secondary);
   transition: color 0.3s ease;
+}
+
+.labelFocused {
+  color: var(--violet);
 }
 
 .inputBase {
   width: 100%;
   background-color: var(--input-bg);
   border: none;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--card-border);
   padding: 0.75rem 0;
   font-size: 1.125rem;
-  color: var(--text-main);
+  color: var(--text-primary);
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, background-color 0.4s ease, color 0.4s ease;
+}
+
+.inputBase::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
 }
 
 .inputBase:focus {
-  border-color: var(--violet-primary);
+  border-color: var(--violet);
 }
 
 .textarea {
   width: 100%;
   background-color: var(--input-bg);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--card-border);
   border-radius: 1.5rem;
   padding: 1.25rem;
-  color: var(--text-main);
+  color: var(--text-primary);
+  font-size: 1rem;
   outline: none;
-  transition: border-color 0.3s ease;
   resize: none;
+  transition: border-color 0.3s ease, background-color 0.4s ease, color 0.4s ease;
+}
+
+.textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
 }
 
 .textarea:focus {
-  border-color: var(--violet-primary);
+  border-color: var(--violet);
 }
 
 .submitBtn {
   width: 100%;
   padding: 1.25rem;
-  background-color: var(--violet-primary);
-  color: white;
+  background-color: var(--violet);
+  color: #ffffff;
   border: none;
   border-radius: 1.5rem;
   font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
   cursor: pointer;
-  box-shadow: 0 10px 20px -10px var(--violet-primary);
+  box-shadow: 0 10px 20px -10px var(--violet);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease,
+    transform 0.2s ease, opacity 0.2s ease;
+}
+
+.submitBtn:hover {
+  opacity: 0.9;
+  box-shadow: 0 14px 28px -10px var(--violet);
+}
+
+.submitBtn:active {
+  transform: scale(0.98);
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .contactContainer {
+    padding-top: 5rem;
+    padding-inline: 1rem;
+  }
+
+  .headerSection {
+    margin-bottom: 3rem;
+  }
+
+  .formContainer {
+    border-radius: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .formRow {
+    grid-template-columns: 1fr;
+  }
 }

@@ -4,7 +4,6 @@
   backdrop-filter: blur(12px);
   border-top: 1px solid #e5e7eb; /* gray-200 */
   padding: 3rem 0; /* py-12 */
-  margin-top: 5rem; /* mt-20 */
   overflow: hidden;
   transition: background-color 0.3s, border-color 0.3s;
   background-color: rgba(255, 255, 255, 0.8);
@@ -12,7 +11,7 @@
 }
 
 :global(.dark) .footer {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color:black;
   border-color: rgba(139, 92, 246, 0.3); /* violet-500/30 */
   color: #9ca3af; /* gray-400 */
 }

@@ -1,64 +1,90 @@
-:root {
+.aboutContainer {
   --bg-primary: #ffffff;
   --bg-secondary: #f4f4f5;
-  --bg-card: rgba(255, 255, 255, 0.8);
+  --bg-card: rgba(255, 255, 255, 0.85);
+
   --text-main: #09090b;
-  --text-muted: #71717a;
+  --text-muted: #52525b;
+
   --violet-primary: #8b5cf6;
   --violet-soft: rgba(139, 92, 246, 0.1);
-  --border-color: rgba(139, 92, 246, 0.2);
+
+  --border-color: rgba(139, 92, 246, 0.25);
   --accent-zinc: #e4e4e7;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #000000;
-    --bg-secondary: #09090b;
-    --bg-card: rgba(24, 24, 27, 0.4);
-    --text-main: #ffffff;
-    --text-muted: #a1a1aa;
-    --violet-primary: #8b5cf6;
-    --violet-soft: rgba(139, 92, 246, 0.1);
-    --border-color: rgba(139, 92, 246, 0.3);
-    --accent-zinc: #27272a;
-  }
-}
-
-.aboutContainer {
-  position: relative;
-  min-height: 100vh;
-  color: var(--text-main);
   background-color: var(--bg-primary);
+  color: var(--text-main);
+
+  min-height: 100vh;
+
   padding-bottom: 5rem;
+
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+:global(.dark) .aboutContainer,
+:global(html.dark) .aboutContainer,
+:global(body.dark) .aboutContainer {
+  --bg-primary: #000000;
+
+  --bg-secondary: #09090b;
+
+  --bg-card: rgba(24, 24, 27, 0.75);
+
+  --text-main: #ffffff;
+
+  --text-muted: #a1a1aa;
+
+  --violet-primary: #a78bfa;
+
+  --violet-soft: rgba(139, 92, 246, 0.15);
+
+  --border-color: rgba(139, 92, 246, 0.35);
+
+  --accent-zinc: #27272a;
 }
 
 .heroSection {
-  position: relative;
-  z-index: 10;
-  padding-top: 5rem;
+  padding-top: 6rem;
   padding-inline: 2.5rem;
+
   display: flex;
   flex-direction: column;
+
   align-items: center;
   text-align: center;
+
   gap: 1.5rem;
 }
 
 .badge {
-  background-color: var(--violet-soft);
+  background: var(--violet-soft);
+
   border: 1px solid var(--border-color);
-  padding: 0.25rem 1rem;
+
+  padding: 0.3rem 1rem;
+
   border-radius: 9999px;
+
   color: var(--violet-primary);
-  font-size: 0.875rem;
-  font-weight: 500;
+
+  font-size: 0.85rem;
+
+  font-weight: 600;
 }
 
 .heroTitle {
   font-size: clamp(3rem, 8vw, 4.5rem);
-  font-weight: 800;
-  letter-spacing: -0.025em;
+
+  font-weight: 900;
+
+  letter-spacing: -0.02em;
+
   line-height: 1.1;
+
+  color: var(--text-main);
 }
 
 .textGradient {
@@ -67,142 +93,204 @@
 
 .heroDesc {
   max-width: 42rem;
+
   color: var(--text-muted);
-  font-size: 1.25rem;
+
+  font-size: 1.2rem;
+
   line-height: 1.6;
 }
 
 .stepSection {
-  position: relative;
-  z-index: 10;
   margin-top: 6rem;
+
   padding-inline: 2.5rem;
 }
 
 .stepGrid {
   max-width: 72rem;
-  margin: 0 auto;
+
+  margin: auto;
+
   display: grid;
+
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
   gap: 1rem;
 }
 
 .stepCard {
   display: flex;
+
   align-items: center;
+
   gap: 0.75rem;
-  background-color: var(--bg-card);
+
+  background: var(--bg-card);
+
   border: 1px solid var(--border-color);
+
   padding: 1rem;
+
   border-radius: 1rem;
+
+  backdrop-filter: blur(8px);
 }
 
 .stepNumber {
   height: 2rem;
+
   width: 2rem;
+
   border-radius: 9999px;
-  background-color: var(--violet-primary);
+
+  background: var(--violet-primary);
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
-  font-weight: bold;
-  font-size: 0.875rem;
+
   color: white;
+
+  font-weight: 700;
 }
 
 .featuresSection {
-  position: relative;
-  z-index: 10;
   margin-top: 8rem;
+
   padding-inline: 2.5rem;
+
   max-width: 80rem;
+
   margin-inline: auto;
 }
 
 .featuresGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
   gap: 1.5rem;
 }
 
 .featureCard {
   padding: 2rem;
+
   border-radius: 1.5rem;
-  background-color: var(--bg-card);
+
+  background: var(--bg-card);
+
   border: 1px solid var(--border-color);
-  backdrop-filter: blur(4px);
-  transition: transform 0.3s ease, border-color 0.3s ease;
+
+  backdrop-filter: blur(10px);
+
+  transition: 0.3s;
 }
 
 .featureCard:hover {
+  transform: translateY(-6px);
+
   border-color: var(--violet-primary);
 }
 
 .iconWrapper {
   margin-bottom: 1rem;
-  padding: 0.75rem;
-  background-color: var(--violet-soft);
-  width: fit-content;
+
+  padding: 0.8rem;
+
+  background: var(--violet-soft);
+
   border-radius: 1rem;
+
+  width: fit-content;
 }
 
 .roleSection {
-  position: relative;
-  z-index: 10;
   margin-top: 8rem;
+
   padding-inline: 2.5rem;
+
   max-width: 64rem;
+
   margin-inline: auto;
 }
 
 .roleContainer {
-  background: linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary));
+  background: linear-gradient(
+    to bottom,
+    var(--bg-secondary),
+    var(--bg-primary)
+  );
+
   border: 1px solid var(--border-color);
+
   border-radius: 3rem;
+
   padding: 3rem;
 }
 
 .roleGrid {
   display: grid;
+
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
   gap: 3rem;
 }
 
 .roleItem {
   display: flex;
+
   gap: 1rem;
+
   margin-bottom: 1rem;
 }
 
 .dot {
   height: 0.5rem;
+
   width: 0.5rem;
-  border-radius: 9999px;
-  background-color: var(--violet-primary);
+
+  border-radius: 999px;
+
+  background: var(--violet-primary);
+
   margin-top: 0.6rem;
-  flex-shrink: 0;
 }
 
 .statusCard {
-  background-color: var(--bg-card);
+  background: var(--bg-card);
+
   border-radius: 1.5rem;
+
   padding: 1.5rem;
+
   border: 1px solid var(--border-color);
+
   display: flex;
+
   flex-direction: column;
+
   justify-content: center;
 }
 
 .progressBg {
   height: 0.5rem;
+
   width: 100%;
-  background-color: var(--accent-zinc);
-  border-radius: 9999px;
+
+  background: var(--accent-zinc);
+
+  border-radius: 999px;
+
   overflow: hidden;
+
   margin-top: 0.75rem;
 }
 
 .progressFill {
   height: 100%;
-  background-color: var(--violet-primary);
+
+  background: var(--violet-primary);
 }

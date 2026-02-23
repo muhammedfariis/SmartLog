@@ -43,11 +43,10 @@ const protocols = [
 const Terms = () => {
   return (
     <PageMotion>
+      <LandingNav />
       <div className={styles.pageWrapper}>
-        <LandingNav />
-
         <main className={styles.termsContainer}>
-          {/* ── Header ── */}
+
           <div className={styles.headerSection}>
             <motion.div
               initial={{ opacity: 0, y: -10 }}
@@ -57,15 +56,12 @@ const Terms = () => {
               <FileText size={14} />
               LEGAL PROTOCOL v2.0.26
             </motion.div>
-
             <h1 className={styles.mainTitle}>
               Terms of <span className={styles.textHighlight}>Service.</span>
             </h1>
-
             <p className={styles.updateDate}>Last Updated: February 2026</p>
           </div>
 
-          {/* ── Protocol cards ── */}
           <div className={styles.protocolList}>
             {protocols.map((item, idx) => (
               <motion.div
@@ -86,7 +82,6 @@ const Terms = () => {
               </motion.div>
             ))}
 
-            {/* ── Critical note ── */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -101,17 +96,16 @@ const Terms = () => {
               </div>
             </motion.div>
 
-            {/* ── Download ── */}
             <div className={styles.downloadSection}>
               <button className={styles.downloadButton}>
                 Download Full Documentation
               </button>
             </div>
           </div>
-        </main>
 
-        <Footer />
+        </main>
       </div>
+      <Footer />
     </PageMotion>
   );
 };
