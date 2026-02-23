@@ -1,5 +1,4 @@
 .loginContainer {
-  /* Sync variables with your Dashboard/Theme context */
   --bg-main: #f8fafc;
   --text-primary: #1e293b;
   --card-bg: rgba(255, 255, 255, 0.8);
@@ -25,7 +24,6 @@
   --border-color: rgba(139, 92, 246, 0.3);
 }
 
-/* Theme Toggle Position */
 .toggleWrapper {
   position: absolute;
   top: 2rem;

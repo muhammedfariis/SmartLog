@@ -37,8 +37,7 @@
  background-color:var(--nav-bg);
 }
 
-/* DARK MODE */
-:global(.dark) .navContainer {
+:global(.dark) .navContainer  {
 
  --nav-bg:black;
  --nav-border:#1f2937;
@@ -48,6 +47,12 @@
  --shadow:rgba(0,0,0,.3);
 
 }
+
+:global(.dark) .navLink{
+  background-color: #d8652f;
+  color: #ffffff;
+}
+
 .brandWrapper {
   display: flex;
   align-items: center;
@@ -93,7 +98,7 @@
   padding: 0.5rem 1rem;
   background-color: var(--link-bg);
   border: 1px solid var(--link-border);
-  color: #0cfdfd;
+  color: #8413e7;
   text-decoration: none;
   transition: all 0.3s ease;
   white-space: nowrap;
@@ -102,7 +107,7 @@
 .navLink:hover {
   background-color: #7c3aed;
   border-color: #a78bfa;
-  color: #ffffff !important; /* Forces white text on purple hover */
+  color: #ffffff !important; 
   transform: translateY(-2px);
 }
 

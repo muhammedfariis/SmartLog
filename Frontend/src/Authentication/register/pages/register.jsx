@@ -1,56 +1,47 @@
 import { Link, useNavigate } from "react-router-dom";
 import API from "../../../Api/api";
-import { useState, useEffect } from "react"; 
-import { motion } from "framer-motion"; 
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   User,
   Lock,
   ShieldCheck,
   ArrowRight,
+  ArrowLeft,
   XCircle,
   CheckCircle2,
 } from "lucide-react";
+
 import PageMotion from "../../../common/pagemotion";
+import Switch from "../../../common/toggle";
 import styles from "./register.module.css";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [focused, setFocused] = useState(null);
-  const go = useNavigate();
-
   const [toast, setToast] = useState({ show: false, msg: "", type: "error" });
-
-  const [form, setForm] = useState({
-    userName: "",
-    password: "",
-  });
+  const [form, setForm] = useState({ userName: "", password: "" });
 
   useEffect(() => {
     if (toast.show) {
-      const timer = setTimeout(() => setToast({ ...toast, show: false }), 4000);
+      const timer = setTimeout(() => {
+        setToast((prev) => ({ ...prev, show: false }));
+      }, 4000);
       return () => clearTimeout(timer);
     }
   }, [toast.show]);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await API.post("/authentication/register", {
-        ...form,
-        role: "admin",
-      });
-
-      setToast({
-        show: true,
-        msg: "Registration Protocol Complete",
-        type: "success",
-      });
-
+      await API.post("/authentication/register", { ...form, role: "admin" });
+      setToast({ show: true, msg: "Registration Completed", type: "success" });
       setForm({ userName: "", password: "" });
-      setTimeout(() => go("/admin/vehicles"), 1500);
+      setTimeout(() => navigate("/admin/vehicles"), 1500);
     } catch (err) {
       setToast({
         show: true,
@@ -62,121 +53,106 @@ const Register = () => {
 
   return (
     <PageMotion>
-      <div className={styles.registerWrapper}>
-        <div
-          className={`${styles.toast} ${
-            toast.show ? "" : "opacity-0 -translate-y-6 pointer-events-none"
-          } ${
-            toast.type === "error" ? styles.toastError : styles.toastSuccess
-          }`}
-          style={{ 
-            opacity: toast.show ? 1 : 0, 
-            transform: toast.show ? "translateY(0)" : "translateY(-1.5rem)" 
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            {toast.type === "error" ? (
-              <XCircle size={20} />
-            ) : (
-              <CheckCircle2 size={20} />
-            )}
-            <div>
-              <p style={{ fontWeight: 'bold', margin: 0 }}>
-                {toast.type === "error" ? "Access Denied" : "Registration Completed"}
-              </p>
-              <p style={{ fontSize: '0.875rem', margin: 0 }}>{toast.msg}</p>
-            </div>
-          </div>
+      <div className={styles.wrapper}>
+        {/* Background Effects */}
+        <div className={styles.bg}>
+          <div className={styles.bgGradient1} />
+          <div className={styles.bgGradient2} />
         </div>
 
-        <div className={styles.backgroundGlows}>
-          <div className={styles.glowViolet} />
-          <div className={styles.glowBlue} />
+        {/* Top Bar */}
+        <div className={styles.topbar}>
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className={styles.back}
+            onClick={() => navigate("/")}
+          >
+            <ArrowLeft size={18} />
+            BACK
+          </motion.button>
+          <Switch />
         </div>
 
+        {/* Alerts */}
+        <AnimatePresence>
+          {toast.show && (
+            <motion.div
+              initial={{ y: -100, x: "-50%", opacity: 0 }}
+              animate={{ y: 0, x: "-50%", opacity: 1 }}
+              exit={{ y: -100, x: "-50%", opacity: 0 }}
+              className={toast.type === "error" ? styles.error : styles.success}
+            >
+              {toast.type === "error" ? <XCircle size={20} /> : <CheckCircle2 size={20} />}
+              <div>
+                <strong>{toast.type === "error" ? "Access Denied" : "Success"}</strong>
+                <p style={{ margin: 0, fontSize: '0.85rem' }}>{toast.msg}</p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Register Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className={styles.card}
         >
           <div className={styles.header}>
-            <motion.div whileHover={{ scale: 1.05 }} className={styles.logoContainer}>
-              <img
-                src="/images/logosmartlog-removebg-preview.png"
-                alt="SmartLog"
-                style={{ height: '100%', width: 'auto', objectFit: 'contain' }}
-              />
-            </motion.div>
-            <div className={styles.divider} />
-            <h1 className={styles.title}>
-              Register Your <span style={{ color: '#8b5cf6' }}>Fleet</span>
+            <img
+              src="/images/logosmartlog-removebg-preview.png"
+              alt="SmartLog"
+              className={styles.logo}
+            />
+            <h1>
+              Smart<span>Log</span>
             </h1>
-            <p className={styles.subtitle}>
-              New Operator Registration
-            </p>
+            <p>FLEET REGISTRATION</p>
           </div>
 
           <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.inputWrapper}>
+            <div className={styles.inputWrap}>
               <User
                 size={20}
-                className={styles.inputIcon}
-                style={{ color: focused === "user" ? "#a78bfa" : "#52525b" }}
+                className={`${styles.icon} ${focused === "user" ? styles.active : ""}`}
               />
               <input
-                onFocus={() => setFocused("user")}
-                onBlur={() => setFocused(null)}
-                className={styles.inputField}
-                style={{ borderColor: focused === "user" ? "rgba(139, 92, 246, 0.5)" : "rgba(255, 255, 255, 0.05)" }}
-                type="text"
-                placeholder="Operator Username"
                 required
                 name="userName"
+                placeholder="Username"
                 value={form.userName}
                 onChange={handleChange}
+                onFocus={() => setFocused("user")}
+                onBlur={() => setFocused(null)}
+                className={styles.input}
               />
             </div>
 
-            <div className={styles.inputWrapper}>
+            <div className={styles.inputWrap}>
               <Lock
                 size={20}
-                className={styles.inputIcon}
-                style={{ color: focused === "pass" ? "#a78bfa" : "#52525b" }}
+                className={`${styles.icon} ${focused === "pass" ? styles.active : ""}`}
               />
               <input
-                onFocus={() => setFocused("pass")}
-                onBlur={() => setFocused(null)}
-                className={styles.inputField}
-                style={{ borderColor: focused === "pass" ? "rgba(139, 92, 246, 0.5)" : "rgba(255, 255, 255, 0.05)" }}
-                type="password"
-                placeholder="Operator Password"
                 required
+                type="password"
                 name="password"
+                placeholder="Password"
                 value={form.password}
                 onChange={handleChange}
+                onFocus={() => setFocused("pass")}
+                onBlur={() => setFocused(null)}
+                className={styles.input}
               />
             </div>
 
             <label className={styles.checkboxLabel}>
-              <div className={styles.checkboxContainer}>
-                <input type="checkbox" required className={styles.hiddenCheckbox} id="terms" />
-                <div className={styles.customCheckbox}></div>
-                <ShieldCheck 
-                  size={14} 
-                  style={{ 
-                    position: 'absolute', 
-                    left: '3px', 
-                    top: '3px', 
-                    color: 'black',
-                    pointerEvents: 'none'
-                  }} 
-                />
-              </div>
+              <input required type="checkbox" className={styles.checkbox} />
+              <span className={styles.box}>
+                <ShieldCheck size={14} />
+              </span>
               <span>
-                I accept the{" "}
-                <Link to="/terms" className={styles.link} style={{ color: '#a78bfa', textDecoration: 'underline' }}>
-                  Terms&Condition
-                </Link>
+                I accept the <Link to="/terms" className={styles.link}>Terms & Conditions</Link>
               </span>
             </label>
 
@@ -184,20 +160,15 @@ const Register = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               type="submit"
-              className={styles.submitButton}
+              className={styles.button}
             >
-              CREATE ACCOUNT
-              <ArrowRight size={18} />
+              REGISTER ACCOUNT
+              <ArrowRight size={20} />
             </motion.button>
           </form>
 
           <div className={styles.footer}>
-            <p className={styles.footerText}>
-              Existing Operator?{" "}
-              <Link to="/login" className={styles.link}>
-                Login Here
-              </Link>
-            </p>
+            Existing Operator? <Link to="/login">Login Here</Link>
           </div>
         </motion.div>
       </div>
