@@ -13,6 +13,7 @@ const LandingPage = () => {
     <div className={styles.pageWrapper}>
       <LandingNav />
 
+      {/* Hero Section */}
       <FadeSection>
         <section className={styles.heroSection}>
           <motion.div 
@@ -33,11 +34,11 @@ const LandingPage = () => {
             The bridge between logistics complexity and operational simplicity.
           </p>
 
-          <div style={{ marginTop: '2.5rem', display: 'flex', gap: '1.5rem', justifyContent: 'center' }}>
-            <Buttons name="GetReady" Icon={ArrowBigRight} />
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#64748b' }}>
-              <Zap size={16} className={styles.highlightOrange} /> 
-              <span style={{ fontFamily: 'monospace' }}>Live Tracking Ready</span>
+          <div className={styles.ctaContainer}>
+            <Buttons name="Get Ready" Icon={ArrowBigRight} />
+            <div className={styles.liveBadge}>
+              <Zap size={18} className={styles.highlightOrange} /> 
+              <span>Live Tracking Ready</span>
             </div>
           </div>
 
@@ -47,71 +48,75 @@ const LandingPage = () => {
         </section>
       </FadeSection>
 
+      {/* Analytics Video Section */}
       <FadeSection>
         <section className={styles.videoSectionContainer}>
           <div className={styles.videoCard}>
-            <video className={styles.videoElement} loop autoPlay muted>
+            <video className={styles.videoElement} loop autoPlay muted playsInline>
               <source src="/videos/analytics.mp4" type="video/mp4" />
             </video>
             <div className={styles.videoOverlay} />
             <div className={styles.videoContentBox}>
-              <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <h2 className={styles.videoTitle}>
                 <Zap className={styles.highlightOrange} /> Real-Time Analytics
               </h2>
-              <p style={{ marginTop: '1rem', color: '#475569' }}>
+              <p className={styles.videoText}>
                 Monitor driver activity and fuel efficiency from a single unified dashboard. 
+                Turn raw data into actionable logistics intelligence.
               </p>
             </div>
           </div>
         </section>
       </FadeSection>
 
+      {/* Modules Section */}
       <section className={styles.modulesSection}>
-        <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-          <h2 style={{ fontSize: '3rem', fontWeight: '900', fontStyle: 'italic', textTransform: 'uppercase' }}>Core Modules</h2>
-          <div style={{ height: '4px', width: '80px', backgroundColor: '#7c3aed', margin: '1rem auto' }} />
+        <div className={styles.moduleHeader}>
+          <h2 className={styles.moduleTitle}>Core Modules</h2>
+          <div style={{ height: '4px', width: '80px', backgroundColor: '#7c3aed', margin: '1rem auto', borderRadius: '2px' }} />
         </div>
 
         <div className={styles.gridContainer}>
           <ModuleCard 
             title="Driver Portal" 
             badge="Worker Node" 
-            icon={<TruckIcon color="black" />} 
+            icon={<TruckIcon color="currentColor" />} 
             desc="Optimized for trip execution. Drivers update status, log mileage, and report issues in real-time."
             features={["Assigned Trips", "Mileage Logs", "Issue Reporting"]}
           />
           <ModuleCard 
             title="Dispatch Panel" 
             badge="Command Center" 
-            icon={<PackageCheck color="black" />} 
+            icon={<PackageCheck color="currentColor" />} 
             desc="Bridge the gap between orders and delivery. High-speed trip scheduling and route adjustment."
             features={["Driver Assignment", "Live Monitoring", "Route Control"]}
           />
           <ModuleCard 
             title="Admin Console" 
             badge="Root Access" 
-            icon={<UserCircle2 color="black" />} 
+            icon={<UserCircle2 color="currentColor" />} 
             desc="Total system control. Manage users, roles, and global fleet master data with advanced audit logs."
             features={["User RBAC", "Fleet Master Data", "Global Analytics"]}
           />
         </div>
       </section>
 
+      {/* Security Section */}
       <FadeSection>
         <section className={styles.videoSectionContainer}>
           <div className={styles.securityCard}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <div style={{ padding: '0.75rem', backgroundColor: 'rgba(34,197,94,0.1)', width: 'fit-content', borderRadius: '1rem' }}>
+            <div className={styles.securityInfo}>
+              <div className={styles.securityIconBox}>
                 <ShieldCheck size={40} color="#16a34a" />
               </div>
-              <h2 style={{ fontSize: '2.25rem', fontWeight: 'bold' }}>Enterprise Security</h2>
-              <p style={{ color: '#475569', lineHeight: '1.6' }}>
+              <h2 className={styles.securityTitle}>Enterprise Security</h2>
+              <p className={styles.securityDescription}>
                 Secure driver records and vehicle details with industry-standard encryption. 
-                Role-based permissions ensure that only authorized personnel can touch critical infrastructure.
+                Role-based permissions (RBAC) ensure that only authorized personnel can touch critical infrastructure.
               </p>
             </div>
-            <div style={{ borderRadius: '1.5rem', overflow: 'hidden', }}>
-              <video style={{ width: '100%'  , border : '0px'}} loop autoPlay muted>
+            <div className={styles.securityVideoBox}>
+              <video style={{ width: '100%', display: 'block' }} loop autoPlay muted playsInline>
                 <source src="/videos/security.mp4" type="video/mp4" />
               </video>
             </div>

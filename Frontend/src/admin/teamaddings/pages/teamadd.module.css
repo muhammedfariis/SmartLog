@@ -150,7 +150,6 @@
   background: var(--row-hover);
 }
 
-/* Actions */
 .actionWrapper {
   display: flex;
   align-items: center;

@@ -1,71 +1,129 @@
-.animationContainer {
+.container {
   position: relative;
   width: 100%;
-  height: 10rem;
-  overflow: hidden;
-  margin-top: 2.5rem;
-  pointer-events: none;
+  height: 380px;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.015) 2px,
+    rgba(255, 255, 255, 0.015) 4px
+  );
+
+  
 }
 
-.roadLine {
+.road {
   position: absolute;
-  bottom: 2.5rem;
-  width: 100%;
-  height: 2px;
-  background-color: rgba(139, 92, 246, 0.4);
-  z-index: 30;
+  top: 60px;
+  left: 0;
+  right: 0;
+  height: 300px;
+  background-color: #1e2022;
+  border-top: 3px solid #3a3a3a;
+  border-bottom: 3px solid #3a3a3a;
+  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.7);
 }
 
-.vehicleWrapper {
+.laneRule {
   position: absolute;
-  bottom: 2.5rem;
-  display: flex;
-  align-items: flex-end;
+  left: 0;
+  right: 0;
 }
 
-.imageContainer {
-  position: relative;
+.dashed {
+  height: 3px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #e6b800 0px,
+    #e6b800 48px,
+    transparent 48px,
+    transparent 80px
+  );
+}
+
+.solid {
+  height: 4px;
+  background-color: #ffffff;
+  opacity: 0.55;
+}
+
+.signalWrap {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 20;
+  padding: 5px;
+  
 }
 
-.shadow {
+.trafficLight {
+  background: #111111;
+  border: 3px solid #333333;
+  border-radius: 8px;
+  padding: 4px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 4px 12px rgba(0,0,0,0.6);
+}
+
+.bulb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.redOn {
+  background: #ff2200;
+  box-shadow: 0 0 18px 6px rgba(255, 34, 0, 0.8);
+}
+.redOff {
+  background: #330800;
+  box-shadow: none;
+}
+
+.greenOn {
+  background: #00e520;
+  box-shadow: 0 0 18px 6px rgba(0, 229, 32, 0.8);
+}
+.greenOff {
+  background: #001a00;
+  box-shadow: none;
+}
+
+.pole {
+  width: 8px;
+  height: 295px;
+  background: linear-gradient(180deg, #444444, #222222);
+  border-radius: 0 0 4px 4px;
+}
+
+.vehicle {
   position: absolute;
-  bottom: 0;
-  width: 80%;
-  height: 0.5rem;
-  background-color: rgba(0, 0, 0, 0.6);
-  filter: blur(12px);
-  border-radius: 9999px;
+  z-index: 10;
+  will-change: left;
+  transform: translateY(-50%);
 }
 
-.vehicleImage {
-  width: 12rem;
+.vehicle.rtl {
+  transform: translateY(-50%) scaleX(-1);
+}
+
+.vehicleImg {
+  width: 150px;
   height: auto;
-  object-fit: contain;
-  transform: translateY(4px);
-  filter: brightness(0.9) contrast(1.1);
+  display: block;
+  filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.6));
+  pointer-events: none;
 }
 
 @media (min-width: 768px) {
-  .vehicleImage {
-    width: 16rem;
+  .vehicleImg {
+    width: 200px;
   }
-}
-
-.fadeLeft {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 8rem;
-  background: linear-gradient(to right, #000, transparent);
-  z-index: 40;
-}
-
-.fadeRight {
-  position: absolute;
-  inset: 0 0 0 auto;
-  width: 8rem;
-  background: linear-gradient(to left, #000, transparent);
-  z-index: 40;
 }
